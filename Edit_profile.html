@@ -55,34 +55,51 @@
           </div>
           <div class="hobbies_edit">
             <h4>Hobbies</h4>
-            <input type="text" placeholder="Add a hobby" />
-            <button type="button">Add Hobby</button>
-            <ul>
-              <li>Hobby 1 <button type="button">Remove</button></li>
-              <li>Hobby 2 <button type="button">Remove</button></li>
-              <li>Hobby 3 <button type="button">Remove</button></li>
-            </ul>
-          </div>
-          <div class="skills_edit">
-            <h4>Skills</h4>
-            <input type="text" placeholder="Add a skill" />
-            <button type="button">Add Skill</button>
-            <ul>
-              <li>Skill 1 <button type="button">Remove</button></li>
-              <li>Skill 2 <button type="button">Remove</button></li>
-              <li>Skill 3 <button type="button">Remove</button></li>
-            </ul>
-          </div>
-          <div class="goals_edit">
-            <h4>Goals</h4>
-            <input type="text" placeholder="Add a goal" />
-            <button type="button">Add Goal</button>
-            <ul>
-              <li>Goal 1 <button type="button">Remove</button></li>
-              <li>Goal 2 <button type="button">Remove</button></li>
-              <li>Goal 3 <button type="button">Remove</button></li>
-            </ul>
-          </div>
+            <div class="hobbies_edit">
+              <h4>Hobbies</h4>
+              <p>add your hobbies</p>
+              <input type="text" id="hobby-input" placeholder="Add a hobby" />
+              <div class="suggestions">
+                <button type="button" class="tag">Gaming</button>
+                <button type="button" class="tag">Coding</button>
+                <button type="button" class="tag">Football</button>
+                <button type="button" class="tag">Music</button>
+                <button type="button" class="tag">Reading</button>
+              </div>
+            </div>
+            <div class="skills_edit">
+              <h4>Skills</h4>
+              <p>add your skills</p>
+              <input type="text" id="skill-input" placeholder="Add a skill" />
+              <div class="suggestions">
+                <button type="button" class="tag">HTML</button>
+                <button type="button" class="tag">CSS</button>
+                <button type="button" class="tag">JavaScript</button>
+                <button type="button" class="tag">Python</button>
+                <button type="button" class="tag">UI Design</button>
+                <button type="button" class="tag">Communication</button>
+                <button type="button" class="tag">Problem Solving</button>
+                <button type="button" class="tag">Game Dev</button>
+              </div>
+            </div>
+            <div class="goals_edit">
+              <h4>Goals</h4>
+              <div class="suggestions">
+                <button type="button" class="tag">Graduate</button>
+                <button type="button" class="tag">Build Projects</button>
+                <button type="button" class="tag">Get Internship</button>
+                <button type="button" class="tag">Network</button>
+                <button type="button" class="tag">Learn AI</button>
+                <button type="button" class="tag">Improve Grades</button>
+                <button type="button" class="tag">Become Developer</button>
+                <button type="button" class="tag">Start Business</button>
+              </div>
+            </div>
+            <label for="bio">Bio</label>
+            <textarea id="bio" placeholder="Bio"></textarea> <br />
+            <button href="#signup-form" id="back-btn">Back</button>
+            <button type="submit">create account</button>
+          </form>
           <div class="academic_edit">
             <h4>Academic Information</h4>
             <button type="button">Add Achievements</button>

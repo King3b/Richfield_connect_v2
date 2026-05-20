@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Richfield Connect / Log In</title>
+    <link rel="stylesheet" href="CSS/login.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -19,77 +24,89 @@
       </nav>
     </header>
     <main>
-      <section class="link-boared">
-        <h2>Welcome back to Richfield Connect</h2>
-        <p>
-          Login to Richfield connect and connect with peers , join a active
-          community and progress on your student journey
-        </p>
-        <div>
-          <a href="Profile.html"><img src="" alt="profile picture" /></a>
-          <h5>connect</h5>
-          <p>Showcase your academic interests and achievements.</p>
-        </div>
-        <div>
-          <a href="Feed.html"><img src="" alt="feed" /></a>
-          <h5>share</h5>
-          <p>Engage with peers and work together on ideas.</p>
-        </div>
-        <div>
-          <a href="schoolresources.html"
-            ><img src="" alt="resource picture"
-          /></a>
-          <h5>Grow</h5>
-          <p>Your data is protected and only shared within Richfield.</p>
-        </div>
-      </section>
-      <section class="login">
-        <form action="Profile.html" method="get">
-          <img src="" alt="profile picture" />
-          <h3>Log in</h3>
-          <p>Welcome back! Please enter your credentials.</p>
-
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Email" required /> <br>
-          <label for="student_id">Student ID</label> 
-          <input
-            type="number"
-            id="student_id"
-            placeholder="Student ID"
-            required
-            minlength="8"
-            maxlength="8"
-          /> <br>
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Password" required /> <br>
-          <button type="submit">Log in</button> <br>
-          <p class="signup">
-            Don't have an account? <a href="Signup.html">Sign up here</a>
+      <section class="login-layout">
+        <section class="link-boared">
+          <div class="board-card"></div>
+          <h2>Welcome back to Richfield Connect</h2>
+          <p>
+            Login to Richfield connect and connect with peers , join a active
+            community and progress on your student journey
           </p>
-        </form>
+          <div class="board-links">
+            <span class="material-symbols-rounded icon">person</span>
+            <h5>connect</h5>
+            <p>Showcase your academic interests and achievements.</p>
+          </div>
+          <div class="board-links">
+            <span class="material-symbols-rounded icon">person</span>
+            <h5>share</h5>
+            <p>Engage with peers and work together on ideas.</p>
+          </div>
+          <div class="board-links">
+            <span class="material-symbols-rounded icon">person</span>
+            <h5>Grow</h5>
+            <p>Your data is protected and only shared within Richfield.</p>
+          </div>
+        </div>
+        </section>
+        <section class="login">
+          <form action="Profile.html" method="get">
+            <img src="" alt="profile picture" />
+            <h3>Log in</h3>
+            <p>Welcome back! Please enter your credentials.</p>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email" required />
+            <br />
+            <label for="student_id">Student ID</label>
+            <input
+              type="number"
+              id="student_id"
+              placeholder="Student ID"
+              required
+              minlength="8"
+              maxlength="8"
+            />
+            <br />
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+            <br />
+            <button type="submit">Log in</button> <br />
+            <p class="signup">
+              Don't have an account? <a href="Signup.html">Sign up here</a>
+            </p>
+          </form>
+        </section>
       </section>
       <section class="reasons">
         <ul>
           <li>
             <div class="core-advantages">
+              <span class="material-symbols-rounded icon">lock</span>
               <h3>Privacy & Security</h3>
-              <img src="" alt="security pic" />
               <p>Your data and privacy are our top priority.</p>
             </div>
           </li>
+
           <li>
             <div class="core-advantages">
-              <h3>community support</h3>
-              <img src="" alt="community pic" />
+              <span class="material-symbols-rounded icon">groups</span>
+              <h3>Community Support</h3>
               <p>
                 Get the support you need from your fellow students and faculty.
               </p>
             </div>
           </li>
+
           <li>
             <div class="core-advantages">
-              <h3>stay connected</h3>
-              <img src="" alt="collaboration pic" />
+              <span class="material-symbols-rounded icon">hub</span>
+              <h3>Stay Connected</h3>
               <p>
                 We encourage open communication and collaboration among
                 students, fostering a culture of knowledge sharing and mutual
@@ -97,20 +114,22 @@
               </p>
             </div>
           </li>
+
           <li>
             <div class="core-advantages">
-              <h3>Academic focused</h3>
-              <img src="" alt="academic pic" />
+              <span class="material-symbols-rounded icon">school</span>
+              <h3>Academic Focused</h3>
               <p>
                 Designed to support learning, collaboration, and academic
                 excellence.
               </p>
             </div>
           </li>
+
           <li>
             <div class="core-advantages">
+              <span class="material-symbols-rounded icon">verified</span>
               <h3>Integrity</h3>
-              <img src="" alt="integrity pic" />
               <p>
                 We are committed to maintaining the highest standards of
                 integrity and ethical behavior in all our interactions and

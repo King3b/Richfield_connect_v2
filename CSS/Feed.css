@@ -1,0 +1,235 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f4f8ff;
+  color: #0f172a;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background: white;
+  box-shadow: 0 2px 15px rgba(0, 82, 204, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  color: #0052cc;
+}
+
+nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #0052cc;
+}
+
+/* LAYOUT */
+main {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 25px;
+  padding: 40px 8%;
+}
+
+/* SIDE LINKS */
+.social_links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+
+.social_links a {
+  display: block;
+  padding: 12px;
+  background: white;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #0052cc;
+  box-shadow: 0 5px 15px rgba(0, 82, 204, 0.08);
+  transition: 0.3s;
+}
+
+.social_links a:hover {
+  transform: translateX(5px);
+  background: #0052cc;
+  color: white;
+}
+
+/* GROUPS */
+.groups {
+  background: white;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
+  margin-bottom: 20px;
+}
+
+.groups h2 {
+  color: #0052cc;
+  margin-bottom: 15px;
+}
+
+/* SEARCH */
+.group_search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.group_search input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid #dbeafe;
+}
+
+.group_search button {
+  background: #0052cc;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 12px;
+}
+
+/* CATEGORY BUTTONS */
+.group_categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.group_categories button {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: #f1f5ff;
+  color: #0052cc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.group_categories button:hover {
+  background: #0052cc;
+  color: white;
+}
+
+/* GROUP CARD */
+.group {
+  background: #f8fbff;
+  padding: 15px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  border: 1px solid #dbeafe;
+  transition: 0.3s;
+}
+
+.group:hover {
+  transform: translateY(-3px);
+  border-color: #0052cc;
+}
+
+/* FEED */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post {
+  background: white;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
+}
+
+.post h5 {
+  color: #0052cc;
+}
+
+.post img {
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+/* BUTTONS */
+button {
+  cursor: pointer;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: #0052cc;
+  color: white;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 82, 204, 0.2);
+}
+
+/* CREATE POST */
+.create_Post {
+  background: white;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
+}
+
+.create_Post input,
+.create_Post textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 15px;
+  border: 2px solid #dbeafe;
+}
+
+.create_Post textarea {
+  min-height: 120px;
+}
+
+/* FOOTER */
+footer {
+  background: #001b44;
+  color: white;
+  padding: 40px 8%;
+  margin-top: 50px;
+}
+
+footer ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+footer a {
+  color: #dbeafe;
+  text-decoration: none;
+}

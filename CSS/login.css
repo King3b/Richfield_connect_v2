@@ -1,3 +1,6 @@
+/* =========================
+   LOGIN PAGE LAYOUT
+========================= */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
@@ -70,44 +73,19 @@ nav ul li a::after {
 nav ul li a:hover::after {
   width: 100%;
 }
-/* MAIN LAYOUT */
-.signup-layout {
-  display: grid;
-  grid-template-columns: 35% 65%;
-  gap: 35px;
-  align-items: start;
-}
 
-/* LEFT SIDE */
-.link-boared {
-  position: sticky;
-  top: 120px;
-  height: fit-content;
-}
-
-/* RIGHT SIDE */
-.signup {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1000px) {
-  .signup-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .link-boared {
-    position: relative;
-    top: 0;
-  }
-}
 /* MAIN */
 main {
   padding: 50px 8%;
 }
+.login-layout {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 40px;
+  align-items: start;
+}
 
-/* TOP BOARD */
+/* LEFT PANEL */
 .link-boared {
   width: 100%;
   background-color: #001b44;
@@ -119,9 +97,10 @@ main {
   box-shadow: 0 15px 35px rgba(0, 82, 204, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 30px; 
+  gap: 30px;
 }
 
+/* TITLE */
 .link-boared h2 {
   font-size: 2.3rem;
   margin-bottom: 10px;
@@ -129,6 +108,7 @@ main {
   color: rgb(255, 0, 0);
 }
 
+/* INTRO TEXT */
 .link-boared p {
   font-size: 0.95rem;
   max-width: 500px;
@@ -137,7 +117,7 @@ main {
   line-height: 1.6;
 }
 
-/* FEATURE CARDS */
+/* SMALL FEATURE ROWS */
 .board-links {
   width: 100%;
   background-color: #022863;
@@ -156,19 +136,27 @@ main {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 82, 204, 0.2);
 }
-
 .board-links h5 {
   font-size: 1.2rem;
   margin: 0;
   color: white;
 }
 
-.board-links p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.85);
+/* ICON CIRCLE */
+.icon {
+  border-radius: 50%;
+  font-size: 42px;
+  color: white;
+  margin-bottom: 10px;
+  transition: 0.3s;
 }
 
-/* CARD CONTENT */
+.board-links:hover .icon {
+  background: #1e90ff;
+  box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
+}
+
+/* TEXT CONTENT */
 .board-card {
   width: 100%;
   padding: 10px;
@@ -180,21 +168,48 @@ main {
   gap: 10px;
 }
 
-/* GLOW EFFECT */
-.board-card::before {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: 0.4s;
+.board-card h5 {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
 }
 
-.board-card:hover::before {
-  opacity: 0.15;
+.board-card p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
-/* LIFT ON HOVER */
-.board-card:hover {
-  transform: translateY(-5px);
+/* LOGIN FORM*/
+.login {
+  background: #212121;
+  width: 60%;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0, 82, 204, 0.15);
+  width: 70%;
+  height: 870px;
+  margin-bottom: 70px;
+  margin-left: 70px;
+}
+
+/* BUTTON */
+.login button {
+  width: 85%;
+  padding: 14px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #0052cc, #1e90ff);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 82, 204, 0.2);
 }
 
 /* ICON */
@@ -228,19 +243,6 @@ main {
   text-decoration: none;
 }
 
-/* SIGNUP AREA */
-.signup {
-  background: #212121;
-  width: 60%;
-  padding: 30px;
-  border-radius: 25px;
-  box-shadow: 0 15px 35px rgba(0, 82, 204, 0.15);
-  width: 70%;
-  height: fit-content;
-  margin-bottom: 70px;
-  margin-left: 70px;
-}
-
 /* FORMS */
 form {
   background: #212121;
@@ -249,7 +251,7 @@ form {
   padding: 40px;
   border-radius: 30px;
   box-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
-  overflow-y: auto;
+  height: 800px;
 }
 
 /* FORM TITLES */
@@ -300,8 +302,7 @@ label {
 
 /* INPUTS */
 input,
-select,
-textarea {
+select {
   width: 70%;
   padding: 14px;
   border: 2px solid #dbeafe;
@@ -314,9 +315,9 @@ textarea {
   color: rgb(185, 186, 187);
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+input,
+select,
+textarea {
   border-color: #0052cc;
   box-shadow: 0 0 10px rgba(0, 82, 204, 0.15);
 }
@@ -355,65 +356,6 @@ button:hover {
   color: #0052cc;
   text-decoration: none;
   font-weight: 600;
-}
-
-/* HOBBIES SKILLS GOALS */
-.hobbies_edit,
-.skills_edit,
-.goals_edit {
-  background: #212121;
-  padding: 20px;
-  border-radius: 20px;
-  margin-top: 25px;
-  border: 1px solid #006eff;
-}
-
-.hobbies_edit h4,
-.skills_edit h4,
-.goals_edit h4 {
-  color: #0052cc;
-  margin-bottom: 15px;
-}
-
-/* SUGGESTION AREA */
-.suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 15px;
-}
-
-/* TAG BUTTONS */
-.tag {
-  padding: 10px 18px;
-  border-radius: 30px;
-  border: 2px solid #0052cc;
-  background: white;
-  color: #0052cc;
-  cursor: pointer;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-/* HOVER */
-.tag:hover {
-  transform: translateY(-2px);
-}
-
-/* ACTIVE / SELECTED */
-.tag:active,
-.tag.selected {
-  background: linear-gradient(135deg, #0052cc, #1e90ff);
-  color: white;
-  box-shadow: 0 0 15px rgba(0, 82, 204, 0.5);
-}
-
-/* HR */
-hr {
-  border: none;
-  height: 2px;
-  background: #dbeafe;
-  margin: 25px 0;
 }
 
 /* REASONS SECTION */
@@ -522,4 +464,24 @@ footer div li {
   form {
     padding: 25px;
   }
+}
+@media (max-width: 1000px) {
+  .login-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .link-boared {
+    position: relative;
+    top: 0;
+    height: 400px;
+  }
+}
+
+.board-card:hover::before {
+  opacity: 0.15;
+}
+
+/* LIFT ON HOVER */
+.board-card:hover {
+  transform: translateY(-5px);
 }
