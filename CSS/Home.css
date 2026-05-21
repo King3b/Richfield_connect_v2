@@ -334,10 +334,11 @@ nav ul li a:hover::after {
 
 .vision,
 .mission {
-  background: #ffffff;
+  background: #212121;
+  color: white;
   padding: 30px;
   border-radius: 25px;
-  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 102, 255, 0.308);
   transition: 0.3s;
 }
 
@@ -348,13 +349,13 @@ nav ul li a:hover::after {
 
 .vision h2,
 .mission h2 {
-  color: #0052cc;
+  color: red;
   margin-bottom: 15px;
 }
 
 /* WHAT IS */
 .about3 {
-  background: white;
+  background: #212121;
   padding: 35px;
   border-radius: 25px;
   margin-bottom: 50px;
@@ -369,6 +370,7 @@ nav ul li a:hover::after {
 
 .about3 p {
   margin-bottom: 20px;
+  color: #0052cc;
 }
 
 .about3 ul {
@@ -377,6 +379,7 @@ nav ul li a:hover::after {
 
 .about3 li {
   margin-bottom: 10px;
+  color: white;
 }
 
 /* CORE VALUES */
@@ -400,11 +403,12 @@ nav ul li a:hover::after {
 }
 
 .core-values li div {
-  background: white;
+  background: #212121;
+  color: #58a6ff;
   padding: 30px;
   border-radius: 25px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.205);
   transition: 0.3s;
   height: 100%;
 }
@@ -425,14 +429,31 @@ nav ul li a:hover::after {
   border-radius: 50%;
   margin: 15px 0;
 }
+.core-icon {
+  font-size: 70px;
+  color: #0052cc;
+  background: #eaf2ff;
+  padding: 18px;
+  border-radius: 50%;
+  margin: 15px 0;
+
+  transition: 0.3s;
+}
+.core-values li div:hover .core-icon {
+  transform: scale(1.1);
+  color: white;
+  background: linear-gradient(135deg, #0052cc, #1e90ff);
+
+  box-shadow: 0 0 25px rgba(30, 144, 255, 0.5);
+}
 
 /* CTA */
 .about4 {
-  background: linear-gradient(135deg, #0052cc, #1e90ff);
+  background: linear-gradient(135deg, #003380, #1e90ff);
   padding: 60px 30px;
   border-radius: 30px;
   text-align: center;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 249, 249);
   margin-bottom: 50px;
 }
 
@@ -443,7 +464,7 @@ nav ul li a:hover::after {
 
 .about4 p {
   margin-bottom: 25px;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 253, 253);
 }
 
 .about4 button {
@@ -459,24 +480,26 @@ nav ul li a:hover::after {
 
 .about4 button:hover {
   transform: scale(1.05);
+  color: #0052cc;
+  background-color: red;
 }
 
 /* PRIVACY + CONTACT + HELP */
 .privacy_policy,
 .contact,
 .help_center {
-  background: white;
-  color: rgb(0, 0, 0);
+  background: #212121;
+  color:#1e90ff;
   padding: 35px;
   border-radius: 25px;
   margin-bottom: 35px;
-  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
+  box-shadow: 0 10px 25px rgba(255, 23, 23, 0.247);
 }
 
 .privacy_policy h2,
 .contact h2,
 .help_center h2 {
-  color: #0052cc;
+  color: red;
   margin-bottom: 15px;
 }
 

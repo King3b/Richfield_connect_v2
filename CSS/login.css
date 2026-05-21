@@ -1,6 +1,4 @@
-/* =========================
-   LOGIN PAGE LAYOUT
-========================= */
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
@@ -49,14 +47,14 @@ nav ul {
 
 nav ul li a {
   text-decoration: none;
-  color: #1e293b;
+  color: #ffffff;
   font-weight: 500;
   transition: 0.3s;
   position: relative;
 }
 
 nav ul li a:hover {
-  color: #0052cc;
+  color: #3082fc;
 }
 
 nav ul li a::after {

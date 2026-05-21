@@ -1,0 +1,230 @@
+/* =========================
+EDIT PROFILE PAGE
+========================= */
+
+.edit-profile {
+  margin: 50px 8%;
+  background: #212121;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.2);
+}
+
+.edit-profile h2 {
+  color: #1e90ff;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* FORM */
+.edit-profile form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* CARDS */
+.profile-picture,
+.profile-info,
+.contact_edit,
+.hobbies_edit,
+.skills_edit,
+.goals_edit,
+.academic_edit {
+  background: #2a2a2a;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 8px 20px rgba(0, 82, 204, 0.15);
+}
+
+.profile-picture h4,
+.contact_edit h4,
+.hobbies_edit h4,
+.skills_edit h4,
+.goals_edit h4,
+.academic_edit h4 {
+  color: #1e90ff;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+/* IMAGES */
+.profile-picture img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #3a3a3a;
+  border: 4px solid #0052cc;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile-picture img:last-of-type {
+  width: 100%;
+  height: 220px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+/* LABELS */
+.edit-profile label {
+  display: block;
+  margin: 15px 0 8px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* INPUTS */
+.edit-profile input,
+.edit-profile textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: #1b1b1b;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  transition: 0.3s;
+}
+
+.edit-profile input:focus,
+.edit-profile textarea:focus {
+  outline: none;
+  border-color: #1e90ff;
+  box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+}
+
+.edit-profile textarea {
+  min-height: 140px;
+  resize: none;
+}
+
+/* FILE INPUT */
+input[type="file"] {
+  background: transparent;
+  border: none;
+  padding: 10px 0;
+  color: white;
+}
+
+/* TAGS */
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.tag {
+  padding: 10px 18px;
+  border-radius: 30px;
+  border: 2px solid #0052cc;
+  background: transparent;
+  color: #58a6ff;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.tag:hover {
+  background: #0052cc;
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* PARAGRAPHS */
+.hobbies_edit p,
+.skills_edit p,
+.goals_edit p {
+  color: #b5b5b5;
+  margin-bottom: 15px;
+}
+
+/* BUTTONS */
+.edit-profile button {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #0052cc, #1e90ff);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 15px;
+}
+
+.edit-profile button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 82, 204, 0.3);
+}
+
+/* BACK BUTTON */
+#back-btn {
+  background: transparent;
+  border: 2px solid red;
+  color: red;
+}
+
+#back-btn:hover {
+  background: red;
+  color: white;
+}
+
+/* ACADEMIC SECTION */
+.academic_edit ul {
+  margin-top: 20px;
+  list-style: none;
+}
+
+.academic_edit li {
+  background: #1b1b1b;
+  padding: 15px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.academic_edit li button {
+  background: red;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+}
+
+.academic_edit li button:hover {
+  background: darkred;
+}
+
+/* SAVE BUTTON */
+.edit-profile > button,
+button[type="submit"] {
+  align-self: flex-start;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .edit-profile {
+    padding: 25px;
+  }
+
+  .edit-profile h2 {
+    font-size: 2rem;
+  }
+
+  .profile-picture img:last-of-type {
+    height: 150px;
+  }
+
+  .academic_edit li {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .suggestions {
+    gap: 8px;
+  }
+}

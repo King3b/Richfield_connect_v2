@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Richfield connect / messages</title>
-        <link
+    <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="CSS/chat.css" />
   </head>
   <body>
     <header>
@@ -68,31 +69,40 @@
       </div>
     </article>
     <main>
-        <section class="chat">
-            <h2>Chat</h2>
-            <div class="chat_window">
-            <div class="messages">
-                <div class="message received">
-                <p>Hello! How can I help you today?</p>
-                </div>
-                <div class="message sent">
-                <p>Hi! I have a question about the upcoming exam.</p>
-                </div>
+      <section class="chat">
+        <h2>Chat</h2>
+        <div class="chat_window">
+          <div class="messages">
+            <div class="message received">
+              <p>Hello! How can I help you today?</p>
             </div>
-            <form class="chat_input" action="#" method="post">
-                <input type="text" placeholder="Type your message here..." required />
-                <button type="submit">Send</button>
-            </form>
+            <div class="message sent">
+              <p>Hi! I have a question about the upcoming exam.</p>
             </div>
-        </section>
-        <section class="chatbox">
+          </div>
+          <form class="chat_input" action="#" method="post">
+            <input
+              type="text"
+              placeholder="Type your message here..."
+              required
+            />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+      <section class="chatbox">
         <form action="#" method="post">
-          <textarea name="post_content" id="post_content" placeholder="What`s on your mind?"required></textarea>
+          <textarea
+            name="post_content"
+            id="post_content"
+            placeholder="What`s on your mind?"
+            required
+          ></textarea>
           <input type="file" accept="image/*" />
           <button type="button">gifs</button>
           <button type="submit">Post</button>
         </form>
-        </section>
+      </section>
     </main>
     <footer>
       <img src="" alt="school_logo" />
