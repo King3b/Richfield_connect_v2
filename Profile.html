@@ -14,19 +14,16 @@
   </head>
 
   <body>
-    <!-- HEADER -->
-    <header class="main_header">
-      <div class="logo_section">
-        <img src="" alt="school logo" />
-        <h1>Richfield Connect</h1>
-      </div>
-
+    <header>
+      <img src="assets/images/rcLogo.png" alt="school_logo" />
+      <h1>Richfield connect</h1>
       <nav>
         <ul>
           <li><a href="Home.html">Home</a></li>
           <li><a href="About.html">About</a></li>
-          <li><a href="Signup.html">Sign Up</a></li>
+          <li><a href="Signup.html">Sign up</a></li>
           <li><a href="Feed.html">Feed</a></li>
+          <li><button id="themeToggle" class="theme_btn">🌙</button></li>
         </ul>
       </nav>
     </header>
@@ -34,12 +31,12 @@
     <!-- QUICK NAV -->
     <section class="quick_links">
       <ul>
-          <li><a href="Home.html">🏠 Home</a></li>
-          <li><a href="Feed.html">📰 Feed</a></li>
-          <li><a href="Chat.html">💬 Chat</a></li>
-          <li><a href="Profile.html">👤 Profile</a></li>
-          <li><a href="SchoolResources.html">📚 Resources</a></li>
-          <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
+        <li><a href="Home.html">🏠 Home</a></li>
+        <li><a href="Feed.html">📰 Feed</a></li>
+        <li><a href="Chat.html">💬 Chat</a></li>
+        <li><a href="Profile.html">👤 Profile</a></li>
+        <li><a href="SchoolResources.html">📚 Resources</a></li>
+        <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
       </ul>
     </section>
 
@@ -47,21 +44,42 @@
       <!-- PROFILE HERO -->
       <section class="profile_bar">
         <div class="profile_banner">
-          <img src="" alt="profile banner" />
+          <img
+            id="bannerImage"
+            src="assets/images/defaultBanner.jpg"
+            alt="profile banner"
+          />
         </div>
 
         <div class="profile_image">
-          <img src="" alt="profile picture" />
+          <img
+            id="profileImage"
+            src="assets/images/defaultProfile.png"
+            alt="profile picture"
+          />
         </div>
 
         <div class="profile_info">
-          <h2>Blessings Marera</h2>
-          <h3>@blessings</h3>
+          <h2 id="profileName">No name added yet</h2>
+
+          <h3 id="profileUsername">@please_edit_profile</h3>
 
           <div class="bio_info">
-            <p>Software Development</p>
-            <p>2nd Year</p>
-            <p>Game Developer 🎮</p>
+            <p id="profileCourse">Please add your course in Edit Profile</p>
+
+            <p id="profileYear">Please add your academic year</p>
+
+            <p id="profileBio">Please add your bio in Edit Profile</p>
+          </div>
+          <div class="profile_completion">
+            <div class="completion_text">
+              <h4>Profile Completion</h4>
+              <p id="completionPercent">0%</p>
+            </div>
+
+            <div class="completion_bar">
+              <div class="completion_fill" id="completionFill"></div>
+            </div>
           </div>
 
           <div class="profile_stats">
@@ -82,9 +100,9 @@
           </div>
 
           <div class="personal_links">
-            <a href="">GitHub</a>
-            <a href="">LinkedIn</a>
-            <a href="">Portfolio</a>
+            <a id="githubLink" href="#">Add GitHub</a>
+            <a id="linkedinLink" href="#"> Add LinkedIn </a>
+            <a id="portfolioLink" href="#"> Add Portfolio </a>
           </div>
         </div>
       </section>
@@ -110,7 +128,7 @@
               <span class="material-symbols-rounded">person</span>
               <div>
                 <h4>Full Name</h4>
-                <p>Blessings Marera</p>
+                <p id="overviewName">Please edit your full name</p>
               </div>
             </li>
 
@@ -118,7 +136,7 @@
               <span class="material-symbols-rounded">school</span>
               <div>
                 <h4>Institution</h4>
-                <p>Richfield</p>
+                <p id="overviewInstitution">Richfield</p>
               </div>
             </li>
 
@@ -126,7 +144,7 @@
               <span class="material-symbols-rounded">menu_book</span>
               <div>
                 <h4>Course</h4>
-                <p>Software Development</p>
+                <p id="overviewCourse">Please add course</p>
               </div>
             </li>
 
@@ -134,7 +152,7 @@
               <span class="material-symbols-rounded">location_on</span>
               <div>
                 <h4>Location</h4>
-                <p>Cape Town</p>
+                <p id="overviewLocation">Please add location</p>
               </div>
             </li>
           </ul>
@@ -148,7 +166,7 @@
               <span class="material-symbols-rounded">history_edu</span>
               <div>
                 <h4>High School</h4>
-                <p>Your High School</p>
+                <p id="highSchool">Please add high school</p>
               </div>
             </li>
 
@@ -156,7 +174,7 @@
               <span class="material-symbols-rounded">psychology</span>
               <div>
                 <h4>Field of Study</h4>
-                <p>Programming & Game Development</p>
+                <p id="fieldStudy">Please add field of study</p>
               </div>
             </li>
           </ul>
@@ -165,23 +183,13 @@
         <div class="card">
           <h3>Hobbies</h3>
 
-          <ul>
-            <li>
-              <span class="material-symbols-rounded">sports_esports</span>
-              <div>
-                <h4>Gaming</h4>
-                <p>Unity Game Development</p>
-              </div>
-            </li>
+          <div class="input_group">
+            <input type="text" id="hobbyInput" placeholder="Add hobby" />
 
-            <li>
-              <span class="material-symbols-rounded">sports_soccer</span>
-              <div>
-                <h4>Football</h4>
-                <p>Competitive Soccer</p>
-              </div>
-            </li>
-          </ul>
+            <button type="button" id="addHobby">Add Hobby</button>
+          </div>
+
+          <div class="tags" id="hobbyList"></div>
         </div>
       </section>
 
@@ -252,28 +260,28 @@
 
     <!-- FOOTER -->
     <footer>
-      <div class="footer_logo">
-        <img src="" alt="school logo" />
-        <h3>Richfield Connect</h3>
+      <div class="f_naves">
+        <img src="assets/images/rcLogo.png" alt="school_logo" />
+        <div>
+          <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Signup.html">Sign up</a></li>
+            <li><a href="Feed.html">Feed</a></li>
+          </ul>
+        </div>
+        <hr />
+        <div>
+          <ul>
+            <li><a href="About.html#help_center">Help center</a></li>
+            <li><a href="About.html#contact">Contact us</a></li>
+            <li><a href="About.html#privacy_policy">Privacy policy</a></li>
+            <li><a href="About.html#Core_values">Terms of use</a></li>
+          </ul>
+        </div>
       </div>
-
-      <div class="footer_links">
-        <ul>
-          <li><a href="Home.html">Home</a></li>
-          <li><a href="About.html">About</a></li>
-          <li><a href="Signup.html">Sign Up</a></li>
-          <li><a href="Feed.html">Feed</a></li>
-        </ul>
-      </div>
-
-      <div class="footer_extra">
-        <ul>
-          <li>Help Center</li>
-          <li>Contact Us</li>
-          <li>Privacy Policy</li>
-          <li>Terms of Use</li>
-        </ul>
-      </div>
+      <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
+    <script src="JavaScript/profile.js"></script>
   </body>
 </html>

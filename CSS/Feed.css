@@ -257,12 +257,13 @@ main {
 
 .cTopic {
   font-size: 1rem;
-  color: #0052cc;
+  color: #ffffff;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .cUser {
+  color: #ffffff;
   font-size: 0.95rem;
   font-weight: 600;
 }
@@ -274,6 +275,7 @@ main {
 }
 
 .cMsg {
+  color: #ffffff;
   margin-top: 8px;
   line-height: 1.6;
   white-space: nowrap;
@@ -358,11 +360,11 @@ button:hover {
 
 /* CREATE POST */
 .create_Post {
-  background: white;
+  background: #21212121;
   padding: 25px;
   border-radius: 25px;
 
-  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
+  box-shadow: 0 10px 25px rgba(3, 104, 255, 0.336);
 }
 
 .create_Post h2 {

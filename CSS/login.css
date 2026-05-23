@@ -184,10 +184,7 @@ main {
   padding: 30px;
   border-radius: 25px;
   box-shadow: 0 15px 35px rgba(0, 82, 204, 0.15);
-  width: 70%;
-  height: 870px;
   margin-bottom: 70px;
-  margin-left: 70px;
 }
 
 /* BUTTON */
@@ -248,7 +245,6 @@ form {
   padding: 40px;
   border-radius: 30px;
   box-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
-  height: 800px;
 }
 
 /* FORM TITLES */
@@ -433,59 +429,148 @@ footer div li {
 }
 
 /* RESPONSIVE */
-@media (max-width: 900px) {
+/* =========================
+TABLET
+========================= */
+
+@media (max-width: 1000px) {
   header {
     flex-direction: column;
     gap: 20px;
-  }
-  .login-layout {
-    width: 400px;
-  }
-  .link-boared {
-    padding: 40px 20px;
-    overflow-y: auto;
-  }
-  .link-boared h2 {
-    font-size: 2.2rem;
-  }
-}
-
-@media (max-width: 600px) {
-  nav ul {
-    flex-direction: column;
     text-align: center;
   }
 
-  .link-boared {
-    padding: 40px 20px;
-    overflow-y: auto;
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .link-boared h2 {
-    font-size: 2rem;
+  .login-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .link-boared {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .login {
+    width: 100%;
+    margin: 0;
+    height: auto;
+    padding: 20px;
   }
 
   form {
-    padding: 25px;
+    width: 100%;
+    height: auto;
+    padding: 30px 20px;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  form button {
+    width: 100%;
+  }
+
+  footer div {
+    flex-direction: column;
   }
 }
-@media (max-width: 1000px) {
-  .login-layout {
-    grid-template-columns: 1fr;
+
+/* =========================
+PHONE
+========================= */
+
+@media (max-width: 600px) {
+  main {
+    padding: 30px 5%;
+  }
+
+  header {
+    padding: 20px 5%;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
   }
 
   .link-boared {
-    position: relative;
-    top: 0;
-    height: 400px;
+    padding: 25px 15px;
+    border-radius: 20px;
   }
-}
 
-.board-card:hover::before {
-  opacity: 0.15;
-}
+  .link-boared h2 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
 
-/* LIFT ON HOVER */
-.board-card:hover {
-  transform: translateY(-5px);
+  .link-boared p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .board-links {
+    padding: 20px 15px;
+  }
+
+  .login {
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  form {
+    padding: 20px 15px;
+    border-radius: 20px;
+  }
+
+  form h3 {
+    font-size: 1.6rem;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  form button,
+  .login button,
+  button {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .reasons ul {
+    grid-template-columns: 1fr;
+  }
+
+  .core-advantages {
+    padding: 20px;
+  }
+
+  footer {
+    padding: 40px 5%;
+    text-align: center;
+  }
+
+  footer nav ul {
+    justify-content: center;
+  }
+
+  footer div {
+    align-items: center;
+  }
 }

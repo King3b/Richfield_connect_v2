@@ -15,21 +15,15 @@
   </head>
 
   <body>
-    <!-- HEADER -->
-    <header class="main_header">
-      <div class="logo_section">
-        <img src="" alt="school logo" />
-        <h1>Richfield Connect</h1>
-      </div>
-
+    <header>
+      <img src="assets/images/rcLogo.png" alt="school_logo" />
+      <h1>Richfield connect</h1>
       <nav>
         <ul>
-          <li><a href="Home.html">🏠 Home</a></li>
-          <li><a href="Feed.html">📰 Feed</a></li>
-          <li><a href="Chat.html">💬 Chat</a></li>
-          <li><a href="Profile.html">👤 Profile</a></li>
-          <li><a href="SchoolResources.html">📚 Resources</a></li>
-          <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="Signup.html">Sign up</a></li>
+          <li><a href="Feed.html">Feed</a></li>
         </ul>
       </nav>
     </header>
@@ -57,7 +51,7 @@
           <p>Customize your Richfield Connect profile ✨</p>
         </div>
 
-        <form action="Profile.html">
+        <form id="profileForm" action="Profile.html">
           <!-- PROFILE IMAGES -->
           <div class="card">
             <h3>Profile Images</h3>
@@ -66,13 +60,13 @@
               <div class="profile_preview">
                 <img src="" alt="profile picture" />
                 <label>Profile Picture</label>
-                <input type="file" accept="image/*" />
+                <input type="file" id="profileUpload" accept="image/*" />
               </div>
 
               <div class="banner_preview">
                 <img src="" alt="banner image" />
                 <label>Banner Image</label>
-                <input type="file" accept="image/*" />
+                <input type="file" id="bannerUpload" accept="image/*" />
               </div>
             </div>
           </div>
@@ -84,6 +78,7 @@
             <div class="input_group">
               <label for="name">Full Name</label>
               <input type="text" id="name" placeholder="Blessings Marera" />
+              <small class="error"></small>
             </div>
 
             <div class="input_group">
@@ -97,6 +92,53 @@
                 id="bio"
                 placeholder="Tell people about yourself..."
               ></textarea>
+            </div>
+            <div class="input_group">
+              <label for="course">Course</label>
+
+              <input
+                type="text"
+                id="course"
+                placeholder="Software Development"
+              />
+            </div>
+
+            <div class="input_group">
+              <label for="year">Academic Year</label>
+
+              <input type="text" id="year" placeholder="2nd Year" />
+            </div>
+
+            <div class="input_group">
+              <label for="location">Location</label>
+
+              <input type="text" id="location" placeholder="Cape Town" />
+            </div>
+
+            <div class="input_group">
+              <label for="highschool">High School</label>
+
+              <input
+                type="text"
+                id="highschool"
+                placeholder="Your High School"
+              />
+            </div>
+
+            <div class="input_group">
+              <label for="fieldstudy">Field of Study</label>
+
+              <input
+                type="text"
+                id="fieldstudy"
+                placeholder="Programming & Game Development"
+              />
+            </div>
+
+            <div class="input_group">
+              <label for="portfolio">Portfolio</label>
+
+              <input type="text" id="portfolio" placeholder="Portfolio link" />
             </div>
           </div>
 
@@ -210,8 +252,14 @@
                 <button type="button">Remove</button>
               </li>
             </ul>
-
-            <button type="button" class="add_btn">Add Achievement</button>
+            <input
+              type="text"
+              id="achievementInput"
+              placeholder="Add achievement"
+            />
+            <button type="button" class="add_btn" id="addAchievement">
+              Add Achievement
+            </button>
           </div>
 
           <!-- ACTION BUTTONS -->
@@ -226,26 +274,30 @@
 
     <!-- FOOTER -->
     <footer>
-      <div class="footer_logo">
-        <img src="" alt="school logo" />
-        <h3>Richfield Connect</h3>
+      <div class="f_naves">
+        <img src="assets/images/rcLogo.png" alt="school_logo" />
+        <div>
+          <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Signup.html">Sign up</a></li>
+            <li><a href="Feed.html">Feed</a></li>
+          </ul>
+        </div>
+        <hr />
+        <div>
+          <ul>
+            <li><a href="About.html#help_center">Help center</a></li>
+            <li><a href="About.html#contact">Contact us</a></li>
+            <li><a href="About.html#privacy_policy">Privacy policy</a></li>
+            <li><a href="About.html#Core_values">Terms of use</a></li>
+          </ul>
+        </div>
       </div>
-
-      <div class="footer_links">
-        <ul>
-          <li><a href="Home.html">Home</a></li>
-          <li><a href="Feed.html">Feed</a></li>
-          <li><a href="Profile.html">Profile</a></li>
-        </ul>
-      </div>
-
-      <div class="footer_links">
-        <ul>
-          <li><a href="">Help Center</a></li>
-          <li><a href="">Privacy Policy</a></li>
-          <li><a href="">Terms of Use</a></li>
-        </ul>
-      </div>
+      <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
+
+    <div class="popup" id="popup">✅ Profile Updated Successfully</div>
+    <script src="JavaScript/edit_profile.js"></script>
   </body>
 </html>

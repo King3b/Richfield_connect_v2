@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Richfield connect \ signup</title>
-    <link rel="stylesheet" href="CSS/About.css" />
+    <link rel="stylesheet" href="CSS/SignUp.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
       rel="stylesheet"
@@ -12,7 +12,7 @@
   </head>
   <body>
     <header>
-      <img src="" alt="school_logo" />
+      <img src="assets/images/rcLogo.png" alt="school_logo" />
       <h1>Richfield connect</h1>
       <nav>
         <ul>
@@ -52,7 +52,7 @@
         </section>
 
         <section class="signup">
-          <form id="signup-form" action="Profile.html" method="get">
+          <form id="profileForm" action="Profile.html">
             <img src="" alt="profile picture" />
             <h3>sign up</h3>
             <p>Create your profile to get started!</p>
@@ -69,10 +69,12 @@
             /><br />
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="Email" required /><br />
-            <label for="name_2">Name</label>
-            <input type="text" id="name_2" placeholder="Name" required /> <br />
             <label for="username">Username</label>
             <input type="text" id="username" placeholder="@username" required />
+            <div class="username-preview">
+              Suggested username:
+              <span id="generatedUsername">@username</span>
+            </div>
             <br />
             <label for="campus">Campus</label>
             <select name="campus" id="campus" required>
@@ -112,27 +114,83 @@
               maxlength="8"
             /><br />
             <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              required
-            />
+
+            <div class="password-box">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+
+              <span class="material-symbols-rounded eye" id="togglePassword">
+                visibility
+              </span>
+            </div>
+
+            <div class="strength">
+              <div class="strength-bar"></div>
+            </div>
+
+            <p class="strength-text"></p>
             <br />
             <label for="confirm_password">Confirm Password</label>
-            <input
-              type="password"
-              id="confirm_password"
-              placeholder="Confirm Password"
-              required
-            />
+
+            <div class="password-box">
+              <input
+                type="password"
+                id="confirm_password"
+                placeholder="Confirm Password"
+                required
+              />
+
+              <span class="material-symbols-rounded eye confirm-eye">
+                visibility
+              </span>
+            </div>
+
+            <p class="password-match"></p>
             <br />
+            <section class="interest-section">
+              <h4>Select Interests</h4>
+
+              <div class="interest-tags">
+                <button type="button" class="tag">Coding</button>
+
+                <button type="button" class="tag">AI</button>
+
+                <button type="button" class="tag">Soccer</button>
+
+                <button type="button" class="tag">Networking</button>
+
+                <button type="button" class="tag">Cybersecurity</button>
+
+                <button type="button" class="tag">Design</button>
+              </div>
+            </section>
             <button type="submit">Sign Up</button>
             <hr />
             <p class="login">
               Already have an account? <a href="logIn.html">Login here</a>
             </p>
           </form>
+          <section class="live-preview">
+            <h3>Live Profile Preview</h3>
+
+            <div class="preview-card">
+              <div class="preview-avatar">
+                <span class="material-symbols-rounded"> person </span>
+              </div>
+
+              <h2 class="preview-name">Your Name</h2>
+
+              <p class="preview-username">@username</p>
+
+              <p class="preview-campus">Campus</p>
+
+              <div class="preview-tags"></div>
+            </div>
+          </section>
         </section>
       </section>
 
@@ -193,23 +251,45 @@
         </ul>
       </section>
     </main>
-
     <footer>
-      <img src="" alt="school_logo" />
-      <nav class="Fnaves">
-        <ul>
-          <li><a href="Home.html">Home</a></li>
-          <li><a href="About.html">About</a></li>
-          <li><a href="Signup.html">Sign up</a></li>
-          <li><a href="Feed.html">Feed</a></li>
-        </ul>
-      </nav>
-      <div>
-        <li>Help center</li>
-        <li>Connect us</li>
-        <li>Privacy policy</li>
-        <li>Terms of use</li>
+      <div class="f_naves">
+        <img src="assets/images/rcLogo.png" alt="school_logo" />
+        <div>
+          <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Signup.html">Sign up</a></li>
+            <li><a href="Feed.html">Feed</a></li>
+          </ul>
+        </div>
+        <hr />
+        <div>
+          <ul>
+            <li><a href="About.html#help_center">Help center</a></li>
+            <li><a href="About.html#contact">Contact us</a></li>
+            <li><a href="About.html#privacy_policy">Privacy policy</a></li>
+            <li><a href="About.html#Core_values">Terms of use</a></li>
+          </ul>
+        </div>
       </div>
+      <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="JavaScript/signup.js"></script>
+    <script src="JavaScript/login.js"></script>
+    <script>
+      const signupForm = document.querySelector("form");
+
+      signupForm.addEventListener("submit", function () {
+        localStorage.setItem(
+          "profileData",
+          JSON.stringify({
+            name: document.getElementById("fullname").value,
+            username: document.getElementById("username").value,
+            email: document.getElementById("email").value,
+          }),
+        );
+      });
+    </script>
   </body>
 </html>

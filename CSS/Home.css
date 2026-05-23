@@ -189,12 +189,12 @@ nav ul li a:hover::after {
   margin-bottom: 10px;
 }
 
-.cMsg {
+#cMsg {
   font-size: 0.95rem;
 }
 
 /* EVENTS */
-.calender {
+.calendar {
   display: flex;
   gap: 15px;
   align-items: center;
@@ -204,7 +204,7 @@ nav ul li a:hover::after {
   margin-bottom: 15px;
 }
 
-.calender_block {
+.calendar_block {
   background: #0052cc;
   color: white;
   padding: 15px;
@@ -213,12 +213,12 @@ nav ul li a:hover::after {
   min-width: 90px;
 }
 
-.calender_block p:last-child {
+.calendar_block p:last-child {
   font-size: 1.8rem;
   font-weight: bold;
 }
 
-.calender_block2 h6 {
+.calendar_block2 h6 {
   font-size: 1rem;
   margin-bottom: 8px;
   color: #0052cc;
@@ -260,7 +260,7 @@ nav ul li a:hover::after {
 }
 
 .ideas,
-.Calender {
+.Calendar {
   height: 260px;
   background: linear-gradient(135deg, #0052cc, #1e90ff);
   border-radius: 25px;
@@ -485,32 +485,32 @@ nav ul li a:hover::after {
 }
 
 /* PRIVACY + CONTACT + HELP */
-.privacy_policy,
-.contact,
-.help_center {
+#privacy_policy,
+#contact,
+#help_center {
   background: #212121;
-  color:#1e90ff;
+  color: #1e90ff;
   padding: 35px;
   border-radius: 25px;
   margin-bottom: 35px;
   box-shadow: 0 10px 25px rgba(255, 23, 23, 0.247);
 }
 
-.privacy_policy h2,
-.contact h2,
-.help_center h2 {
+#privacy_policy h2,
+#contact h2,
+#help_center h2 {
   color: red;
   margin-bottom: 15px;
 }
 
 /* LINKS */
-.contact a {
+#contact a {
   color: #0052cc;
   text-decoration: none;
   font-weight: 600;
 }
 
-.contact a:hover {
+#contact a:hover {
   text-decoration: underline;
 }
 
@@ -533,7 +533,7 @@ textarea:focus {
 }
 
 /* BUTTONS */
-.help_center button {
+#help_center button {
   margin-top: 20px;
   padding: 12px 30px;
   border: none;
@@ -545,7 +545,7 @@ textarea:focus {
   transition: 0.3s;
 }
 
-.help_center button:hover {
+#help_center button:hover {
   background: #003f9e;
   transform: translateY(-3px);
 }
@@ -555,12 +555,20 @@ footer {
   color: white;
   padding: 50px 8%;
 }
+footer img {
+  width: 100px;
+  height: 150px;
+  object-fit: contain;
+  float: left;
+}
 
-footer nav ul,
+.f_naves {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
 footer div ul {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
   gap: 20px;
   margin: 20px 0;
 }
@@ -576,8 +584,9 @@ footer a:hover {
 }
 
 footer p {
-  margin-top: 20px;
+  margin-top: 30px;
   opacity: 0.8;
+  text-align: center;
 }
 
 /* RESPONSIVE */
