@@ -61,45 +61,71 @@ main {
 }
 
 /* SOCIAL LINKS */
-.social_links ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  margin-bottom: 40px;
+.social_links {
+  position: absolute;
+  top: 100px;
+  height: fit-content;
+  width: 400px;
+  background-color: #212121;
+
+  /* PUSH FULLY LEFT */
+  margin-left: 0;
+  padding-left: 0;
+  align-self: start;
 }
 
+/* keep list clean */
+.social_links ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  margin: 0;
+  padding: 0;
+}
+
+/* links */
 .social_links a {
+  display: flex;
+  align-items: center;
+
+  padding: 14px 18px;
+  border-radius: 16px;
+
   text-decoration: none;
-  background: white;
-  padding: 12px 20px;
-  border-radius: 30px;
-  color: #0052cc;
-  font-weight: 500;
-  box-shadow: 0 5px 15px rgba(0,82,204,0.08);
+  color: #3b84f3;
+  background-color: #212121;
+
+  box-shadow: 0 5px 15px rgba(0, 47, 255, 0.08);
   transition: 0.3s;
 }
 
+/* hover */
 .social_links a:hover {
   background: #0052cc;
   color: white;
+  transform: translateX(5px);
 }
 
 /* MAIN RESOURCE SECTION */
+
 .school_resources {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers cards */
   gap: 30px;
   margin-bottom: 60px;
 }
 
 /* RESOURCE CARDS */
 .resource {
-  background: white;
+  align-items: center;
+  background: #212121;
+  width: 900px;
   padding: 30px;
   border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0,82,204,0.08);
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
   transition: 0.3s;
 }
 
@@ -168,7 +194,7 @@ main {
   background: white;
   padding: 35px;
   border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0,82,204,0.08);
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
   margin-bottom: 60px;
   overflow-x: auto;
 }
@@ -236,7 +262,7 @@ td {
   background: white;
   padding: 35px;
   border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0,82,204,0.08);
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
   margin-bottom: 60px;
 }
 
@@ -256,7 +282,13 @@ td {
 
 /* GUIDELINES */
 .guidelines {
+  margin-top: 60px;
   margin-bottom: 60px;
+}
+guidelines p {
+  color: #64748b;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .guidelines h4 {
@@ -272,6 +304,55 @@ td {
   list-style: none;
   margin-top: 30px;
 }
+/*cards */
+.cards {
+  display: flex;
+  background: #212121;
+  padding: 25px;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0, 82, 204, 0.08);
+  transition: 0.3s;
+}
+
+.cards:hover {
+  transform: translateY(-5px);
+}
+
+.cards h3 {
+  color: #0052cc;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+.calender {
+  width: 500px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: #212121;
+  padding: 15px;
+  border-radius: 18px;
+  margin-bottom: 15px;
+}
+
+.calender_block {
+  background: #0052cc;
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  min-width: 90px;
+}
+
+.calender_block p:last-child {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.calender_block2 h6 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #0052cc;
+}
 
 /* ADVANTAGE CARDS */
 .core-advantages {
@@ -279,7 +360,7 @@ td {
   padding: 30px;
   border-radius: 25px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0,82,204,0.08);
+  box-shadow: 0 10px 25px rgba(0, 82, 204, 0.08);
   transition: 0.3s;
   height: 100%;
 }
@@ -335,7 +416,6 @@ footer div ul {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-
   header {
     flex-direction: column;
     gap: 20px;
@@ -344,11 +424,9 @@ footer div ul {
   .school_resources {
     grid-template-columns: 1fr;
   }
-
 }
 
 @media (max-width: 600px) {
-
   nav ul {
     flex-direction: column;
     text-align: center;
@@ -361,5 +439,4 @@ footer div ul {
   .timetable {
     padding: 20px;
   }
-
 }

@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
@@ -439,7 +438,13 @@ footer div li {
     flex-direction: column;
     gap: 20px;
   }
-
+  .login-layout {
+    width: 400px;
+  }
+  .link-boared {
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
   .link-boared h2 {
     font-size: 2.2rem;
   }
@@ -453,6 +458,7 @@ footer div li {
 
   .link-boared {
     padding: 40px 20px;
+    overflow-y: auto;
   }
 
   .link-boared h2 {

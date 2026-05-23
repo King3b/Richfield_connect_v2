@@ -3,58 +3,276 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Richfield Connect/ Profile</title>
-    <link rel="stylesheet" href="CSS/About.css" />
+    <title>Richfield Connect | Profile</title>
+
+    <link rel="stylesheet" href="CSS/Profile.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <header>
-      <img src="" alt="school_logo" />
-      <h1>Richfield connect</h1>
+    <!-- HEADER -->
+    <header class="main_header">
+      <div class="logo_section">
+        <img src="" alt="school logo" />
+        <h1>Richfield Connect</h1>
+      </div>
+
       <nav>
-        <li><a href="Home.html">Home</a></li>
-        <li><a href="About.html">About</a></li>
-        <li><a href="Signup.html">Sign up</a></li>
-        <li><a href="Feed.html">Feed</a></li>
+        <ul>
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="Signup.html">Sign Up</a></li>
+          <li><a href="Feed.html">Feed</a></li>
+        </ul>
       </nav>
     </header>
-    <article>
-      <ul class="social_links">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="feed.html">Feed</a></li>
-        <li><a href="profile.html">Profile</a></li>
+
+    <!-- QUICK NAV -->
+    <section class="quick_links">
+      <ul>
+          <li><a href="Home.html">🏠 Home</a></li>
+          <li><a href="Feed.html">📰 Feed</a></li>
+          <li><a href="Chat.html">💬 Chat</a></li>
+          <li><a href="Profile.html">👤 Profile</a></li>
+          <li><a href="SchoolResources.html">📚 Resources</a></li>
+          <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
       </ul>
-    </article>
+    </section>
+
     <main>
-      <section class="Profile_Bar">
-        <img src="" alt="profile_pic" />
-        <img src="" alt="profile_banner" />
-        <h2>Name</h2>
-        <h3>@username</h3>
-        <div class="bio_info">
-          <p id="course">course</p>
-          <p id="year">year</p>
-          <p id="bio">bio</p>
+      <!-- PROFILE HERO -->
+      <section class="profile_bar">
+        <div class="profile_banner">
+          <img src="" alt="profile banner" />
         </div>
-        <div class="profile_stats">
-          <p id="followers">followers</p>
-          <p id="following">following</p>
-          <p id="posts">posts</p>
+
+        <div class="profile_image">
+          <img src="" alt="profile picture" />
+        </div>
+
+        <div class="profile_info">
+          <h2>Blessings Marera</h2>
+          <h3>@blessings</h3>
+
+          <div class="bio_info">
+            <p>Software Development</p>
+            <p>2nd Year</p>
+            <p>Game Developer 🎮</p>
+          </div>
+
+          <div class="profile_stats">
+            <div>
+              <h4>1.2K</h4>
+              <p>Followers</p>
+            </div>
+
+            <div>
+              <h4>534</h4>
+              <p>Following</p>
+            </div>
+
+            <div>
+              <h4>89</h4>
+              <p>Posts</p>
+            </div>
+          </div>
+
+          <div class="personal_links">
+            <a href="">GitHub</a>
+            <a href="">LinkedIn</a>
+            <a href="">Portfolio</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE NAV -->
+      <section class="section_nav">
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#connections">Connections</a></li>
+          <li><a href="#activity">Activity</a></li>
+        </ul>
+      </section>
+
+      <!-- OVERVIEW -->
+      <section class="board" id="overview">
+        <h2>Overview</h2>
+
+        <div class="card">
+          <h3>Personal Info</h3>
+
+          <ul>
+            <li>
+              <span class="material-symbols-rounded">person</span>
+              <div>
+                <h4>Full Name</h4>
+                <p>Blessings Marera</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="material-symbols-rounded">school</span>
+              <div>
+                <h4>Institution</h4>
+                <p>Richfield</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="material-symbols-rounded">menu_book</span>
+              <div>
+                <h4>Course</h4>
+                <p>Software Development</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="material-symbols-rounded">location_on</span>
+              <div>
+                <h4>Location</h4>
+                <p>Cape Town</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Education</h3>
+
+          <ul>
+            <li>
+              <span class="material-symbols-rounded">history_edu</span>
+              <div>
+                <h4>High School</h4>
+                <p>Your High School</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="material-symbols-rounded">psychology</span>
+              <div>
+                <h4>Field of Study</h4>
+                <p>Programming & Game Development</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Hobbies</h3>
+
+          <ul>
+            <li>
+              <span class="material-symbols-rounded">sports_esports</span>
+              <div>
+                <h4>Gaming</h4>
+                <p>Unity Game Development</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="material-symbols-rounded">sports_soccer</span>
+              <div>
+                <h4>Football</h4>
+                <p>Competitive Soccer</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CONNECTIONS -->
+      <section class="board" id="connections">
+        <h2>Connections</h2>
+
+        <div class="connections_grid">
+          <div class="card">
+            <h3>Followers</h3>
+
+            <ul>
+              <li>John Doe</li>
+              <li>Sarah Smith</li>
+              <li>Mike Johnson</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Following</h3>
+
+            <ul>
+              <li>Jane Doe</li>
+              <li>Alex Brown</li>
+              <li>Chris Evans</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Groups</h3>
+
+            <ul>
+              <li>Game Dev Club</li>
+              <li>Programming Society</li>
+              <li>Richfield Developers</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTIVITY -->
+      <section class="board" id="activity">
+        <h2>Activity</h2>
+
+        <div class="activity_grid">
+          <div class="activity_card">
+            <h3>Posts</h3>
+            <p>89</p>
+          </div>
+
+          <div class="activity_card">
+            <h3>Likes</h3>
+            <p>2.5K</p>
+          </div>
+
+          <div class="activity_card">
+            <h3>Comments</h3>
+            <p>643</p>
+          </div>
+
+          <div class="activity_card">
+            <h3>Shares</h3>
+            <p>182</p>
+          </div>
         </div>
       </section>
     </main>
+
+    <!-- FOOTER -->
     <footer>
-      <img src="" alt="school_logo" />
-      <nav class="Fnaves">
-        <a href="Home.html"><li>Home</li></a>
-        <a href="About.html"><li>About</li></a>
-        <a href="Signup.html"><li>Sign up</li></a>
-        <a href="Feed.html"><li>Feed</li></a>
-      </nav>
-      <div>
-        <li>Help center</li>
-        <li>Connect us</li>
-        <li>Privacy policy</li>
-        <li>Terms of use</li>
+      <div class="footer_logo">
+        <img src="" alt="school logo" />
+        <h3>Richfield Connect</h3>
+      </div>
+
+      <div class="footer_links">
+        <ul>
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="Signup.html">Sign Up</a></li>
+          <li><a href="Feed.html">Feed</a></li>
+        </ul>
+      </div>
+
+      <div class="footer_extra">
+        <ul>
+          <li>Help Center</li>
+          <li>Contact Us</li>
+          <li>Privacy Policy</li>
+          <li>Terms of Use</li>
+        </ul>
       </div>
     </footer>
   </body>

@@ -3,139 +3,249 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Richfield Connect / Edit Profile</title>
-    <link rel="stylesheet" href="CSS/Edit.css">
+
+    <title>Richfield Connect | Edit Profile</title>
+
+    <link rel="stylesheet" href="CSS/Edit.css" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
       rel="stylesheet"
     />
   </head>
+
   <body>
-    <header>
-      <img src="" alt="school_logo" />
-      <h1>Richfield connect</h1>
+    <!-- HEADER -->
+    <header class="main_header">
+      <div class="logo_section">
+        <img src="" alt="school logo" />
+        <h1>Richfield Connect</h1>
+      </div>
+
       <nav>
         <ul>
-          <li><a href="Home.html">Home</a></li>
-          <li><a href="About.html">About</a></li>
-          <li><a href="Signup.html">Sign up</a></li>
-          <li><a href="Feed.html">Feed</a></li>
+          <li><a href="Home.html">🏠 Home</a></li>
+          <li><a href="Feed.html">📰 Feed</a></li>
+          <li><a href="Chat.html">💬 Chat</a></li>
+          <li><a href="Profile.html">👤 Profile</a></li>
+          <li><a href="SchoolResources.html">📚 Resources</a></li>
+          <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
         </ul>
       </nav>
     </header>
+
+    <!-- MAIN -->
     <main>
-      <section class="edit-profile">
-        <h2>Edit Profile</h2>
-        <form action="Profile.html" method="get">
-          <div class="profile-picture">
-            <h4>Current Profile Picture</h4>
-            <img src="" alt="current profile picture" />
-            <input type="file" accept="image/*" />
-            <h4>Current Banner</h4>
-            <img src="" alt="current banner" />
-            <input type="file" accept="image/*" />
-          </div>
-          <div class="profile-info">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Name" required /> <br />
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="@username" required />
-            <br />
-            <label for="bio">Bio</label>
-            <textarea id="bio" placeholder="Bio"></textarea>
-          </div>
-          <div class="contact_edit">
-            <h4>Contact Information</h4>
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Email" required />
-            <br />
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" placeholder="Phone Number" /> <br />
-            <label for="linkedin">LinkedIn Profile</label>
-            <input type="text" id="linkedin" placeholder="LinkedIn Profile" />
-            <br />
-            <label for="github">GitHub Profile</label>
-            <input type="text" id="github" placeholder="GitHub Profile" />
-            <br />
-          </div>
-          <div class="hobbies_edit">
-            <h4>Hobbies</h4>
-            <div class="hobbies_edit">
-              <h4>Hobbies</h4>
-              <p>add your hobbies</p>
-              <input type="text" id="hobby-input" placeholder="Add a hobby" />
-              <div class="suggestions">
-                <button type="button" class="tag">Gaming</button>
-                <button type="button" class="tag">Coding</button>
-                <button type="button" class="tag">Football</button>
-                <button type="button" class="tag">Music</button>
-                <button type="button" class="tag">Reading</button>
+      <aside class="social_links">
+        <ul>
+          <li><a href="Home.html">🏠 Home</a></li>
+
+          <li><a href="Feed.html">📰 Feed</a></li>
+
+          <li><a href="Chat.html">💬 Chat</a></li>
+
+          <li><a href="Profile.html">👤 Profile</a></li>
+
+          <li><a href="SchoolResources.html">📚 Resources</a></li>
+
+          <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
+        </ul>
+      </aside>
+      <section class="edit_profile">
+        <div class="page_title">
+          <h2>Edit Profile</h2>
+          <p>Customize your Richfield Connect profile ✨</p>
+        </div>
+
+        <form action="Profile.html">
+          <!-- PROFILE IMAGES -->
+          <div class="card">
+            <h3>Profile Images</h3>
+
+            <div class="image_preview">
+              <div class="profile_preview">
+                <img src="" alt="profile picture" />
+                <label>Profile Picture</label>
+                <input type="file" accept="image/*" />
+              </div>
+
+              <div class="banner_preview">
+                <img src="" alt="banner image" />
+                <label>Banner Image</label>
+                <input type="file" accept="image/*" />
               </div>
             </div>
-            <div class="skills_edit">
-              <h4>Skills</h4>
-              <p>add your skills</p>
-              <input type="text" id="skill-input" placeholder="Add a skill" />
-              <div class="suggestions">
-                <button type="button" class="tag">HTML</button>
-                <button type="button" class="tag">CSS</button>
-                <button type="button" class="tag">JavaScript</button>
-                <button type="button" class="tag">Python</button>
-                <button type="button" class="tag">UI Design</button>
-                <button type="button" class="tag">Communication</button>
-                <button type="button" class="tag">Problem Solving</button>
-                <button type="button" class="tag">Game Dev</button>
-              </div>
+          </div>
+
+          <!-- BASIC INFO -->
+          <div class="card">
+            <h3>Basic Information</h3>
+
+            <div class="input_group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Blessings Marera" />
             </div>
-            <div class="goals_edit">
-              <h4>Goals</h4>
-              <div class="suggestions">
-                <button type="button" class="tag">Graduate</button>
-                <button type="button" class="tag">Build Projects</button>
-                <button type="button" class="tag">Get Internship</button>
-                <button type="button" class="tag">Network</button>
-                <button type="button" class="tag">Learn AI</button>
-                <button type="button" class="tag">Improve Grades</button>
-                <button type="button" class="tag">Become Developer</button>
-                <button type="button" class="tag">Start Business</button>
-              </div>
+
+            <div class="input_group">
+              <label for="username">Username</label>
+              <input type="text" id="username" placeholder="@blessings" />
             </div>
-            <textarea id="bio" placeholder="Bio"></textarea> <br />
-            <a href="#signup-form"><button id="back-btn">Back</button></a>
-            <button type="submit">Save Profile</button>
-          
-          <div class="academic_edit">
-            <h4>Academic Information</h4>
-            <button type="button">Add Achievements</button>
-            <ul>
-              <li>Achievement 1 <button type="button">Remove</button></li>
-              <li>Achievement 2 <button type="button">Remove</button></li>
-              <li>Achievement 3 <button type="button">Remove</button></li>
+
+            <div class="input_group">
+              <label for="bio">Bio</label>
+              <textarea
+                id="bio"
+                placeholder="Tell people about yourself..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- CONTACT -->
+          <div class="card">
+            <h3>Contact Information</h3>
+
+            <div class="input_group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="example@gmail.com" />
+            </div>
+
+            <div class="input_group">
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" placeholder="+27..." />
+            </div>
+
+            <div class="input_group">
+              <label for="github">GitHub</label>
+              <input
+                type="text"
+                id="github"
+                placeholder="GitHub profile link"
+              />
+            </div>
+
+            <div class="input_group">
+              <label for="linkedin">LinkedIn</label>
+              <input
+                type="text"
+                id="linkedin"
+                placeholder="LinkedIn profile link"
+              />
+            </div>
+          </div>
+
+          <!-- HOBBIES -->
+          <div class="card">
+            <h3>Hobbies</h3>
+
+            <input type="text" placeholder="Add your hobbies..." />
+
+            <div class="tags">
+              <button type="button" class="tag">Gaming</button>
+
+              <button type="button" class="tag">Coding</button>
+
+              <button type="button" class="tag">Football</button>
+
+              <button type="button" class="tag">Music</button>
+
+              <button type="button" class="tag">Reading</button>
+            </div>
+          </div>
+
+          <!-- SKILLS -->
+          <div class="card">
+            <h3>Skills</h3>
+
+            <input type="text" placeholder="Add your skills..." />
+
+            <div class="tags">
+              <button type="button" class="tag">HTML</button>
+
+              <button type="button" class="tag">CSS</button>
+
+              <button type="button" class="tag">JavaScript</button>
+
+              <button type="button" class="tag">Python</button>
+
+              <button type="button" class="tag">UI Design</button>
+
+              <button type="button" class="tag">Game Dev</button>
+            </div>
+          </div>
+
+          <!-- GOALS -->
+          <div class="card">
+            <h3>Goals</h3>
+
+            <div class="tags">
+              <button type="button" class="tag">Graduate</button>
+
+              <button type="button" class="tag">Build Projects</button>
+
+              <button type="button" class="tag">Get Internship</button>
+
+              <button type="button" class="tag">Learn AI</button>
+
+              <button type="button" class="tag">Become Developer</button>
+            </div>
+          </div>
+
+          <!-- ACADEMIC -->
+          <div class="card">
+            <h3>Academic Achievements</h3>
+
+            <ul class="achievement_list">
+              <li>
+                <span>Dean's List 2025</span>
+                <button type="button">Remove</button>
+              </li>
+
+              <li>
+                <span>Hackathon Finalist</span>
+                <button type="button">Remove</button>
+              </li>
+
+              <li>
+                <span>Top Programming Student</span>
+                <button type="button">Remove</button>
+              </li>
             </ul>
+
+            <button type="button" class="add_btn">Add Achievement</button>
           </div>
-          <button type="submit">Save Changes</button>
+
+          <!-- ACTION BUTTONS -->
+          <div class="action_buttons">
+            <a href="Profile.html" class="back_btn"> Back </a>
+
+            <button type="submit" class="save_btn">Save Changes</button>
+          </div>
         </form>
       </section>
     </main>
+
+    <!-- FOOTER -->
     <footer>
-      <img src="" alt="school_logo" />
-      <nav class="Fnaves">
+      <div class="footer_logo">
+        <img src="" alt="school logo" />
+        <h3>Richfield Connect</h3>
+      </div>
+
+      <div class="footer_links">
         <ul>
           <li><a href="Home.html">Home</a></li>
-          <li><a href="About.html">About</a></li>
-          <li><a href="Signup.html">Sign up</a></li>
           <li><a href="Feed.html">Feed</a></li>
-        </ul>
-      </nav>
-      <div>
-        <ul>
-          <li><a href="Help.html">Help center</a></li>
-          <li><a href="Contact.html">Connect us</a></li>
-          <li><a href="Privacy.html">Privacy policy</a></li>
-          <li><a href="Terms.html">Terms of use</a></li>
+          <li><a href="Profile.html">Profile</a></li>
         </ul>
       </div>
-      <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
+
+      <div class="footer_links">
+        <ul>
+          <li><a href="">Help Center</a></li>
+          <li><a href="">Privacy Policy</a></li>
+          <li><a href="">Terms of Use</a></li>
+        </ul>
+      </div>
     </footer>
   </body>
 </html>
