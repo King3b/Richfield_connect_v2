@@ -23,81 +23,32 @@
         </ul>
       </nav>
     </header>
-    <aside class="social_links">
-      <ul>
-        <li><a href="Home.html">🏠 Home</a></li>
 
-        <li><a href="Feed.html">📰 Feed</a></li>
-
-        <li><a href="Chat.html">💬 Chat</a></li>
-
-        <li><a href="Profile.html">👤 Profile</a></li>
-
-        <li><a href="SchoolResources.html">📚 Resources</a></li>
-
-        <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
-      </ul>
-    </aside>
-
-    <article class="groups">
-      <h2>Groups</h2>
-      <div class="group_search">
-        <input type="text" placeholder="Search groups" />
-        <button type="submit">Search</button>
-        <input type="text" id="new-group" />
-        <button id="create-group">Create</button>
-      </div>
-      <div class="group_categories">
-        <button type="button">Academic</button>
-        <button type="button">Clubs</button>
-        <button type="button">Sports</button>
-        <button type="button">Arts</button>
-        <button type="button">Social</button>
-      </div>
-      <div class="group">
-        <img src="" alt="group picture" />
-
-        <h4>
-          <a href="Chat.html?group=Math511"> Math 511 Study Group </a>
-        </h4>
-
-        <p>
-          Group description goes here. This is a brief overview of the group.
-        </p>
-      </div>
-
-      <div class="group">
-        <img src="" alt="group picture" />
-
-        <h4>
-          <a href="Chat.html?group=ComputerScience"> Computer Science Club </a>
-        </h4>
-
-        <p>
-          Group description goes here. This is a brief overview of the group.
-        </p>
-      </div>
-
-      <div class="group">
-        <img src="" alt="group picture" />
-
-        <h4>
-          <a href="Chat.html?group=Literature"> Literature Enthusiasts </a>
-        </h4>
-
-        <p>
-          Group description goes here. This is a brief overview of the group.
-        </p>
-      </div>
-    </article>
     <main>
+      <aside class="social_links">
+        <ul>
+          <li><a href="Home.html">🏠 Home</a></li>
+
+          <li><a href="Feed.html">📰 Feed</a></li>
+
+          <li><a href="Chat.html">💬 Chat</a></li>
+
+          <li><a href="Profile.html">👤 Profile</a></li>
+
+          <li><a href="SchoolResources.html">📚 Resources</a></li>
+
+          <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
+        </ul>
+      </aside>
       <section class="chat">
-        <div class="online-users">
-          <span class="online-dot"></span>
-          12 users online
+        <div class="chat_header">
+          <div class="online-users">
+            <span class="online-dot"></span>
+            12 users online
+          </div>
+          <span class="user_icon"></span>
+          <h2 id="group-name">Group Chat</h2>
         </div>
-        <span class="unread">3</span>
-        <h2 id="group-name">Group Chat</h2>
         <div class="chat_window">
           <div class="messages" id="messages">
             <div class="received">
@@ -116,10 +67,77 @@
               required
             />
             <button type="submit">Send</button>
-            <input type="file" id="image-upload" accept="image/*" />
+            <label for="image-upload" class="image-upload-label"
+              > Image</label
+            >
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              style="display: none"
+            />
             <button id="emoji-btn">😀</button>
           </form>
         </div>
+        <article class="groups">
+          <h2>Groups</h2>
+          <div class="group_search">
+            <input
+              type="text"
+              id="group-search"
+              placeholder="Search or create a group..."
+            />
+
+            <button id="group-action-btn">Search</button>
+          </div>
+          <div class="group_categories">
+            <button type="button">Academic</button>
+            <button type="button">Clubs</button>
+            <button type="button">Sports</button>
+            <button type="button">Arts</button>
+            <button type="button">Social</button>
+          </div>
+          <div class="group">
+            <img src="" alt="group picture" />
+
+            <h4>
+              <a href="Chat.html?group=Math511"> Math 511 Study Group </a>
+            </h4>
+
+            <p>
+              Group description goes here. This is a brief overview of the
+              group.
+            </p>
+          </div>
+
+          <div class="group">
+            <img src="" alt="group picture" />
+
+            <h4>
+              <a href="Chat.html?group=ComputerScience">
+                Computer Science Club
+              </a>
+            </h4>
+
+            <p>
+              Group description goes here. This is a brief overview of the
+              group.
+            </p>
+          </div>
+
+          <div class="group">
+            <img src="" alt="group picture" />
+
+            <h4>
+              <a href="Chat.html?group=Literature"> Literature Enthusiasts </a>
+            </h4>
+
+            <p>
+              Group description goes here. This is a brief overview of the
+              group.
+            </p>
+          </div>
+        </article>
       </section>
     </main>
     <footer>
@@ -145,6 +163,7 @@
       </div>
       <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JavaScript/chat.js"></script>
   </body>
 </html>

@@ -20,6 +20,7 @@
           <li><a href="About.html">About</a></li>
           <li><a href="Signup.html">Sign up</a></li>
           <li><a href="Feed.html">Feed</a></li>
+          <li><button id="logout">logout</button></li>
         </ul>
       </nav>
       <h2 id="welcomeUser"></h2>
@@ -248,6 +249,7 @@
       </div>
       <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JavaScript/feed.js"></script>
     <script>
       const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
