@@ -1,4 +1,3 @@
-// SIMPLE WORKING VERSION - Test this first
 $(document).ready(function () {
   console.log("✅ feed.js loaded successfully");
 

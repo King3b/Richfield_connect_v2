@@ -1,98 +1,108 @@
-const params = new URLSearchParams(window.location.search);
-const group = params.get("group") || "General";
+// ========================================
+// CHAT PAGE - Handles group chat functionality
+// ========================================
 
-// ELEMENTS
-const groupName = document.getElementById("group-name");
+// Get the group name from the URL (e.g., ?group=Math511)
+const urlParams = new URLSearchParams(window.location.search);
+const groupName = urlParams.get("group") || "General";
+
+// Get all the HTML elements we need
+const groupTitle = document.getElementById("group-name");
 const messagesContainer = document.getElementById("messages");
 const chatForm = document.getElementById("chat-form");
 const chatInput = document.getElementById("chat-message");
-const typing = document.getElementById("typing");
-const emojiBtn = document.getElementById("emoji-btn");
-const imageUpload = document.getElementById("image-upload");
-const createGroup = document.getElementById("createGroup");
-const newGroup = document.getElementById("newGroup");
+const typingIndicator = document.getElementById("typing");
+const emojiButton = document.getElementById("emoji-btn");
+const imageUploadInput = document.getElementById("image-upload");
+const createGroupButton = document.getElementById("createGroup");
+const newGroupNameInput = document.getElementById("newGroup");
 
-// SET TITLE
-groupName.textContent = `${group} Group Chat`;
+// Set the page title to show which group we're in
+groupTitle.textContent = groupName + " Group Chat";
 
-// =========================
-// GET CURRENT USER
-// =========================
+// ========================================
+// 1. WHO IS THE CURRENT USER?
+// ========================================
 let currentUser = JSON.parse(localStorage.getItem("loggedInUser")) || null;
-let hasSentWelcomeMessage = false;
+let welcomeMessageSent = false;
 
-// =========================
-// LOAD MESSAGES FROM STORAGE
-// =========================
-let groupMessages = JSON.parse(localStorage.getItem(group)) || [];
+// ========================================
+// 2. LOAD EXISTING MESSAGES FROM STORAGE
+// ========================================
+let allMessages = JSON.parse(localStorage.getItem(groupName)) || [];
 
-// Check if welcome message was already sent for this user in this group
-const welcomeKey = `${group}_welcome_sent_${currentUser?.email || "anonymous"}`;
-hasSentWelcomeMessage = localStorage.getItem(welcomeKey) === "true";
+// Check if we already sent a welcome message to this user
+const welcomeKey =
+  groupName + "_welcome_sent_" + (currentUser?.email || "anonymous");
+welcomeMessageSent = localStorage.getItem(welcomeKey) === "true";
 
-// =========================
-// GIF DATA - 10 BASIC GIFS
-// =========================
-const gifLibrary = [
+// ========================================
+// 3. GIF LIBRARY - 10 Fun GIFs to choose from
+// ========================================
+const gifCollection = [
   {
     name: "👋 Wave",
-    url: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif",
+    url: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGNyNHViYWx3Z3h3YjhmMzlodWJ3bnoxNW5yODlwZTc5NnJxcDY4NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgG50Fb7Mi0prBC/giphy.gif",
     emoji: "👋",
   },
   {
     name: "😂 Laugh",
-    url: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTk4c2lmYmV6YTRvYmZ4b2dneWVmZ2g2cWJlcWJuN2I1dHF6cHV4NSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wWue0rCDOphOE/giphy.gif",
     emoji: "😂",
   },
   {
     name: "👍 Thumbs Up",
-    url: "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9A/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjdnbDE5M3Q5b3lyZzJwYXhqdmdjeXM2b3IyMW9yMDdpdHoxZm5yOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tIeCLkB8geYtW/giphy.gif",
     emoji: "👍",
   },
   {
     name: "🎉 Celebration",
-    url: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MHV4bDhrd2ViYXNubHZvd2Y1NngyZWJpdzRia3M5aTdrcDF2NDkzdCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/FY5vhK1zpoJGqap917/giphy.gif",
     emoji: "🎉",
   },
   {
     name: "❤️ Love",
-    url: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnhlcGg5cHE2cXBueDZhbTY3YmQ4OGdxcDNhdTRiandrYTZ2OHZpcyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SYo1DFS8NLhhqzzjMU/giphy.gif",
     emoji: "❤️",
   },
   {
     name: "😮 Wow",
-    url: "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9A/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzFibDZqdXBjd3ozd291MG51dmllcDJib2FoaTdmdXcxMHhhb2VueiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5VKbvrjxpVJCM/giphy.gif",
     emoji: "😮",
   },
   {
     name: "🙏 Please",
-    url: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjh4eHllc2Y0ODI4YXNnMTlwYmIweXRmeDcxZ3Bwbzhtd3cyODhoZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/zZbf6UpZslp3nvFjIR/giphy.gif",
     emoji: "🙏",
   },
   {
     name: "🔥 Fire",
-    url: "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGg5dzhtNnQwb2x3ZmFleHQzOGZ3MGptNnF3Nm1zYWxkaHhxb25xeSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AHeTfHgVFPHgs/giphy.gif",
     emoji: "🔥",
   },
   {
     name: "💯 100",
-    url: "https://media.giphy.com/media/3o6Zt6ML6Bklcaj9A/giphy.gif",
+    url: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTg5cWNuN3MycnhzcTFvZGxwNHBxZWxsc3Fwam9pZmxxbWFkeXczaSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9Fqek5SdRxZ0W1jZK9/giphy.gif",
     emoji: "💯",
   },
   {
     name: "✨ Stars",
-    url: "https://media.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif",
+    url: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzgzbmdmaDRtazlud2QzYXcwOHFkaWR2dXJhdXA3b2ZwOGo1bDh4YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ePckuPKIpKEmd8p7DE/giphy.gif",
     emoji: "✨",
   },
 ];
 
-// Create GIF button and picker
-const gifBtn = document.createElement("button");
-gifBtn.innerHTML = "🎥 GIF";
-gifBtn.id = "gif-btn";
-gifBtn.type = "button";
+// ========================================
+// 4. CREATE THE GIF BUTTON AND PICKER
+// ========================================
 
-// Create GIF picker dropdown
+// Make the GIF button
+const gifButton = document.createElement("button");
+gifButton.innerHTML = "🎥 GIF";
+gifButton.id = "gif-btn";
+gifButton.type = "button";
+
+// Make the GIF picker (popup window)
 const gifPicker = document.createElement("div");
 gifPicker.id = "gif-picker";
 gifPicker.className = "gif-picker";
@@ -105,678 +115,589 @@ gifPicker.innerHTML = `
   <div class="gif-grid" id="gif-grid"></div>
 `;
 
-// Add GIF button to chat input
-const chatInputContainer = document.querySelector(".chat_input");
-if (chatInputContainer) {
-  // Insert GIF button before the emoji button or at the end
-  const emojiButton = document.getElementById("emoji-btn");
-  if (emojiButton) {
-    chatInputContainer.insertBefore(gifBtn, emojiButton);
+// Add the GIF button to the chat input area
+const chatInputArea = document.querySelector(".chat_input");
+if (chatInputArea) {
+  const existingEmojiButton = document.getElementById("emoji-btn");
+  if (existingEmojiButton) {
+    chatInputArea.insertBefore(gifButton, existingEmojiButton);
   } else {
-    chatInputContainer.appendChild(gifBtn);
+    chatInputArea.appendChild(gifButton);
   }
-  chatInputContainer.appendChild(gifPicker);
+  chatInputArea.appendChild(gifPicker);
 }
 
-// Populate GIF grid
-function populateGifGrid() {
+// Show all GIFs in the picker
+function showAllGifs() {
   const gifGrid = document.getElementById("gif-grid");
   if (!gifGrid) return;
 
   gifGrid.innerHTML = "";
-  gifLibrary.forEach((gif, index) => {
-    const gifItem = document.createElement("div");
+
+  for (let i = 0; i < gifCollection.length; i++) {
+    let gif = gifCollection[i];
+    let gifItem = document.createElement("div");
     gifItem.className = "gif-item";
     gifItem.innerHTML = `
       <div class="gif-emoji">${gif.emoji}</div>
       <div class="gif-name">${gif.name}</div>
     `;
-    gifItem.addEventListener("click", () => {
+
+    gifItem.addEventListener("click", function () {
       sendGifMessage(gif.url, gif.name);
       gifPicker.style.display = "none";
     });
+
     gifGrid.appendChild(gifItem);
-  });
+  }
 }
 
-// Send GIF message
+// Send a GIF message
 function sendGifMessage(gifUrl, gifName) {
-  const newMsg = {
+  let newMessage = {
     text: gifUrl,
     type: "sent",
     sender: currentUser?.username || currentUser?.name || "You",
-    time: new Date().toLocaleTimeString(),
+    time: getCurrentTime(),
     isImage: true,
     isGif: true,
     gifName: gifName,
   };
 
-  groupMessages.push(newMsg);
+  allMessages.push(newMessage);
   saveMessages();
-  renderMessages();
+  displayAllMessages();
 
-  // Optional: Bot acknowledges GIF
-  setTimeout(() => {
-    const ackMsg = {
-      text: `Nice GIF! 🎥 ${gifName}`,
+  setTimeout(function () {
+    let botReply = {
+      text: "Nice GIF! 🎥 " + gifName,
       type: "received",
       sender: "Bot 🤖",
-      time: new Date().toLocaleTimeString(),
+      time: getCurrentTime(),
       isImage: false,
     };
-    groupMessages.push(ackMsg);
+    allMessages.push(botReply);
     saveMessages();
-    renderMessages();
+    displayAllMessages();
   }, 500);
 }
 
-// Toggle GIF picker
-if (gifBtn) {
-  gifBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isVisible = gifPicker.style.display === "flex";
+// Show/hide GIF picker when button is clicked
+if (gifButton) {
+  gifButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    let isVisible = gifPicker.style.display === "flex";
     gifPicker.style.display = isVisible ? "none" : "flex";
-    populateGifGrid();
+    showAllGifs();
   });
 }
 
 // Close GIF picker when clicking outside
-document.addEventListener("click", (e) => {
-  if (gifPicker && !gifPicker.contains(e.target) && e.target !== gifBtn) {
+document.addEventListener("click", function (event) {
+  if (
+    gifPicker &&
+    !gifPicker.contains(event.target) &&
+    event.target !== gifButton
+  ) {
     gifPicker.style.display = "none";
   }
 });
 
 // Close button for GIF picker
-document.addEventListener("click", (e) => {
-  if (e.target.id === "close-gif-picker") {
+document.addEventListener("click", function (event) {
+  if (event.target.id === "close-gif-picker") {
     gifPicker.style.display = "none";
   }
 });
 
-// =========================
-// RENDER MESSAGES
-// =========================
-function renderMessages() {
+// ========================================
+// 5. DISPLAY ALL MESSAGES ON SCREEN
+// ========================================
+function displayAllMessages() {
   if (!messagesContainer) return;
 
   messagesContainer.innerHTML = "";
 
-  groupMessages.forEach((msg, index) => {
-    const messageDiv = document.createElement("div");
-    messageDiv.classList.add("message", msg.type);
-
-    // Add animation class
+  for (let i = 0; i < allMessages.length; i++) {
+    let message = allMessages[i];
+    let messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", message.type);
     messageDiv.classList.add("fade-in");
 
-    // Handle different message types
     let messageContent = "";
-    if (msg.isImage && msg.isGif) {
-      // GIF message
-      messageContent = `<img src="${msg.text}" alt="gif" class="gif-message" style="max-width: 250px; border-radius: 12px; cursor: pointer;" onclick="window.open(this.src)"><div class="gif-label">🎥 GIF: ${msg.gifName || "GIF"}</div>`;
-    } else if (msg.isImage) {
-      // Regular image message
-      messageContent = `<img src="${msg.text}" style="max-width: 250px; border-radius: 12px; cursor: pointer;" onclick="window.open(this.src)">`;
+    if (message.isImage && message.isGif) {
+      messageContent = `<img src="${message.text}" alt="gif" style="max-width: 250px; border-radius: 12px; cursor: pointer;" onclick="window.open(this.src)"><div class="gif-label">🎥 GIF: ${message.gifName || "GIF"}</div>`;
+    } else if (message.isImage) {
+      messageContent = `<img src="${message.text}" style="max-width: 250px; border-radius: 12px; cursor: pointer;" onclick="window.open(this.src)">`;
     } else {
-      // Text message
-      messageContent = msg.text;
+      messageContent = message.text;
     }
 
+    let senderName =
+      message.sender || (message.type === "sent" ? "You" : "Bot");
     messageDiv.innerHTML = `
       <div class="message-bubble">
-        <strong class="message-sender">${msg.sender || (msg.type === "sent" ? "You" : "Bot")}</strong>
+        <strong class="message-sender">${senderName}</strong>
         <p>${messageContent}</p>
-        <small class="timestamp">${msg.time || ""}</small>
+        <small class="timestamp">${message.time || ""}</small>
       </div>
-      ${msg.type === "sent" ? '<button class="delete-msg" data-index="' + index + '">🗑️</button>' : ""}
+      ${message.type === "sent" ? '<button class="delete-msg" data-index="' + i + '">🗑️</button>' : ""}
     `;
 
     messagesContainer.appendChild(messageDiv);
-  });
+  }
 
-  // Add delete event listeners
-  document.querySelectorAll(".delete-msg").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const index = parseInt(btn.getAttribute("data-index"));
+  let deleteButtons = document.querySelectorAll(".delete-msg");
+  for (let i = 0; i < deleteButtons.length; i++) {
+    let button = deleteButtons[i];
+    button.addEventListener("click", function () {
+      let index = parseInt(button.getAttribute("data-index"));
       if (!isNaN(index)) {
-        groupMessages.splice(index, 1);
+        allMessages.splice(index, 1);
         saveMessages();
-        renderMessages();
+        displayAllMessages();
       }
     });
-  });
+  }
 
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// SAVE MESSAGES TO STORAGE
-function saveMessages() {
-  localStorage.setItem(group, JSON.stringify(groupMessages));
+function getCurrentTime() {
+  let now = new Date();
+  return now.toLocaleTimeString();
 }
 
-// =========================
-// SEND MESSAGE
-// =========================
+function saveMessages() {
+  localStorage.setItem(groupName, JSON.stringify(allMessages));
+}
+
+// ========================================
+// 6. SEND A NEW MESSAGE
+// ========================================
 if (chatForm) {
-  chatForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+  chatForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-    const text = chatInput.value.trim();
-    if (!text) return;
+    let messageText = chatInput.value.trim();
+    if (!messageText) return;
 
-    // Create new message object
-    const newMsg = {
-      text: text,
+    let newMessage = {
+      text: messageText,
       type: "sent",
       sender: currentUser?.username || currentUser?.name || "You",
-      time: new Date().toLocaleTimeString(),
+      time: getCurrentTime(),
       isImage: false,
       isGif: false,
     };
 
-    groupMessages.push(newMsg);
+    allMessages.push(newMessage);
     saveMessages();
-    renderMessages();
+    displayAllMessages();
 
     chatInput.value = "";
 
-    // =========================
-    // AUTO RESPOND ONLY ON FIRST MESSAGE
-    // =========================
-    if (!hasSentWelcomeMessage && currentUser) {
-      hasSentWelcomeMessage = true;
+    if (!welcomeMessageSent && currentUser) {
+      welcomeMessageSent = true;
       localStorage.setItem(welcomeKey, "true");
 
-      const userName = currentUser.name || currentUser.username || "there";
-      const welcomeMessages = [
-        `👋 Welcome to the ${group} group, ${userName}! We're glad to have you here!`,
-        `🎉 Hey ${userName}! Welcome to ${group}! Feel free to share your thoughts.`,
-        `💬 ${userName} joined the chat! Welcome to ${group}!`,
-        `✨ Welcome ${userName}! This is the ${group} group chat. Enjoy your stay!`,
-        `🚀 ${userName} has arrived! Welcome to the ${group} community!`,
-        `🌟 A warm welcome to ${userName} in ${group}! Let's have great discussions!`,
+      let userName = currentUser.name || currentUser.username || "there";
+      let welcomeMessages = [
+        "👋 Welcome to the " +
+          groupName +
+          " group, " +
+          userName +
+          "! We're glad to have you here!",
+        "🎉 Hey " +
+          userName +
+          "! Welcome to " +
+          groupName +
+          "! Feel free to share your thoughts.",
+        "💬 " + userName + " joined the chat! Welcome to " + groupName + "!",
+        "✨ Welcome " +
+          userName +
+          "! This is the " +
+          groupName +
+          " group chat. Enjoy your stay!",
+        "🚀 " +
+          userName +
+          " has arrived! Welcome to the " +
+          groupName +
+          " community!",
+        "🌟 A warm welcome to " +
+          userName +
+          " in " +
+          groupName +
+          "! Let's have great discussions!",
       ];
 
-      const randomWelcome =
-        welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+      let randomIndex = Math.floor(Math.random() * welcomeMessages.length);
+      let randomWelcome = welcomeMessages[randomIndex];
 
-      setTimeout(() => {
-        const welcomeMsg = {
+      setTimeout(function () {
+        let welcomeMsg = {
           text: randomWelcome,
           type: "received",
           sender: "Bot 🤖",
-          time: new Date().toLocaleTimeString(),
+          time: getCurrentTime(),
           isImage: false,
         };
-
-        groupMessages.push(welcomeMsg);
+        allMessages.push(welcomeMsg);
         saveMessages();
-        renderMessages();
+        displayAllMessages();
 
-        setTimeout(() => {
-          const helpMsg = {
-            text: `💡 Tip: You can send images 📸, GIFs 🎥, use emojis 😀, and delete your own messages!`,
+        setTimeout(function () {
+          let helpMsg = {
+            text: "💡 Tip: You can send images 📸, GIFs 🎥, use emojis 😀, and delete your own messages!",
             type: "received",
             sender: "Bot 🤖",
-            time: new Date().toLocaleTimeString(),
+            time: getCurrentTime(),
             isImage: false,
           };
-
-          groupMessages.push(helpMsg);
+          allMessages.push(helpMsg);
           saveMessages();
-          renderMessages();
+          displayAllMessages();
         }, 1500);
       }, 800);
-    }
-    // Reply to specific keywords after first message
-    else if (hasSentWelcomeMessage) {
-      const lowerText = text.toLowerCase();
+    } else if (welcomeMessageSent) {
+      let lowerText = messageText.toLowerCase();
 
-      setTimeout(() => {
-        let response = null;
+      setTimeout(function () {
+        let botResponse = null;
 
         if (
           lowerText.includes("hello") ||
           lowerText.includes("hi") ||
           lowerText.includes("hey")
         ) {
-          response = `Hello ${currentUser?.name || "there"}! How can I help you today? 👋`;
+          botResponse =
+            "Hello " +
+            (currentUser?.name || "there") +
+            "! How can I help you today? 👋";
         } else if (
           lowerText.includes("thanks") ||
           lowerText.includes("thank you")
         ) {
-          response = "You're welcome! 😊 Happy to help!";
+          botResponse = "You're welcome! 😊 Happy to help!";
         } else if (lowerText.includes("bye") || lowerText.includes("goodbye")) {
-          response = "Goodbye! Come back soon! 👋";
+          botResponse = "Goodbye! Come back soon! 👋";
         } else if (lowerText.includes("help")) {
-          response = `I can help you with:\n• Sending messages\n• Sharing images 📸\n• Sending GIFs 🎥\n• Using emojis 😀\n• Deleting your messages (click 🗑️)`;
+          botResponse =
+            "I can help you with:\n• Sending messages\n• Sharing images 📸\n• Sending GIFs 🎥\n• Using emojis 😀\n• Deleting your messages (click 🗑️)";
         } else if (lowerText.includes("gif")) {
-          response = "Try clicking the 🎥 GIF button to send a fun GIF!";
+          botResponse = "Try clicking the 🎥 GIF button to send a fun GIF!";
         }
 
-        if (response) {
-          const replyMsg = {
-            text: response,
+        if (botResponse) {
+          let replyMsg = {
+            text: botResponse,
             type: "received",
             sender: "Bot 🤖",
-            time: new Date().toLocaleTimeString(),
+            time: getCurrentTime(),
             isImage: false,
           };
-
-          groupMessages.push(replyMsg);
+          allMessages.push(replyMsg);
           saveMessages();
-          renderMessages();
+          displayAllMessages();
         }
       }, 500);
     }
   });
 }
 
-// =========================
-// TYPING INDICATOR
-// =========================
+// ========================================
+// 7. TYPING INDICATOR
+// ========================================
 if (chatInput) {
-  chatInput.addEventListener("input", () => {
-    if (!typing) return;
+  chatInput.addEventListener("input", function () {
+    if (!typingIndicator) return;
 
-    typing.textContent = "Someone is typing...";
+    typingIndicator.textContent = "Someone is typing...";
 
     clearTimeout(window.typingTimeout);
 
-    window.typingTimeout = setTimeout(() => {
-      typing.textContent = "";
+    window.typingTimeout = setTimeout(function () {
+      typingIndicator.textContent = "";
     }, 1000);
   });
 }
 
-// =========================
-// EMOJI BUTTON
-// =========================
-if (emojiBtn) {
-  emojiBtn.addEventListener("click", () => {
+// ========================================
+// 8. EMOJI BUTTON
+// ========================================
+if (emojiButton) {
+  emojiButton.addEventListener("click", function () {
     chatInput.value += "😀";
     chatInput.focus();
   });
 }
 
-// =========================
-// IMAGE UPLOAD - FIXED
-// =========================
-if (imageUpload) {
-  imageUpload.addEventListener("change", (e) => {
-    const file = e.target.files[0];
+// ========================================
+// 9. IMAGE UPLOAD
+// ========================================
+if (imageUploadInput) {
+  imageUploadInput.addEventListener("change", function (event) {
+    let file = event.target.files[0];
     if (!file) return;
 
-    // Check file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       alert("Image size must be less than 5MB!");
-      imageUpload.value = "";
+      imageUploadInput.value = "";
       return;
     }
 
-    // Check file type
     if (!file.type.startsWith("image/")) {
       alert("Please upload a valid image file!");
-      imageUpload.value = "";
+      imageUploadInput.value = "";
       return;
     }
 
-    const reader = new FileReader();
+    let fileReader = new FileReader();
 
-    reader.onload = () => {
-      const newMsg = {
-        text: reader.result,
+    fileReader.onload = function () {
+      let newMessage = {
+        text: fileReader.result,
         type: "sent",
         sender: currentUser?.username || currentUser?.name || "You",
-        time: new Date().toLocaleTimeString(),
+        time: getCurrentTime(),
         isImage: true,
         isGif: false,
       };
 
-      groupMessages.push(newMsg);
+      allMessages.push(newMessage);
       saveMessages();
-      renderMessages();
+      displayAllMessages();
 
-      // Bot acknowledges image
-      setTimeout(() => {
-        const ackMsg = {
+      setTimeout(function () {
+        let ackMsg = {
           text: "Nice image! 📸 Thanks for sharing!",
           type: "received",
           sender: "Bot 🤖",
-          time: new Date().toLocaleTimeString(),
+          time: getCurrentTime(),
           isImage: false,
         };
-
-        groupMessages.push(ackMsg);
+        allMessages.push(ackMsg);
         saveMessages();
-        renderMessages();
+        displayAllMessages();
       }, 500);
     };
 
-    reader.readAsDataURL(file);
-
-    // Clear the file input
-    imageUpload.value = "";
+    fileReader.readAsDataURL(file);
+    imageUploadInput.value = "";
   });
 }
 
-// =========================
-// CREATE GROUP
-// =========================
-if (createGroup && newGroup) {
-  createGroup.addEventListener("click", () => {
-    const name = newGroup.value.trim();
-    if (!name) {
+// ========================================
+// 10. CREATE A NEW GROUP (from input field)
+// ========================================
+if (createGroupButton && newGroupNameInput) {
+  createGroupButton.addEventListener("click", function () {
+    let newGroupName = newGroupNameInput.value.trim();
+    if (!newGroupName) {
       alert("Please enter a group name!");
       return;
     }
 
-    const existingGroups = document.querySelectorAll(".groups .group h4 a");
-    let groupExists = false;
-    existingGroups.forEach((link) => {
-      if (link.textContent.toLowerCase() === name.toLowerCase()) {
-        groupExists = true;
-      }
-    });
+    createNewGroup(newGroupName);
+    newGroupNameInput.value = "";
+  });
+}
 
-    if (groupExists) {
-      alert("A group with this name already exists!");
+// ========================================
+// 11. SEARCH GROUP - CREATE IF NOT EXISTS
+// ========================================
+let searchButton = document.querySelector(".group_search button");
+let searchInput = document.querySelector(".group_search input");
+
+if (searchButton && searchInput) {
+  searchButton.addEventListener("click", function () {
+    let searchTerm = searchInput.value.trim();
+    if (!searchTerm) {
+      alert("Please enter a group name to search!");
       return;
     }
 
-    const groupDiv = document.createElement("div");
-    groupDiv.classList.add("group");
+    // Check if group exists in the list
+    let groupExists = false;
+    let existingGroups = document.querySelectorAll(".groups .group h4 a");
 
-    groupDiv.innerHTML = `
-      <div style="font-size: 30px;">💬</div>
-      <h4>
-        <a href="Chat.html?group=${encodeURIComponent(name)}">
-          ${escapeHtml(name)}
-        </a>
-      </h4>
-      <p>A new group for discussions about ${escapeHtml(name)}</p>
-      <button class="join-group-btn">Join Group</button>
-    `;
+    for (let i = 0; i < existingGroups.length; i++) {
+      let groupLink = existingGroups[i];
+      let existingGroupName = groupLink.textContent;
 
-    document.querySelector(".groups").appendChild(groupDiv);
-
-    newGroup.value = "";
-
-    if (!localStorage.getItem(name)) {
-      localStorage.setItem(name, JSON.stringify([]));
+      if (existingGroupName.toLowerCase() === searchTerm.toLowerCase()) {
+        groupExists = true;
+        // Redirect to existing group
+        window.location.href =
+          "Chat.html?group=" + encodeURIComponent(existingGroupName);
+        return;
+      }
     }
 
-    alert(`Group "${name}" created successfully! 🎉`);
+    // If group doesn't exist, ask if user wants to create it
+    let wantToCreate = confirm(
+      "Group '" + searchTerm + "' does not exist. Would you like to create it?",
+    );
+
+    if (wantToCreate) {
+      createNewGroup(searchTerm);
+      searchInput.value = "";
+      // Redirect to the new group
+      setTimeout(function () {
+        window.location.href =
+          "Chat.html?group=" + encodeURIComponent(searchTerm);
+      }, 500);
+    }
+  });
+
+  // Also allow pressing Enter to search
+  searchInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      searchButton.click();
+    }
   });
 }
 
-// =========================
-// JOIN GROUP BUTTONS
-// =========================
-function attachJoinGroupEvents() {
-  document.querySelectorAll(".join-group-btn").forEach((btn) => {
-    btn.removeEventListener("click", handleJoinGroup);
-    btn.addEventListener("click", handleJoinGroup);
-  });
+// ========================================
+// 12. FUNCTION TO CREATE A NEW GROUP
+// ========================================
+function createNewGroup(groupNameToCreate) {
+  // Check if group already exists
+  let existingGroups = document.querySelectorAll(".groups .group h4 a");
+  for (let i = 0; i < existingGroups.length; i++) {
+    if (
+      existingGroups[i].textContent.toLowerCase() ===
+      groupNameToCreate.toLowerCase()
+    ) {
+      alert("A group with this name already exists!");
+      return false;
+    }
+  }
+
+  // Create the new group card
+  let newGroupCard = document.createElement("div");
+  newGroupCard.classList.add("group");
+  newGroupCard.innerHTML = `
+    <div style="font-size: 30px;">💬</div>
+    <h4>
+      <a href="Chat.html?group=${encodeURIComponent(groupNameToCreate)}">
+        ${makeSafe(groupNameToCreate)}
+      </a>
+    </h4>
+    <p>A new group for discussions about ${makeSafe(groupNameToCreate)}</p>
+    <button class="join-group-btn">Join Group</button>
+  `;
+
+  document.querySelector(".groups").appendChild(newGroupCard);
+
+  // Create empty message storage for the new group
+  if (!localStorage.getItem(groupNameToCreate)) {
+    localStorage.setItem(groupNameToCreate, JSON.stringify([]));
+  }
+
+  alert('Group "' + groupNameToCreate + '" created successfully! 🎉');
+  return true;
 }
 
-function handleJoinGroup(e) {
-  const groupCard = e.target.closest(".group");
-  const groupLink = groupCard.querySelector("h4 a");
-  const groupName = groupLink.textContent;
+// ========================================
+// 13. JOIN GROUP BUTTONS
+// ========================================
+function setupJoinGroupButtons() {
+  let joinButtons = document.querySelectorAll(".join-group-btn");
+  for (let i = 0; i < joinButtons.length; i++) {
+    let button = joinButtons[i];
+    button.removeEventListener("click", handleJoinGroup);
+    button.addEventListener("click", handleJoinGroup);
+  }
+}
+
+function handleJoinGroup(event) {
+  let groupCard = event.target.closest(".group");
+  let groupLink = groupCard.querySelector("h4 a");
+  let groupNameText = groupLink.textContent;
 
   if (currentUser) {
-    let joinedGroups =
-      JSON.parse(localStorage.getItem(`${currentUser.email}_joined_groups`)) ||
-      [];
-    if (!joinedGroups.includes(groupName)) {
-      joinedGroups.push(groupName);
-      localStorage.setItem(
-        `${currentUser.email}_joined_groups`,
-        JSON.stringify(joinedGroups),
-      );
-      alert(`You joined ${groupName}! 🎉`);
+    let joinedGroupsKey = currentUser.email + "_joined_groups";
+    let joinedGroups = JSON.parse(localStorage.getItem(joinedGroupsKey)) || [];
+
+    if (!joinedGroups.includes(groupNameText)) {
+      joinedGroups.push(groupNameText);
+      localStorage.setItem(joinedGroupsKey, JSON.stringify(joinedGroups));
+      alert("You joined " + groupNameText + "! 🎉");
     } else {
-      alert(`You're already a member of ${groupName}!`);
+      alert("You're already a member of " + groupNameText + "!");
     }
   } else {
     alert("Please login to join groups!");
   }
 }
 
-// =========================
-// HELPER: ESCAPE HTML
-// =========================
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
+// ========================================
+// 14. HELPER FUNCTION - Make text safe
+// ========================================
+function makeSafe(text) {
+  let tempDiv = document.createElement("div");
+  tempDiv.textContent = text;
+  return tempDiv.innerHTML;
 }
 
-// =========================
-// ADD CSS STYLES
-// =========================
-function addStyles() {
+// ========================================
+// 15. ADD CSS STYLES FOR THE CHAT
+// ========================================
+function addChatStyles() {
   if (!document.querySelector("#chatStyles")) {
-    const style = document.createElement("style");
-    style.id = "chatStyles";
-    style.textContent = `
+    let styleElement = document.createElement("style");
+    styleElement.id = "chatStyles";
+    styleElement.textContent = `
       @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
-      
-      .fade-in {
-        animation: fadeIn 0.3s ease;
-      }
-      
-      .message {
-        margin-bottom: 15px;
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      
-      .message.sent {
-        justify-content: flex-end;
-      }
-      
-      .message-bubble {
-        max-width: 70%;
-        padding: 10px 15px;
-        border-radius: 18px;
-        position: relative;
-      }
-      
-      .message.sent .message-bubble {
-        background: linear-gradient(135deg, #0052cc, #1e90ff);
-        color: white;
-        border-bottom-right-radius: 5px;
-      }
-      
-      .message.received .message-bubble {
-        background: #1e293b;
-        color: #f1f5f9;
-        border-bottom-left-radius: 5px;
-      }
-      
-      .message-sender {
-        font-size: 12px;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-        opacity: 0.8;
-      }
-      
-      .timestamp {
-        font-size: 10px;
-        opacity: 0.6;
-        display: block;
-        margin-top: 5px;
-      }
-      
-      .delete-msg {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        opacity: 0.5;
-        transition: opacity 0.3s;
-        padding: 5px;
-      }
-      
-      .delete-msg:hover {
-        opacity: 1;
-      }
-      
-      .join-group-btn {
-        margin-top: 10px;
-        padding: 8px 16px;
-        background: linear-gradient(135deg, #0052cc, #1e90ff);
-        border: none;
-        border-radius: 20px;
-        color: white;
-        cursor: pointer;
-        font-size: 12px;
-      }
-      
-      .join-group-btn:hover {
-        transform: translateY(-2px);
-      }
-      
-      /* GIF Picker Styles */
-      #gif-btn {
-        background: #30363d;
-        border: none;
-        color: white;
-        padding: 12px 18px;
-        border-radius: 14px;
-        cursor: pointer;
-        transition: 0.3s;
-        font-size: 1rem;
-      }
-      
-      #gif-btn:hover {
-        background: #1e90ff;
-        transform: scale(1.05);
-      }
-      
-      .gif-picker {
-        position: absolute;
-        bottom: 80px;
-        right: 20px;
-        background: #161b22;
-        border: 1px solid #1e90ff;
-        border-radius: 16px;
-        width: 300px;
-        max-height: 400px;
-        overflow-y: auto;
-        z-index: 1000;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        flex-direction: column;
-      }
-      
-      .gif-picker-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 16px;
-        border-bottom: 1px solid #30363d;
-        background: #1e293b;
-        border-radius: 16px 16px 0 0;
-      }
-      
-      .gif-picker-header h4 {
-        color: #58a6ff;
-        margin: 0;
-      }
-      
-      #close-gif-picker {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-        padding: 5px 10px;
-      }
-      
-      #close-gif-picker:hover {
-        color: #ff4757;
-      }
-      
-      .gif-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 15px;
-      }
-      
-      .gif-item {
-        background: #21262d;
-        border-radius: 12px;
-        padding: 12px;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.3s;
-        border: 1px solid transparent;
-      }
-      
-      .gif-item:hover {
-        transform: translateY(-3px);
-        border-color: #1e90ff;
-        background: #1e293b;
-      }
-      
-      .gif-emoji {
-        font-size: 40px;
-        margin-bottom: 5px;
-      }
-      
-      .gif-name {
-        font-size: 12px;
-        color: #c9d1d9;
-      }
-      
-      .gif-label {
-        font-size: 10px;
-        color: #58a6ff;
-        margin-top: 5px;
-      }
-      
-      .gif-message {
-        max-width: 200px;
-      }
-      
-      /* Position relative for chat input */
-      .chat_input {
-        position: relative;
-      }
+      .fade-in { animation: fadeIn 0.3s ease; }
+      .message { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 10px; }
+      .message.sent { justify-content: flex-end; }
+      .message-bubble { max-width: 70%; padding: 10px 15px; border-radius: 18px; }
+      .message.sent .message-bubble { background: linear-gradient(135deg, #0052cc, #1e90ff); color: white; border-bottom-right-radius: 5px; }
+      .message.received .message-bubble { background: #1e293b; color: #f1f5f9; border-bottom-left-radius: 5px; }
+      .message-sender { font-size: 12px; font-weight: bold; display: block; margin-bottom: 5px; opacity: 0.8; }
+      .timestamp { font-size: 10px; opacity: 0.6; display: block; margin-top: 5px; }
+      .delete-msg { background: none; border: none; cursor: pointer; font-size: 16px; opacity: 0.5; padding: 5px; }
+      .delete-msg:hover { opacity: 1; }
+      .join-group-btn { margin-top: 10px; padding: 8px 16px; background: linear-gradient(135deg, #0052cc, #1e90ff); border: none; border-radius: 20px; color: white; cursor: pointer; font-size: 12px; }
+      .join-group-btn:hover { transform: translateY(-2px); }
+      #gif-btn { background: #30363d; border: none; color: white; padding: 12px 18px; border-radius: 14px; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+      #gif-btn:hover { background: #1e90ff; transform: scale(1.05); }
+      .gif-picker { position: absolute; bottom: 80px; right: 20px; background: #161b22; border: 1px solid #1e90ff; border-radius: 16px; width: 300px; max-height: 400px; overflow-y: auto; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); flex-direction: column; }
+      .gif-picker-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #30363d; background: #1e293b; }
+      .gif-picker-header h4 { color: #58a6ff; margin: 0; }
+      #close-gif-picker { background: none; border: none; color: white; font-size: 18px; cursor: pointer; }
+      #close-gif-picker:hover { color: #ff4757; }
+      .gif-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; }
+      .gif-item { background: #21262d; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: 0.3s; }
+      .gif-item:hover { transform: translateY(-3px); border: 1px solid #1e90ff; }
+      .gif-emoji { font-size: 40px; margin-bottom: 5px; }
+      .gif-name { font-size: 12px; color: #c9d1d9; }
+      .chat_input { position: relative; }
     `;
-    document.head.appendChild(style);
+    document.head.appendChild(styleElement);
   }
 }
 
-// =========================
-// INITIAL RENDER
-// =========================
-addStyles();
-renderMessages();
-attachJoinGroupEvents();
+// ========================================
+// 16. START EVERYTHING
+// ========================================
+addChatStyles();
+displayAllMessages();
+setupJoinGroupButtons();
 
-// Add online users count (mock data)
-const onlineUsers = document.querySelector(".online-users");
-if (onlineUsers) {
-  setInterval(() => {
-    const randomUsers = Math.floor(Math.random() * 20) + 1;
-    onlineUsers.innerHTML = `<span class="online-dot"></span> ${randomUsers} users online`;
+// Fake online users count
+let onlineUsersElement = document.querySelector(".online-users");
+if (onlineUsersElement) {
+  setInterval(function () {
+    let randomCount = Math.floor(Math.random() * 20) + 1;
+    onlineUsersElement.innerHTML =
+      '<span class="online-dot"></span> ' + randomCount + " users online";
   }, 30000);
 }
 
-console.log(`✅ Chat initialized for group: ${group}`);
-console.log(`Welcome message sent: ${hasSentWelcomeMessage}`);
+console.log("✅ Chat loaded for group: " + groupName);

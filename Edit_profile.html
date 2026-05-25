@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Richfield Connect | Edit Profile</title>
-
     <link rel="stylesheet" href="CSS/Edit.css" />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
       rel="stylesheet"
@@ -27,7 +24,7 @@
         </ul>
       </nav>
     </header>
-    <!-- MAIN -->
+
     <main>
       <section class="quick_links">
         <ul>
@@ -50,16 +47,20 @@
           <!-- PROFILE IMAGES -->
           <div class="card">
             <h3>Profile Images</h3>
-
             <div class="image_preview">
               <div class="profile_preview">
-                <img src="" alt="profile picture" />
+                <img
+                  src="assets/images/default-avatar.png"
+                  alt="profile picture"
+                />
                 <label>Profile Picture</label>
                 <input type="file" id="profileUpload" accept="image/*" />
               </div>
-
               <div class="banner_preview">
-                <img src="" alt="banner image" />
+                <img
+                  src="assets/images/default-banner.jpg"
+                  alt="banner image"
+                />
                 <label>Banner Image</label>
                 <input type="file" id="bannerUpload" accept="image/*" />
               </div>
@@ -69,18 +70,14 @@
           <!-- BASIC INFO -->
           <div class="card">
             <h3>Basic Information</h3>
-
             <div class="input_group">
               <label for="name">Name</label>
-              <input type="text" id="name" placeholder="Blessings" />
-              <small class="error"></small>
+              <input type="text" id="name" placeholder="Your name" />
             </div>
             <div class="input_group">
-              <label for="name">Surame</label>
-              <input type="text" id="Surname" placeholder="Marera" />
-              <small class="error"></small>
+              <label for="Surname">Surname</label>
+              <input type="text" id="Surname" placeholder="Your surname" />
             </div>
-
             <div class="input_group">
               <label for="bio">Bio</label>
               <textarea
@@ -90,17 +87,15 @@
             </div>
             <div class="input_group">
               <label for="course">Course</label>
-
               <input
                 type="text"
                 id="course"
                 placeholder="Software Development"
               />
             </div>
-
             <div class="input_group">
-              <label for="username">Academic year</label>
-              <select name="Year" id="year" required>
+              <label for="year">Academic year</label>
+              <select id="year">
                 <option value="">Select Year</option>
                 <option value="year1">HCIT</option>
                 <option value="year2">DIT</option>
@@ -110,27 +105,25 @@
                 <option value="year5">BScIT 3rd</option>
               </select>
             </div>
-
             <div class="input_group">
-              <label for="location">Location</label>
-              <select name="Year" id="Location" required>
+              <label for="Location">Location</label>
+              <select id="Location">
                 <option value="">Select Location</option>
-                <option value="province1">Western Cape (cape town)</option>
-                <option value="province2">Gauteng ( Pretoria)</option>
-                <option value="province3">KwaZulu-Natal (Durban)</option>
-                <option value="province4">Limpopo(Polokwane)</option>
-                <option value="province5">Eastern Cape (Bhisho)</option>
-                <option value="province6">Mpumalanga (Mbombela)</option>
-                <option value="province6">North West (Mahikeng)</option>
-                <option value="province6">Northern Cape (Kimberley)</option>
-                <option value="province6">Free State (Bloemfontein)</option>
-                <option value="province6">Other (out of the country)</option>
+                <option value="Western Cape">Western Cape (Cape Town)</option>
+                <option value="Gauteng">Gauteng (Pretoria)</option>
+                <option value="KwaZulu-Natal">KwaZulu-Natal (Durban)</option>
+                <option value="Limpopo">Limpopo (Polokwane)</option>
+                <option value="Eastern Cape">Eastern Cape (Bhisho)</option>
+                <option value="Mpumalanga">Mpumalanga (Mbombela)</option>
+                <option value="North West">North West (Mahikeng)</option>
+                <option value="Northern Cape">Northern Cape (Kimberley)</option>
+                <option value="Free State">Free State (Bloemfontein)</option>
+                <option value="Other">Other (out of the country)</option>
               </select>
             </div>
-
             <div class="input_group">
-              <label for="campuses">Campus</label>
-              <select name="campus" id="campus" required>
+              <label for="campus">Campus</label>
+              <select id="campus">
                 <option value="">Select Campus</option>
                 <option value="campus1">Bryanston Campus</option>
                 <option value="campus2">Cape Town Campus</option>
@@ -142,10 +135,9 @@
                 <option value="campus8">Pretoria Campus</option>
               </select>
             </div>
-
             <div class="input_group">
               <label for="gender">Gender</label>
-              <select name="gender" id="gender">
+              <select id="gender">
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -157,137 +149,97 @@
           <!-- CONTACT -->
           <div class="card">
             <h3>Contact Information</h3>
-
             <div class="input_group">
               <label for="email">Email</label>
               <input type="email" id="email" placeholder="example@gmail.com" />
             </div>
-
             <div class="input_group">
               <label for="phone">Phone Number</label>
               <input type="text" id="phone" placeholder="+27..." />
             </div>
-
             <div class="input_group">
               <label for="github">GitHub links</label>
-              <input type="text" id="github" placeholder="github" />
+              <input
+                type="text"
+                id="github"
+                placeholder="github.com/username"
+              />
             </div>
-
             <div class="input_group">
-              <label for="linkedin">linkedin links</label>
-              <input type="text" id="linkedin" placeholder="linkedin" />
+              <label for="linkedin">LinkedIn links</label>
+              <input
+                type="text"
+                id="linkedin"
+                placeholder="linkedin.com/in/username"
+              />
             </div>
+          </div>
+
+          <!-- INTERESTS -->
+          <div class="card">
+            <h3>Select Interests</h3>
+            <input
+              type="text"
+              id="interestInput"
+              placeholder="Add your interests..."
+            />
+            <button type="button" id="addInterestBtn">Add</button>
+            <div class="tags" id="interestsContainer"></div>
           </div>
 
           <!-- HOBBIES -->
-
-          <div class="card">
-            <h3>Select Interests</h3>
-            <input type="text" placeholder="Add your intrests..." />
-            <button>add</button>
-            <div class="tags">
-              <button type="button" class="tag">Coding</button>
-
-              <button type="button" class="tag">AI</button>
-
-              <button type="button" class="tag">Soccer</button>
-
-              <button type="button" class="tag">Networking</button>
-
-              <button type="button" class="tag">Cybersecurity</button>
-
-              <button type="button" class="tag">Design</button>
-            </div>
-          </div>
-
           <div class="card">
             <h3>Hobbies</h3>
-
-            <input type="text" placeholder="Add your hobbies..." />
-            <button>add</button>
-
-            <div class="tags">
-              <button type="button" class="tag">Gaming</button>
-
-              <button type="button" class="tag">Coding</button>
-
-              <button type="button" class="tag">Football</button>
-
-              <button type="button" class="tag">Music</button>
-
-              <button type="button" class="tag">Reading</button>
-            </div>
+            <input
+              type="text"
+              id="hobbyInput"
+              placeholder="Add your hobbies..."
+            />
+            <button type="button" id="addHobbyBtn">Add</button>
+            <div class="tags" id="hobbiesContainer"></div>
           </div>
 
           <!-- SKILLS -->
           <div class="card">
             <h3>Skills</h3>
-
-            <input type="text" placeholder="Add your skills..." />
-            <button>add</button>
-
-            <div class="tags">
-              <button type="button" class="tag">HTML</button>
-
-              <button type="button" class="tag">CSS</button>
-
-              <button type="button" class="tag">JavaScript</button>
-
-              <button type="button" class="tag">Python</button>
-
-              <button type="button" class="tag">UI Design</button>
-
-              <button type="button" class="tag">Game Dev</button>
-            </div>
+            <input
+              type="text"
+              id="skillInput"
+              placeholder="Add your skills..."
+            />
+            <button type="button" id="addSkillBtn">Add</button>
+            <div class="tags" id="skillsContainer"></div>
           </div>
 
           <!-- GOALS -->
           <div class="card">
             <h3>Goals</h3>
-            <input type="text" placeholder="Add your goal..." />
-            <button>add</button>
-
-            <div class="tags">
-              <button type="button" class="tag">Graduate</button>
-
-              <button type="button" class="tag">Build Projects</button>
-
-              <button type="button" class="tag">Get Internship</button>
-
-              <button type="button" class="tag">Learn AI</button>
-
-              <button type="button" class="tag">Become Developer</button>
-            </div>
+            <input type="text" id="goalInput" placeholder="Add your goals..." />
+            <button type="button" id="addGoalBtn">Add</button>
+            <div class="tags" id="goalsContainer"></div>
           </div>
 
-          <!-- GOALS -->
+          <!-- ACHIEVEMENTS -->
           <div class="card">
-            <h3>Academic achivements</h3>
-            <input type="text" placeholder="Add your achievemnts..." />
-            <button>add</button>
-
-            <div class="tags">
-              <button type="button" class="tag">top 10 learner</button>
-
-              <button type="button" class="tag">top learner</button>
-
-              <button type="button" class="tag">most views</button>
-
-              <button type="button" class="tag">most badges achieved</button>
-            </div>
+            <h3>Academic achievements</h3>
+            <input
+              type="text"
+              id="achievementInput"
+              placeholder="Add your achievements..."
+            />
+            <button type="button" id="addAchievementBtn">Add</button>
+            <div class="tags" id="achievementsContainer"></div>
           </div>
 
           <!-- ACTION BUTTONS -->
           <div class="action_buttons">
-            <a href="Profile.html" class="back_btn"> Back </a>
-
+            <a href="Profile.html" class="back_btn">Back</a>
             <button type="submit" class="save_btn">Save Changes</button>
           </div>
         </form>
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div class="f_naves">
         <img src="assets/images/rcLogo.png" alt="school_logo" />
@@ -313,6 +265,7 @@
     </footer>
 
     <div class="popup" id="popup">✅ Profile Updated Successfully</div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JavaScript/edit_profile.js"></script>
   </body>
