@@ -1,148 +1,165 @@
 $(document).ready(function () {
   const selectedTags = [];
 
-  // SHOW PASSWORD
+  // =========================
+  // SHOW / HIDE PASSWORD
+  // =========================
 
   $("#togglePassword").click(function () {
-    let input = $("#password");
+    const passwordInput = $("#password");
 
-    if (input.attr("type") === "password") {
-      input.attr("type", "text");
-
+    if (passwordInput.attr("type") === "password") {
+      passwordInput.attr("type", "text");
       $(this).text("visibility_off");
     } else {
-      input.attr("type", "password");
-
+      passwordInput.attr("type", "password");
       $(this).text("visibility");
     }
   });
 
-  // LIVE NAME PREVIEW
+  // =========================
+  // LIVE NAME + USERNAME PREVIEW
+  // =========================
 
   $("#name").on("input", function () {
-    let name = $(this).val();
+    const name = $(this).val().trim();
 
-    $(".preview-name").text(name);
+    $(".preview-name").text(name || "Your Name");
 
-    let username = "@" + name.toLowerCase().replace(/\s/g, "_");
+    const username =
+      "@" + name.toLowerCase().replace(/\s+/g, "_");
 
     $("#generatedUsername").text(username);
-
     $(".preview-username").text(username);
   });
 
+  // =========================
   // CAMPUS PREVIEW
+  // =========================
 
   $("#campus").change(function () {
-    $(".preview-campus").text($(this).find(":selected").text());
+    const campus = $(this).find(":selected").text();
+
+    $(".preview-campus").text(campus);
   });
 
+  // =========================
   // PASSWORD STRENGTH
+  // =========================
 
   $("#password").on("input", function () {
-    let password = $(this).val();
+    const password = $(this).val();
 
     let strength = 0;
 
     if (password.length >= 8) strength++;
-
     if (/[A-Z]/.test(password)) strength++;
-
     if (/[0-9]/.test(password)) strength++;
-
     if (/[^A-Za-z0-9]/.test(password)) strength++;
 
-    if (strength === 1) {
-      $(".strength-bar").css({
-        width: "25%",
-        background: "red",
-      });
-
-      $(".strength-text").text("Weak Password");
-    }
+    let width = "0%";
+    let color = "red";
+    let text = "Weak Password";
 
     if (strength === 2) {
-      $(".strength-bar").css({
-        width: "50%",
-        background: "orange",
-      });
-
-      $(".strength-text").text("Medium Password");
+      width = "50%";
+      color = "orange";
+      text = "Medium Password";
     }
 
     if (strength >= 3) {
-      $(".strength-bar").css({
-        width: "100%",
-        background: "lime",
-      });
-
-      $(".strength-text").text("Strong Password");
+      width = "100%";
+      color = "lime";
+      text = "Strong Password";
     }
+
+    $(".strength-bar").css({
+      width: width,
+      background: color,
+    });
+
+    $(".strength-text").text(text);
   });
 
-  // PASSWORD MATCH
+  // =========================
+  // PASSWORD MATCH CHECK
+  // =========================
 
   $("#confirm_password").on("input", function () {
-    let password = $("#password").val();
+    const password = $("#password").val();
+    const confirmPassword = $(this).val();
 
-    let confirm = $(this).val();
-
-    if (password === confirm) {
-      $(".password-match").text("Passwords match").css("color", "lime");
+    if (password === confirmPassword) {
+      $(".password-match")
+        .text("Passwords match ✅")
+        .css("color", "lime");
     } else {
-      $(".password-match").text("Passwords do not match").css("color", "red");
+      $(".password-match")
+        .text("Passwords do not match ❌")
+        .css("color", "red");
     }
   });
 
-  // INTEREST TAGS
 
-  $(".tag").click(function () {
-    $(this).toggleClass("selected");
 
-    let value = $(this).text();
-
-    if (selectedTags.includes(value)) {
-      selectedTags.splice(selectedTags.indexOf(value), 1);
-    } else {
-      selectedTags.push(value);
-    }
-
-    $(".preview-tags").html("");
-
-    selectedTags.forEach((tag) => {
-      $(".preview-tags").append(`
-        <span>${tag}</span>
-      `);
-    });
-  });
-
+  // =========================
   // FORM SUBMIT
+  // =========================
 
-  $("#signup-form").submit(function (e) {
+  $("#signupForm").submit(function (e) {
     e.preventDefault();
 
-    let user = {
+    const password = $("#password").val();
+    const confirmPassword = $("#confirm_password").val();
+
+    // PASSWORD VALIDATION
+    if (password !== confirmPassword) {
+      alert("Passwords do not match ❌");
+      return;
+    }
+
+    // USER DATA
+    const userData = {
       name: $("#name").val(),
-
       surname: $("#surname").val(),
-
-      email: $("#email").val(),
-
       username: $("#generatedUsername").text(),
-
+      email: $("#email").val(),
       campus: $("#campus").val(),
+      year: $("#year").val(),
+      course: $("#course").val(),
+      password: password,
 
-      password: $("#password").val(),
+      bio: "No bio added yet ✨",
+      location: "",
+      github: "",
+      linkedin: "",
+      portfolio: "",
+
+      hobbies: [],
+      skills: [],
+      achievements: [],
 
       interests: selectedTags,
+
+      profileImage: "",
+      bannerImage: "",
     };
 
-    localStorage.setItem("user", JSON.stringify(user));
+    // SAVE USER
+    localStorage.setItem(
+      "richfieldUser",
+      JSON.stringify(userData)
+    );
 
-    $("button").text("Creating Account...");
+    // BUTTON LOADING
+    $("button[type='submit']").text(
+      "Creating Account..."
+    );
 
+    // SUCCESS
     setTimeout(() => {
+      alert("Account created successfully 🎉");
       window.location.href = "Profile.html";
-    }, 2000);
+    }, 1500);
   });
 });

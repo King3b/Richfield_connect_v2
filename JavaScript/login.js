@@ -1,27 +1,43 @@
 $(document).ready(function () {
-  $("form").submit(function (e) {
+  // AUTO LOGIN CHECK
+  if (localStorage.getItem("loggedInUser")) {
+    window.location.href = "Feed.html";
+  }
+
+  // LOGIN FORM
+  $("#profileForm").submit(function (e) {
     e.preventDefault();
 
-    let email = $("#email").val();
+    const email = $("#email").val().trim();
+    const password = $("#password").val().trim();
 
-    let password = $("#password").val();
+    // GET USER
+    const savedUser = JSON.parse(localStorage.getItem("richfieldUser"));
 
-    let user = JSON.parse(localStorage.getItem("user"));
+    // VALIDATION
+    if (!savedUser) {
+      alert("No account found ❌");
+      return;
+    }
 
-    if (email === user.email && password === user.password) {
+    // LOGIN SUCCESS
+    if (savedUser.email === email && savedUser.password === password) {
       $("button").text("Logging in...");
 
-      localStorage.setItem("currentUser", user.username);
+      localStorage.setItem("loggedInUser", JSON.stringify(savedUser));
 
       setTimeout(() => {
+        alert(`Welcome back ${savedUser.name} 🎉`);
         window.location.href = "Feed.html";
-      }, 1500);
+      }, 1200);
     } else {
       $(".login").addClass("shake");
 
       setTimeout(() => {
         $(".login").removeClass("shake");
-      }, 300);
+      }, 400);
+
+      alert("Incorrect email or password ❌");
     }
   });
 });

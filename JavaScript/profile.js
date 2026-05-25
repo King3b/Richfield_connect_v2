@@ -7,6 +7,51 @@ const profileData = JSON.parse(localStorage.getItem("profileData")) || {};
 // =========================
 // PROFILE DETAILS
 // =========================
+const user = JSON.parse(localStorage.getItem("richfieldUser"));
+
+if (user) {
+  // HERO
+  document.getElementById("profileName").textContent =
+    user.fullName || "Add your name";
+
+  document.getElementById("profileUsername").textContent =
+    user.username || "@username";
+
+  document.getElementById("profileCourse").textContent =
+    user.course || "Add course";
+
+  document.getElementById("profileYear").textContent = user.year || "Add year";
+
+  document.getElementById("profileBio").textContent =
+    user.bio || "Add bio from Edit Profile";
+
+  // PERSONAL INFO
+  document.getElementById("fullNameText").textContent =
+    user.fullName || "Add your full name in Edit Profile";
+
+  document.getElementById("courseText").textContent =
+    user.course || "Add course in Edit Profile";
+
+  document.getElementById("locationText").textContent =
+    user.location || "Add location in Edit Profile";
+
+  // LINKS
+  document.getElementById("githubLink").href = user.github || "#";
+
+  document.getElementById("linkedinLink").href = user.linkedin || "#";
+
+  document.getElementById("portfolioLink").href = user.portfolio || "#";
+
+  // PROFILE IMAGE
+  if (user.profileImage) {
+    document.getElementById("profileImage").src = user.profileImage;
+  }
+
+  // BANNER IMAGE
+  if (user.bannerImage) {
+    document.getElementById("bannerImage").src = user.bannerImage;
+  }
+}
 
 document.getElementById("profileName").textContent =
   profileData.name || "Please edit your name";
@@ -131,4 +176,15 @@ if (themeBtn) {
       themeBtn.textContent = "🌙";
     }
   });
+  // =========================
+  // cOMMENT
+  // =========================
+  const stats = JSON.parse(localStorage.getItem("profileStats")) || {
+    likes: 0,
+    comments: 0,
+  };
+
+  document.getElementById("profileLikes").textContent = stats.likes;
+
+  document.getElementById("profileComments").textContent = stats.comments;
 }

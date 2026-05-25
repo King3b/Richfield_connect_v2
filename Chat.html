@@ -44,6 +44,8 @@
       <div class="group_search">
         <input type="text" placeholder="Search groups" />
         <button type="submit">Search</button>
+        <input type="text" id="new-group" />
+        <button id="create-group">Create</button>
       </div>
       <div class="group_categories">
         <button type="button">Academic</button>
@@ -54,21 +56,35 @@
       </div>
       <div class="group">
         <img src="" alt="group picture" />
-        <h4><a href="#">Math 511 Study Group</a></h4>
+
+        <h4>
+          <a href="Chat.html?group=Math511"> Math 511 Study Group </a>
+        </h4>
+
         <p>
           Group description goes here. This is a brief overview of the group.
         </p>
       </div>
+
       <div class="group">
         <img src="" alt="group picture" />
-        <h4><a href="#">Computer Science Club</a></h4>
+
+        <h4>
+          <a href="Chat.html?group=ComputerScience"> Computer Science Club </a>
+        </h4>
+
         <p>
           Group description goes here. This is a brief overview of the group.
         </p>
       </div>
+
       <div class="group">
         <img src="" alt="group picture" />
-        <h4><a href="#">Literature Enthusiasts</a></h4>
+
+        <h4>
+          <a href="Chat.html?group=Literature"> Literature Enthusiasts </a>
+        </h4>
+
         <p>
           Group description goes here. This is a brief overview of the group.
         </p>
@@ -76,25 +92,32 @@
     </article>
     <main>
       <section class="chat">
-        <h2>Chat</h2>
+        <div class="online-users">
+          <span class="online-dot"></span>
+          12 users online
+        </div>
+        <span class="unread">3</span>
+        <h2 id="group-name">Group Chat</h2>
         <div class="chat_window">
-          <div class="messages">
-            <div class="message received">
+          <div class="messages" id="messages">
+            <div class="received">
               <p>Hello! How can I help you today?</p>
             </div>
-            <div class="message sent">
-              <p>Hi! I have a question about the upcoming exam.</p>
+            <div class="sent">
+              <p id="typing"></p>
             </div>
           </div>
-          <form class="chat_input" action="#" method="post">
+          <form class="chat_input" id="chat-form">
             <input
               type="text"
+              id="chat-message"
+              id="typing"
               placeholder="Type your message here..."
               required
             />
             <button type="submit">Send</button>
-            <button id="images">images</button>
-            <button type="button">gifs</button>
+            <input type="file" id="image-upload" accept="image/*" />
+            <button id="emoji-btn">😀</button>
           </form>
         </div>
       </section>
@@ -122,5 +145,6 @@
       </div>
       <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
+    <script src="JavaScript/chat.js"></script>
   </body>
 </html>

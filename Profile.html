@@ -28,19 +28,18 @@
       </nav>
     </header>
 
-    <!-- QUICK NAV -->
-    <section class="quick_links">
-      <ul>
-        <li><a href="Home.html">🏠 Home</a></li>
-        <li><a href="Feed.html">📰 Feed</a></li>
-        <li><a href="Chat.html">💬 Chat</a></li>
-        <li><a href="Profile.html">👤 Profile</a></li>
-        <li><a href="SchoolResources.html">📚 Resources</a></li>
-        <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
-      </ul>
-    </section>
-
     <main>
+      <!-- QUICK NAV -->
+      <section class="quick_links">
+        <ul>
+          <li><a href="Home.html">🏠 Home</a></li>
+          <li><a href="Feed.html">📰 Feed</a></li>
+          <li><a href="Chat.html">💬 Chat</a></li>
+          <li><a href="Profile.html">👤 Profile</a></li>
+          <li><a href="SchoolResources.html">📚 Resources</a></li>
+          <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
+        </ul>
+      </section>
       <!-- PROFILE HERO -->
       <section class="profile_bar">
         <div class="profile_banner">
@@ -68,41 +67,26 @@
             <p id="profileCourse">Please add your course in Edit Profile</p>
 
             <p id="profileYear">Please add your academic year</p>
-
-            <p id="profileBio">Please add your bio in Edit Profile</p>
           </div>
-          <div class="profile_completion">
-            <div class="completion_text">
-              <h4>Profile Completion</h4>
-              <p id="completionPercent">0%</p>
-            </div>
-
-            <div class="completion_bar">
-              <div class="completion_fill" id="completionFill"></div>
-            </div>
+          <div class="bio_info">
+            <p id="profileBio">Please add your bio in Edit Profile</p>
           </div>
 
           <div class="profile_stats">
             <div>
-              <h4>1.2K</h4>
+              <h4 id="followers">0</h4>
               <p>Followers</p>
             </div>
 
             <div>
-              <h4>534</h4>
+              <h4 id="following">0</h4>
               <p>Following</p>
             </div>
 
             <div>
-              <h4>89</h4>
+              <h4>0</h4>
               <p>Posts</p>
             </div>
-          </div>
-
-          <div class="personal_links">
-            <a id="githubLink" href="#">Add GitHub</a>
-            <a id="linkedinLink" href="#"> Add LinkedIn </a>
-            <a id="portfolioLink" href="#"> Add Portfolio </a>
           </div>
         </div>
       </section>
@@ -127,32 +111,87 @@
             <li>
               <span class="material-symbols-rounded">person</span>
               <div>
-                <h4>Full Name</h4>
-                <p id="overviewName">Please edit your full name</p>
+                <h4>Name</h4>
+                <p id="overviewName">none</p>
               </div>
             </li>
-
             <li>
-              <span class="material-symbols-rounded">school</span>
+              <span class="material-symbols-rounded">person</span>
               <div>
-                <h4>Institution</h4>
-                <p id="overviewInstitution">Richfield</p>
+                <h4>Surname</h4>
+                <p id="overviewSurname">none</p>
               </div>
             </li>
-
             <li>
-              <span class="material-symbols-rounded">menu_book</span>
+              <span class="material-symbols-rounded">badge</span>
               <div>
-                <h4>Course</h4>
-                <p id="overviewCourse">Please add course</p>
+                <h4>studentID</h4>
+                <p id="overviewStudentID">none</p>
               </div>
             </li>
-
+            <li>
+              <span class="material-symbols-rounded">mail</span>
+              <div>
+                <h4>Email</h4>
+                <p id="overviewEmail">none</p>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-rounded">wc</span>
+              <div>
+                <h4>Gender</h4>
+                <p id="overviewGender">none</p>
+              </div>
+            </li>
             <li>
               <span class="material-symbols-rounded">location_on</span>
               <div>
                 <h4>Location</h4>
                 <p id="overviewLocation">Please add location</p>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-rounded">code</span>
+              <div>
+                <h4>github Link</h4>
+                <p id="overviewLocation">
+                  <a id="githubLink" href="#">Add GitHub</a>
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-rounded">business_center</span>
+              <div>
+                <h4>linkdin</h4>
+                <p id="overviewLocation">
+                  <a id="linkedinLink" href="#"> Add LinkedIn </a>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Hobbies</h3>
+          <ul>
+            <li>
+              <span class="material-symbols-rounded">sports_esports</span>
+              <div>
+                <h4>Hobby1</h4>
+                <p id="overviewhobby">none</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Intrest</h3>
+          <ul>
+            <li>
+              <span class="material-symbols-rounded">favorite</span>
+              <div>
+                <h4>Intrest1</h4>
+                <p id="overviewIntrest">none</p>
               </div>
             </li>
           </ul>
@@ -163,48 +202,91 @@
 
           <ul>
             <li>
-              <span class="material-symbols-rounded">history_edu</span>
+              <span class="material-symbols-rounded">school</span>
               <div>
-                <h4>High School</h4>
-                <p id="highSchool">Please add high school</p>
+                <h4>Campus</h4>
+                <p id="overviewCampus">Richfield</p>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-rounded">calendar_month</span>
+              <div>
+                <h4>Student year</h4>
+                <p id="overviewyear">none</p>
               </div>
             </li>
 
             <li>
-              <span class="material-symbols-rounded">psychology</span>
+              <span class="material-symbols-rounded">school</span>
               <div>
-                <h4>Field of Study</h4>
-                <p id="fieldStudy">Please add field of study</p>
+                <h4>Achievments</h4>
+                <p id="overviewAchievments">top 10 learner</p>
+              </div>
+            </li>
+
+            <li>
+              <div>
+                <span class="material-symbols-rounded">menu_book</span>
+                <h4>Course</h4>
+                <h5>1st semester</h5>
+                <ul>
+                  <li>
+                    <p id="courses_sem1">Programming511</p>
+                  </li>
+                  <li>
+                    <p>Networks511</p>
+                  </li>
+                  <li>
+                    <p>Maths 511</p>
+                  </li>
+                  <li>
+                    <p>Webtech 511</p>
+                  </li>
+                  <li>
+                    <p>Injformation systems 511</p>
+                  </li>
+                </ul>
+                <span class="material-symbols-rounded">menu_book</span>
+                <h5>2nd semester</h5>
+                <ul>
+                  <li>
+                    <p id="courses_sem2">Programming512</p>
+                  </li>
+                  <li>
+                    <p>Networks512</p>
+                  </li>
+                  <li>
+                    <p>Maths 512</p>
+                  </li>
+                  <li>
+                    <p>Webtech 512</p>
+                  </li>
+                  <li>
+                    <p>Information systems 512</p>
+                  </li>
+                </ul>
               </div>
             </li>
           </ul>
         </div>
-
-        <div class="card">
-          <h3>Hobbies</h3>
-
-          <div class="input_group">
-            <input type="text" id="hobbyInput" placeholder="Add hobby" />
-
-            <button type="button" id="addHobby">Add Hobby</button>
-          </div>
-
-          <div class="tags" id="hobbyList"></div>
-        </div>
       </section>
-
       <!-- CONNECTIONS -->
       <section class="board" id="connections">
         <h2>Connections</h2>
 
         <div class="connections_grid">
           <div class="card">
+            <h3>connections</h3>
+
+            <ul>
+              <li id="connections">zane</li>
+            </ul>
+          </div>
+          <div class="card">
             <h3>Followers</h3>
 
             <ul>
-              <li>John Doe</li>
-              <li>Sarah Smith</li>
-              <li>Mike Johnson</li>
+              <li id="followers">John Doe</li>
             </ul>
           </div>
 
@@ -212,9 +294,7 @@
             <h3>Following</h3>
 
             <ul>
-              <li>Jane Doe</li>
-              <li>Alex Brown</li>
-              <li>Chris Evans</li>
+              <li id="following">Jane Doe</li>
             </ul>
           </div>
 
@@ -222,9 +302,7 @@
             <h3>Groups</h3>
 
             <ul>
-              <li>Game Dev Club</li>
-              <li>Programming Society</li>
-              <li>Richfield Developers</li>
+              <li id="joined_groups">Game Dev Club</li>
             </ul>
           </div>
         </div>
@@ -237,25 +315,59 @@
         <div class="activity_grid">
           <div class="activity_card">
             <h3>Posts</h3>
-            <p>89</p>
+            <ul>
+              <li>
+                <h5>Post 1</h5>
+                <img id="post_img" src="" alt="post1 img" />
+                <p id="post_text">dd</p>
+              </li>
+            </ul>
           </div>
 
           <div class="activity_card">
-            <h3>Likes</h3>
-            <p>2.5K</p>
+            <h3>Liked</h3>
+            <ul>
+              <li>
+                <h5>liked post</h5>
+                <img id="post_img" src="" alt="post1 img" />
+                <p id="post_text">dd</p>
+              </li>
+            </ul>
           </div>
 
           <div class="activity_card">
-            <h3>Comments</h3>
-            <p>643</p>
+            <h3>Commented</h3>
+            <ul>
+              <li>
+                <h5>Post comebted</h5>
+                <img id="post_img" src="" alt="post1 img" />
+                <p id="post_text">dd</p>
+              </li>
+            </ul>
           </div>
 
           <div class="activity_card">
             <h3>Shares</h3>
-            <p>182</p>
+            <ul>
+              <li>
+                <h5>Post shared</h5>
+                <img id="post_img" src="" alt="post1 img" />
+                <p id="post_text">dd</p>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
+      <div class="profile_completion">
+        <div class="completion_text">
+          <h4>Profile Completion</h4>
+          <p id="completionPercent">0%</p>
+        </div>
+
+        <div class="completion_bar">
+          <div class="completion_fill" id="completionFill"></div>
+        </div>
+      </div>
     </main>
 
     <!-- FOOTER -->
@@ -283,5 +395,6 @@
       <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
     <script src="JavaScript/profile.js"></script>
+    <script src="JavaScript/feed.js"></script>
   </body>
 </html>

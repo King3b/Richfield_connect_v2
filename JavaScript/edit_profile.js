@@ -201,4 +201,66 @@ if (form) {
       popup.classList.remove("show");
     }, 3000);
   });
+  const editForm = document.getElementById("editProfileForm");
+
+  const currentUser = JSON.parse(localStorage.getItem("richfieldUser")) || {};
+
+  // LOAD EXISTING DATA
+  document.getElementById("name").value = currentUser.fullName || "";
+
+  document.getElementById("username").value = currentUser.username || "";
+
+  document.getElementById("bio").value = currentUser.bio || "";
+
+  document.getElementById("github").value = currentUser.github || "";
+
+  document.getElementById("linkedin").value = currentUser.linkedin || "";
+
+  document.getElementById("location").value = currentUser.location || "";
+
+  // SAVE DATA
+  editForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    currentUser.fullName = document.getElementById("name").value;
+
+    currentUser.username = document.getElementById("username").value;
+
+    currentUser.bio = document.getElementById("bio").value;
+
+    currentUser.github = document.getElementById("github").value;
+
+    currentUser.linkedin = document.getElementById("linkedin").value;
+
+    currentUser.location = document.getElementById("location").value;
+
+    localStorage.setItem("richfieldUser", JSON.stringify(currentUser));
+
+    alert("Profile updated successfully ✅");
+
+    window.location.href = "Profile.html";
+  });
 }
+// =========================
+// INTEREST TAGS
+// =========================
+
+$(".tag").click(function () {
+  $(this).toggleClass("selected");
+
+  const value = $(this).text();
+
+  if (selectedTags.includes(value)) {
+    selectedTags.splice(selectedTags.indexOf(value), 1);
+  } else {
+    selectedTags.push(value);
+  }
+
+  $(".preview-tags").html("");
+
+  selectedTags.forEach((tag) => {
+    $(".preview-tags").append(`
+        <span>${tag}</span>
+      `);
+  });
+});

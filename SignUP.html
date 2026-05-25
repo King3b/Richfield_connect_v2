@@ -48,11 +48,15 @@
               <p>access academic materials and support services</p>
             </div>
           </div>
-          <img class="background-image" alt="background image" />
+          <img
+            class="background-image"
+            src="assets/images/richfield.jpeg"
+            alt="background image"
+          />
         </section>
 
         <section class="signup">
-          <form id="profileForm" action="Profile.html">
+          <form id="signupForm">
             <img src="" alt="profile picture" />
             <h3>sign up</h3>
             <p>Create your profile to get started!</p>
@@ -108,6 +112,7 @@
             <label for="student_id">Student ID</label>
             <input
               type="number"
+              id="student_id"
               placeholder="Student ID"
               required
               minlength="8"
@@ -151,23 +156,7 @@
 
             <p class="password-match"></p>
             <br />
-            <section class="interest-section">
-              <h4>Select Interests</h4>
 
-              <div class="interest-tags">
-                <button type="button" class="tag">Coding</button>
-
-                <button type="button" class="tag">AI</button>
-
-                <button type="button" class="tag">Soccer</button>
-
-                <button type="button" class="tag">Networking</button>
-
-                <button type="button" class="tag">Cybersecurity</button>
-
-                <button type="button" class="tag">Design</button>
-              </div>
-            </section>
             <button type="submit">Sign Up</button>
             <hr />
             <p class="login">
@@ -277,19 +266,5 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JavaScript/signup.js"></script>
     <script src="JavaScript/login.js"></script>
-    <script>
-      const signupForm = document.querySelector("form");
-
-      signupForm.addEventListener("submit", function () {
-        localStorage.setItem(
-          "profileData",
-          JSON.stringify({
-            name: document.getElementById("fullname").value,
-            username: document.getElementById("username").value,
-            email: document.getElementById("email").value,
-          }),
-        );
-      });
-    </script>
   </body>
 </html>

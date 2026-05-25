@@ -22,6 +22,7 @@
           <li><a href="Feed.html">Feed</a></li>
         </ul>
       </nav>
+      <h2 id="welcomeUser"></h2>
     </header>
 
     <main>
@@ -52,13 +53,12 @@
           </p>
           <img src="assets/images/pixelGame.jpg" alt="subject picture" />
           <div class="react_buttons">
-            <span class="like-count">10 likes</span>
+            <span class="like-count">0</span>
             <button class="like-btn">Like</button>
             <span class="comment_icon"></span>
-
-            <a href="#comments_users"
-              ><button class="comment-btn">Comments</button></a
-            >
+            <button class="comment-btn">
+              Comments (<span class="comment-count">0</span>)
+            </button>
           </div>
           <!-- comment hidden until user press comment-->
 
@@ -93,12 +93,12 @@
           <p class="cMsg">This is the content of the post.</p>
           <img src="assets/images/pixel_comp.jpeg" alt="subject picture" />
           <div class="react_buttons">
-            <span class="like-count">10 likes</span>
+            <span class="like-count">0</span>
             <button class="like-btn">Like</button>
             <span class="comment_icon"></span>
-            <a href="#comments_users"
-              ><button class="comment-btn">Comments</button></a
-            >
+            <button class="comment-btn">
+              Comments (<span class="comment-count">0</span>)
+            </button>
           </div>
           <div id="comments_users">
             <div class="comment">
@@ -134,9 +134,9 @@
             <span class="like-count">10 likes</span>
             <button class="like-btn">Like</button>
             <span class="comment_icon"></span>
-            <a href="#comments_users"
-              ><button class="comment-btn">Comments</button></a
-            >
+            <button class="comment-btn">
+              Comments (<span class="comment-count">0</span>)
+            </button>
           </div>
           <div id="comments_users">
             <div class="comment">
@@ -188,21 +188,37 @@
         </div>
         <div class="group">
           <img src="" alt="group picture" />
-          <h4><a href="#">Math 511 Study Group</a></h4>
+
+          <h4>
+            <a href="Chat.html?group=Math511"> Math 511 Study Group </a>
+          </h4>
+
           <p>
             Group description goes here. This is a brief overview of the group.
           </p>
         </div>
+
         <div class="group">
           <img src="" alt="group picture" />
-          <h4><a href="#">Computer Science Club</a></h4>
+
+          <h4>
+            <a href="Chat.html?group=ComputerScience">
+              Computer Science Club
+            </a>
+          </h4>
+
           <p>
             Group description goes here. This is a brief overview of the group.
           </p>
         </div>
+
         <div class="group">
           <img src="" alt="group picture" />
-          <h4><a href="#">Literature Enthusiasts</a></h4>
+
+          <h4>
+            <a href="Chat.html?group=Literature"> Literature Enthusiasts </a>
+          </h4>
+
           <p>
             Group description goes here. This is a brief overview of the group.
           </p>
@@ -232,5 +248,14 @@
       </div>
       <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
+    <script src="JavaScript/feed.js"></script>
+    <script>
+      const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+      if (currentUser) {
+        document.getElementById("welcomeUser").textContent =
+          `Welcome ${currentUser.name} 👋`;
+      }
+    </script>
   </body>
 </html>

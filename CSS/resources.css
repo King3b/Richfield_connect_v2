@@ -425,31 +425,39 @@ footer {
   background: #001b44;
   color: white;
   padding: 50px 8%;
-  margin-top: 60px;
+}
+footer img {
+  width: 100px;
+  height: 150px;
+  object-fit: contain;
+  float: left;
 }
 
-footer nav ul {
+.f_naves {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  gap: 80px;
+}
+footer div ul {
   list-style: none;
-  flex-wrap: wrap;
+  gap: 20px;
   margin: 20px 0;
 }
 
 footer a {
-  text-decoration: none;
   color: #dbeafe;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 footer a:hover {
   color: white;
 }
 
-footer div ul {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  list-style: none;
+footer p {
+  margin-top: 30px;
+  opacity: 0.8;
+  text-align: center;
 }
 
 /* RESPONSIVE */

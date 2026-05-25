@@ -27,31 +27,26 @@
         </ul>
       </nav>
     </header>
-
     <!-- MAIN -->
     <main>
-      <aside class="social_links">
+      <section class="quick_links">
         <ul>
           <li><a href="Home.html">🏠 Home</a></li>
-
           <li><a href="Feed.html">📰 Feed</a></li>
-
           <li><a href="Chat.html">💬 Chat</a></li>
-
           <li><a href="Profile.html">👤 Profile</a></li>
-
           <li><a href="SchoolResources.html">📚 Resources</a></li>
-
           <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
         </ul>
-      </aside>
+      </section>
+
       <section class="edit_profile">
         <div class="page_title">
           <h2>Edit Profile</h2>
           <p>Customize your Richfield Connect profile ✨</p>
         </div>
 
-        <form id="profileForm" action="Profile.html">
+        <form id="profileForm">
           <!-- PROFILE IMAGES -->
           <div class="card">
             <h3>Profile Images</h3>
@@ -76,14 +71,14 @@
             <h3>Basic Information</h3>
 
             <div class="input_group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" placeholder="Blessings Marera" />
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Blessings" />
               <small class="error"></small>
             </div>
-
             <div class="input_group">
-              <label for="username">Username</label>
-              <input type="text" id="username" placeholder="@blessings" />
+              <label for="name">Surame</label>
+              <input type="text" id="Surname" placeholder="Marera" />
+              <small class="error"></small>
             </div>
 
             <div class="input_group">
@@ -104,41 +99,58 @@
             </div>
 
             <div class="input_group">
-              <label for="year">Academic Year</label>
-
-              <input type="text" id="year" placeholder="2nd Year" />
+              <label for="username">Academic year</label>
+              <select name="Year" id="year" required>
+                <option value="">Select Year</option>
+                <option value="year1">HCIT</option>
+                <option value="year2">DIT</option>
+                <option value="year3">DIT 2nd</option>
+                <option value="year3">BScIT</option>
+                <option value="year4">BScIT 2nd</option>
+                <option value="year5">BScIT 3rd</option>
+              </select>
             </div>
 
             <div class="input_group">
               <label for="location">Location</label>
-
-              <input type="text" id="location" placeholder="Cape Town" />
+              <select name="Year" id="Location" required>
+                <option value="">Select Location</option>
+                <option value="province1">Western Cape (cape town)</option>
+                <option value="province2">Gauteng ( Pretoria)</option>
+                <option value="province3">KwaZulu-Natal (Durban)</option>
+                <option value="province4">Limpopo(Polokwane)</option>
+                <option value="province5">Eastern Cape (Bhisho)</option>
+                <option value="province6">Mpumalanga (Mbombela)</option>
+                <option value="province6">North West (Mahikeng)</option>
+                <option value="province6">Northern Cape (Kimberley)</option>
+                <option value="province6">Free State (Bloemfontein)</option>
+                <option value="province6">Other (out of the country)</option>
+              </select>
             </div>
 
             <div class="input_group">
-              <label for="highschool">High School</label>
-
-              <input
-                type="text"
-                id="highschool"
-                placeholder="Your High School"
-              />
+              <label for="campuses">Campus</label>
+              <select name="campus" id="campus" required>
+                <option value="">Select Campus</option>
+                <option value="campus1">Bryanston Campus</option>
+                <option value="campus2">Cape Town Campus</option>
+                <option value="campus3">Centurion Campus</option>
+                <option value="campus4">Durban Campus</option>
+                <option value="campus5">Musgrave Campus</option>
+                <option value="campus6">Newtown Junction Campus</option>
+                <option value="campus7">Polokwane Campus</option>
+                <option value="campus8">Pretoria Campus</option>
+              </select>
             </div>
 
             <div class="input_group">
-              <label for="fieldstudy">Field of Study</label>
-
-              <input
-                type="text"
-                id="fieldstudy"
-                placeholder="Programming & Game Development"
-              />
-            </div>
-
-            <div class="input_group">
-              <label for="portfolio">Portfolio</label>
-
-              <input type="text" id="portfolio" placeholder="Portfolio link" />
+              <label for="gender">Gender</label>
+              <select name="gender" id="gender">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
             </div>
           </div>
 
@@ -157,29 +169,42 @@
             </div>
 
             <div class="input_group">
-              <label for="github">GitHub</label>
-              <input
-                type="text"
-                id="github"
-                placeholder="GitHub profile link"
-              />
+              <label for="github">GitHub links</label>
+              <input type="text" id="github" placeholder="github" />
             </div>
 
             <div class="input_group">
-              <label for="linkedin">LinkedIn</label>
-              <input
-                type="text"
-                id="linkedin"
-                placeholder="LinkedIn profile link"
-              />
+              <label for="linkedin">linkedin links</label>
+              <input type="text" id="linkedin" placeholder="linkedin" />
             </div>
           </div>
 
           <!-- HOBBIES -->
+
+          <div class="card">
+            <h3>Select Interests</h3>
+            <input type="text" placeholder="Add your intrests..." />
+            <button>add</button>
+            <div class="tags">
+              <button type="button" class="tag">Coding</button>
+
+              <button type="button" class="tag">AI</button>
+
+              <button type="button" class="tag">Soccer</button>
+
+              <button type="button" class="tag">Networking</button>
+
+              <button type="button" class="tag">Cybersecurity</button>
+
+              <button type="button" class="tag">Design</button>
+            </div>
+          </div>
+
           <div class="card">
             <h3>Hobbies</h3>
 
             <input type="text" placeholder="Add your hobbies..." />
+            <button>add</button>
 
             <div class="tags">
               <button type="button" class="tag">Gaming</button>
@@ -199,6 +224,7 @@
             <h3>Skills</h3>
 
             <input type="text" placeholder="Add your skills..." />
+            <button>add</button>
 
             <div class="tags">
               <button type="button" class="tag">HTML</button>
@@ -218,6 +244,8 @@
           <!-- GOALS -->
           <div class="card">
             <h3>Goals</h3>
+            <input type="text" placeholder="Add your goal..." />
+            <button>add</button>
 
             <div class="tags">
               <button type="button" class="tag">Graduate</button>
@@ -232,34 +260,21 @@
             </div>
           </div>
 
-          <!-- ACADEMIC -->
+          <!-- GOALS -->
           <div class="card">
-            <h3>Academic Achievements</h3>
+            <h3>Academic achivements</h3>
+            <input type="text" placeholder="Add your achievemnts..." />
+            <button>add</button>
 
-            <ul class="achievement_list">
-              <li>
-                <span>Dean's List 2025</span>
-                <button type="button">Remove</button>
-              </li>
+            <div class="tags">
+              <button type="button" class="tag">top 10 learner</button>
 
-              <li>
-                <span>Hackathon Finalist</span>
-                <button type="button">Remove</button>
-              </li>
+              <button type="button" class="tag">top learner</button>
 
-              <li>
-                <span>Top Programming Student</span>
-                <button type="button">Remove</button>
-              </li>
-            </ul>
-            <input
-              type="text"
-              id="achievementInput"
-              placeholder="Add achievement"
-            />
-            <button type="button" class="add_btn" id="addAchievement">
-              Add Achievement
-            </button>
+              <button type="button" class="tag">most views</button>
+
+              <button type="button" class="tag">most badges achieved</button>
+            </div>
           </div>
 
           <!-- ACTION BUTTONS -->
