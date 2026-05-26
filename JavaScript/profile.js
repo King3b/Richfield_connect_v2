@@ -1,15 +1,13 @@
 // This code loads and displays the user's profile page
 $(document).ready(function () {
-  // ========================================
-  // 1. WHO IS LOGGED IN?
-  // ========================================
   let currentUser = null;
 
+  // ========================================
+  // 1. LOGIN CHECK
+  // ========================================
   function getLoggedInUser() {
-    // Get user data from browser storage
     currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-    // If no one is logged in, send them to login page
     if (!currentUser) {
       window.location.href = "logIn.html";
       return false;
@@ -18,391 +16,263 @@ $(document).ready(function () {
   }
 
   // ========================================
-  // 2. GET ALL PROFILE DATA FROM STORAGE
+  // 2. PROFILE DATA FETCH
   // ========================================
   function getUserProfileData() {
-    const userEmail = currentUser.email;
+    const email = currentUser.email;
 
-    // Get profile pictures (or empty object if none exist)
-    let allProfileImages =
-      JSON.parse(localStorage.getItem("profile_images")) || {};
+    const images = JSON.parse(localStorage.getItem("profile_images")) || {};
+    const interests = JSON.parse(localStorage.getItem("user_interests")) || {};
+    const bio = JSON.parse(localStorage.getItem("user_bio")) || {};
 
-    // Get user interests (hobbies, skills, etc.)
-    let allUserInterests =
-      JSON.parse(localStorage.getItem("user_interests")) || {};
-
-    // Get user bio information
-    let allUserBios = JSON.parse(localStorage.getItem("user_bio")) || {};
-
-    // Return only THIS user's data
     return {
-      images: allProfileImages[userEmail] || {},
-      interests: allUserInterests[userEmail] || {},
-      bio: allUserBios[userEmail] || {},
+      images: images[email] || {},
+      interests: interests[email] || {},
+      bio: bio[email] || {},
     };
   }
 
   // ========================================
-  // 3. DISPLAY EVERYTHING ON THE PAGE
+  // 3. SAFE TEXT
+  // ========================================
+  function makeSafe(text) {
+    if (!text) return "";
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ========================================
+  // 4. PROFILE UI
   // ========================================
   function showProfileOnPage() {
-    // Get the user's data
-    let userData = getUserProfileData();
-    let userImages = userData.images;
-    let userInterests = userData.interests;
-    let userBio = userData.bio;
+    const data = getUserProfileData();
+    const images = data.images;
+    const interests = data.interests;
+    const bio = data.bio;
 
-    // ----- TOP SECTION (Hero) -----
-    let fullName =
-      (currentUser.name || "Add your name") + " " + (currentUser.surname || "");
-    $("#profileName").text(fullName);
+    // TOP INFO
+    $("#profileName").text(
+      (currentUser.name || "Add name") + " " + (currentUser.surname || ""),
+    );
 
     $("#profileUsername").text(currentUser.username || "@username");
+
     $("#profileCourse").text(currentUser.course || "Add course");
     $("#profileYear").text(currentUser.yearOfStudy || "Add year");
-    $("#profileBio").text(userBio.bio || currentUser.bio || "Add bio");
+    $("#profileBio").text(bio.bio || currentUser.bio || "Add bio");
 
-    // ----- PICTURES -----
-    let profilePic =
-      userImages.profileImage || "assets/images/defaultProfile.png";
-    let bannerPic = userImages.bannerImage || "assets/images/defaultBanner.jpg";
-    $("#profileImage").attr("src", profilePic);
-    $("#bannerImage").attr("src", bannerPic);
+    // IMAGES
+    $("#profileImage").attr(
+      "src",
+      images.profileImage || "assets/images/defaultProfile.png",
+    );
 
-    // ----- PERSONAL INFO -----
+    $("#bannerImage").attr(
+      "src",
+      images.bannerImage || "assets/images/defaultBanner.jpg",
+    );
+
+    // OVERVIEW
     $("#overviewName").text(currentUser.name || "Not set");
     $("#overviewSurname").text(currentUser.surname || "Not set");
     $("#overviewStudentID").text(currentUser.studentId || "Not set");
     $("#overviewEmail").text(currentUser.email || "Not set");
     $("#overviewGender").text(currentUser.gender || "Not set");
 
-    let userLocation = userBio.location || currentUser.location || "Not set";
-    $("#overviewLocation").text(userLocation);
+    $("#overviewLocation").text(
+      bio.location || currentUser.location || "Not set",
+    );
 
-    // ----- SOCIAL LINKS -----
-    if (userBio.github) {
-      $("#githubLink").attr("href", userBio.github).text("GitHub Profile");
-    }
-    if (userBio.linkedin) {
-      $("#linkedinLink")
-        .attr("href", userBio.linkedin)
-        .text("LinkedIn Profile");
-    }
+    $("#githubLink")
+      .attr("href", bio.github || "#")
+      .text(bio.github ? "GitHub Profile" : "");
 
-    // ----- EDUCATION -----
-    let campusName =
-      currentUser.campusName || currentUser.campus || "Richfield";
-    $("#overviewCampus").text(campusName);
+    $("#linkedinLink")
+      .attr("href", bio.linkedin || "#")
+      .text(bio.linkedin ? "LinkedIn Profile" : "");
 
-    let yearName =
-      currentUser.yearName || currentUser.yearOfStudy || "Not specified";
-    $("#overviewYear").text(yearName);
+    $("#overviewCampus").text(currentUser.campus || "Richfield");
+
+    $("#overviewYear").text(currentUser.yearOfStudy || "Not specified");
 
     $("#overviewCourse").text(currentUser.course || "Not specified");
 
-    // ----- HOBBIES -----
-    let hobbyList = userInterests.hobbies || [];
-    let $hobbyContainer = $("#hobbiesList");
-    $hobbyContainer.empty();
+    // ========================================
+    // LISTS (SAFE LOOPING)
+    // ========================================
+    function renderList(container, list, icon, emptyText) {
+      container.empty();
 
-    if (hobbyList.length > 0) {
-      // Show each hobby
-      for (let i = 0; i < hobbyList.length; i++) {
-        let hobby = hobbyList[i];
-        let html = `<li>
-          <span class="material-symbols-rounded">sports_esports</span>
-          <div><h4>${makeSafe(hobby)}</h4></div>
-        </li>`;
-        $hobbyContainer.append(html);
+      if (!Array.isArray(list) || list.length === 0) {
+        container.html(`<li>${emptyText}</li>`);
+        return;
       }
-    } else {
-      // Show empty message
-      $hobbyContainer.html(`<li>
-        <span class="material-symbols-rounded">sports_esports</span>
-        <div><p>No hobbies added yet</p></div>
-      </li>`);
+
+      list.forEach((item) => {
+        container.append(`
+          <li>
+            <span class="material-symbols-rounded">${icon}</span>
+            <div><h4>${makeSafe(item)}</h4></div>
+          </li>
+        `);
+      });
     }
 
-    // ----- INTERESTS -----
-    let interestList = userInterests.interests || [];
-    let $interestContainer = $("#interestsList");
-    $interestContainer.empty();
+    renderList(
+      $("#hobbiesList"),
+      interests.hobbies,
+      "sports_esports",
+      "<p>No hobbies added yet</p>",
+    );
 
-    if (interestList.length > 0) {
-      for (let i = 0; i < interestList.length; i++) {
-        let interest = interestList[i];
-        let html = `<li>
-          <span class="material-symbols-rounded">favorite</span>
-          <div><h4>${makeSafe(interest)}</h4></div>
-        </li>`;
-        $interestContainer.append(html);
-      }
-    } else {
-      $interestContainer.html(`<li>
-        <span class="material-symbols-rounded">favorite</span>
-        <div><p>No interests added yet</p></div>
-      </li>`);
-    }
+    renderList(
+      $("#interestsList"),
+      interests.interests,
+      "favorite",
+      "<p>No interests added yet</p>",
+    );
 
-    // ----- SKILLS -----
-    let skillList = userInterests.skills || [];
-    let $skillsContainer = $("#skillsList");
-    $skillsContainer.empty();
+    renderList(
+      $("#skillsList"),
+      interests.skills,
+      "code",
+      "<p>No skills added yet</p>",
+    );
 
-    if (skillList.length > 0) {
-      for (let i = 0; i < skillList.length; i++) {
-        let skill = skillList[i];
-        let html = `<li>
-          <span class="material-symbols-rounded">code</span>
-          <div><h4>${makeSafe(skill)}</h4></div>
-        </li>`;
-        $skillsContainer.append(html);
-      }
-    } else {
-      $skillsContainer.html(`<li>
-        <span class="material-symbols-rounded">code</span>
-        <div><p>No skills added yet</p></div>
-      </li>`);
-    }
+    renderList(
+      $("#goalsList"),
+      interests.goals,
+      "flag",
+      "<p>No goals added yet</p>",
+    );
 
-    // ----- GOALS -----
-    let goalList = userInterests.goals || [];
-    let $goalsContainer = $("#goalsList");
-    $goalsContainer.empty();
+    renderList(
+      $("#achievementsList"),
+      interests.achievements,
+      "emoji_events",
+      "<p>No achievements added yet</p>",
+    );
 
-    if (goalList.length > 0) {
-      for (let i = 0; i < goalList.length; i++) {
-        let goal = goalList[i];
-        let html = `<li>
-          <span class="material-symbols-rounded">flag</span>
-          <div><h4>${makeSafe(goal)}</h4></div>
-        </li>`;
-        $goalsContainer.append(html);
-      }
-    } else {
-      $goalsContainer.html(`<li>
-        <span class="material-symbols-rounded">flag</span>
-        <div><p>No goals added yet</p></div>
-      </li>`);
-    }
+    // ========================================
+    // POSTS COUNT (FIXED)
+    // ========================================
+    const allPosts = JSON.parse(localStorage.getItem("feedPosts")) || [];
 
-    // ----- ACHIEVEMENTS -----
-    let achievementList = userInterests.achievements || [];
-    let $achievementsContainer = $("#achievementsList");
-    $achievementsContainer.empty();
+    const myPosts = allPosts.filter((post) => {
+      return (
+        post.username === currentUser.username ||
+        post.userId === currentUser.email
+      );
+    });
 
-    if (achievementList.length > 0) {
-      for (let i = 0; i < achievementList.length; i++) {
-        let achievement = achievementList[i];
-        let html = `<li>
-          <span class="material-symbols-rounded">emoji_events</span>
-          <div><h4>${makeSafe(achievement)}</h4></div>
-        </li>`;
-        $achievementsContainer.append(html);
-      }
-    } else {
-      $achievementsContainer.html(`<li>
-        <span class="material-symbols-rounded">emoji_events</span>
-        <div><p>No achievements added yet</p></div>
-      </li>`);
-    }
-
-    // ----- POST COUNT -----
-    let allFeedPosts = JSON.parse(localStorage.getItem("feed_posts")) || [];
-    let myPosts = [];
-
-    // Find all posts made by this user
-    for (let i = 0; i < allFeedPosts.length; i++) {
-      if (allFeedPosts[i].username === currentUser.username) {
-        myPosts.push(allFeedPosts[i]);
-      }
-    }
     $("#postsCount").text(myPosts.length);
 
-    // ----- PROFILE COMPLETION PERCENTAGE -----
-    calculateProfileCompletion(userImages, userInterests, userBio);
+    calculateProfileCompletion(images, interests, bio);
   }
 
   // ========================================
-  // 4. CALCULATE HOW COMPLETE THE PROFILE IS
+  // 5. PROFILE COMPLETION
   // ========================================
   function calculateProfileCompletion(images, interests, bio) {
-    // List of things that make a complete profile
-    let checklist = [
+    const checklist = [
       currentUser.name,
       currentUser.surname,
       currentUser.email,
-      bio.bio && bio.bio !== "No bio added yet ✨",
+      bio.bio,
       bio.location,
       bio.github,
       bio.linkedin,
       images.profileImage,
-      interests.interests && interests.interests.length > 0,
-      interests.hobbies && interests.hobbies.length > 0,
-      interests.skills && interests.skills.length > 0,
-      interests.goals && interests.goals.length > 0,
-      interests.achievements && interests.achievements.length > 0,
+      interests.interests?.length,
+      interests.hobbies?.length,
+      interests.skills?.length,
+      interests.goals?.length,
+      interests.achievements?.length,
     ];
 
-    // Count how many are complete
-    let completedCount = 0;
-    for (let i = 0; i < checklist.length; i++) {
-      if (checklist[i]) {
-        completedCount++;
-      }
-    }
+    const done = checklist.filter(Boolean).length;
+    const percent = Math.floor((done / checklist.length) * 100);
 
-    // Calculate percentage
-    let percentage = Math.floor((completedCount / checklist.length) * 100);
-
-    // Update the progress bar
-    $("#completionPercent").text(percentage + "%");
-    $("#completionFill").css("width", percentage + "%");
+    $("#completionPercent").text(percent + "%");
+    $("#completionFill").css("width", percent + "%");
   }
 
   // ========================================
-  // 5. DARK/LIGHT MODE BUTTON
+  // 6. DARK MODE
   // ========================================
   function setupDarkLightMode() {
-    let themeButton = $("#themeToggle");
+    const saved = localStorage.getItem("theme");
 
-    // Check if user prefers dark or light mode
-    let savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
+    if (saved === "light") {
       $("body").addClass("light_mode");
     }
 
-    // When button is clicked, switch mode
-    themeButton.click(function () {
+    $("#themeToggle").on("click", function () {
       $("body").toggleClass("light_mode");
 
-      let newTheme = $("body").hasClass("light_mode") ? "light" : "dark";
-      localStorage.setItem("theme", newTheme);
+      localStorage.setItem(
+        "theme",
+        $("body").hasClass("light_mode") ? "light" : "dark",
+      );
     });
   }
 
   // ========================================
-  // 6. SAFELY DISPLAY TEXT (PREVENT HACKING)
-  // ========================================
-  function makeSafe(text) {
-    if (!text) return "";
-    // This converts special characters to safe HTML entities
-    let tempDiv = document.createElement("div");
-    tempDiv.textContent = text;
-    return tempDiv.innerHTML;
-  }
-
-  // ========================================
-  // 7. START EVERYTHING
-  // ========================================
-  function startPage() {
-    // Step 1: Make sure someone is logged in
-    let userLoaded = getLoggedInUser();
-    if (!userLoaded) return;
-
-    // Step 2: Show all their profile data
-    showProfileOnPage();
-
-    // Step 3: Setup dark/light mode button
-    setupDarkLightMode();
-  }
-  // ========================================
-  // 8. DISPLAY USER STATS (Posts, Likes, Comments)
+  // 7. USER STATS (SAFE)
   // ========================================
   function displayUserStats() {
-    let userEmail = currentUser.email;
-    let statsKey = "user_stats_" + userEmail;
-    let userStats = JSON.parse(localStorage.getItem(statsKey));
+    const key = "user_stats_" + currentUser.email;
+    const stats = JSON.parse(localStorage.getItem(key)) || {};
 
-    if (userStats) {
-      // Update the activity cards with stats
-      $("#post_count").text(userStats.postCount || 0);
-      $("#liked_post").text(userStats.likeCount || 0);
-      $("#comment_count").text(userStats.commentCount || 0);
-
-      console.log("📊 Profile Stats Loaded:");
-      console.log("   - Posts created: " + (userStats.postCount || 0));
-      console.log("   - Likes received: " + (userStats.likeCount || 0));
-      console.log("   - Comments received: " + (userStats.commentCount || 0));
-    } else {
-      // No stats yet, show zeros
-      $("#post_count").text("0");
-      $("#liked_post").text("0");
-      $("#comment_count").text("0");
-      console.log("📊 No stats found for user yet");
-    }
+    $("#post_count").text(stats.postCount || 0);
+    $("#liked_post").text(stats.likeCount || 0);
+    $("#comment_count").text(stats.commentCount || 0);
   }
 
-  // Also add this to show the actual posts the user made
+  // ========================================
+  // 8. USER POSTS (FIXED STORAGE NAME)
+  // ========================================
   function displayUserPosts() {
-    let allFeedPosts = JSON.parse(localStorage.getItem("feed_posts")) || [];
-    let myPosts = [];
-    let userEmail = currentUser.email;
-    let userName = currentUser.username;
+    const allPosts = JSON.parse(localStorage.getItem("feedPosts")) || [];
 
-    // Find all posts made by this user
-    for (let i = 0; i < allFeedPosts.length; i++) {
-      let post = allFeedPosts[i];
-      // Check by username or userId
-      if (post.username === userName || post.userId === userEmail) {
-        myPosts.push(post);
-      }
+    const myPosts = allPosts.filter(
+      (p) =>
+        p.username === currentUser.username || p.userId === currentUser.email,
+    );
+
+    const box = $("#userPostsList");
+    if (!box.length) return;
+
+    box.empty();
+
+    if (myPosts.length === 0) {
+      box.html("<li>No posts yet. Go post something 🔥</li>");
+      return;
     }
 
-    let postsContainer = $("#userPostsList");
-    if (postsContainer.length) {
-      postsContainer.empty();
-
-      if (myPosts.length === 0) {
-        postsContainer.html(
-          '<li class="no-data">No posts yet. Create your first post on the Feed page! 📝</li>',
-        );
-      } else {
-        // Show the 5 most recent posts
-        let postsToShow = myPosts.slice(0, 5);
-        for (let i = 0; i < postsToShow.length; i++) {
-          let post = postsToShow[i];
-          let timeAgo = getTimeAgo(post.time);
-          postsContainer.append(`
-          <li class="post-item">
-            <div class="post-title">📌 ${makeSafe(post.topic)}</div>
-            <div class="post-preview">${makeSafe(post.content.substring(0, 80))}${post.content.length > 80 ? "..." : ""}</div>
-            <div class="post-meta">
-              <span>❤️ ${post.likes || 0} likes</span>
-              <span>💬 ${post.comments ? post.comments.length : 0} comments</span>
-              <span>🕐 ${timeAgo}</span>
-            </div>
-          </li>
-        `);
-        }
-
-        if (myPosts.length > 5) {
-          postsContainer.append(
-            '<li class="view-more"><a href="Feed.html">View all ' +
-              myPosts.length +
-              " posts →</a></li>",
-          );
-        }
-      }
-    }
+    myPosts.slice(0, 5).forEach((post) => {
+      box.append(`
+        <li class="post-item">
+          <div>📌 ${makeSafe(post.topic)}</div>
+          <div>${makeSafe(post.content.substring(0, 80))}</div>
+        </li>
+      `);
+    });
   }
 
-  // Helper function to get time ago (add to your profile.js)
-  function getTimeAgo(timestamp) {
-    if (!timestamp) return "recently";
-    let seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
-    if (seconds < 10) return "just now";
-    if (seconds < 60) return seconds + " seconds ago";
-    let minutes = Math.floor(seconds / 60);
-    if (minutes < 60)
-      return minutes + " minute" + (minutes > 1 ? "s" : "") + " ago";
-    let hours = Math.floor(minutes / 60);
-    if (hours < 24) return hours + " hour" + (hours > 1 ? "s" : "") + " ago";
-    let days = Math.floor(hours / 24);
-    if (days < 7) return days + " day" + (days > 1 ? "s" : "") + " ago";
-    return new Date(timestamp).toLocaleDateString();
+  // ========================================
+  // 9. START
+  // ========================================
+  function startPage() {
+    if (!getLoggedInUser()) return;
+
+    showProfileOnPage();
+    setupDarkLightMode();
+
+    displayUserStats();
+    displayUserPosts();
   }
 
-  // Run the page
   startPage();
 });

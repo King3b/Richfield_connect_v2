@@ -266,6 +266,61 @@ nav ul li a:hover::after {
   border-radius: 25px;
   box-shadow: 0 10px 25px rgba(0, 82, 204, 0.12);
 }
+.Calendar img {
+  height: 260px;
+  border-radius: 25px;
+  width: fit-content;
+}
+.ideas {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.link_tab {
+  background: #ffffff;
+  width: 130px;
+  padding: 20px 15px;
+  border-radius: 18px;
+  text-align: center;
+  transition: 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.link_tab:hover {
+  transform: translateY(-5px);
+  background: #0d6efd;
+}
+
+.link_tab a {
+  text-decoration: none;
+}
+
+.link_tab span {
+  font-size: 50px;
+  color: #0d6efd;
+  transition: 0.3s ease;
+}
+
+.link_tab:hover span {
+  color: white;
+}
+
+.link_tab p {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  transition: 0.3s ease;
+  text-transform: capitalize;
+}
+
+.link_tab:hover p {
+  color: white;
+}
 
 /* PROFILE SECTION */
 .Profile {
@@ -594,10 +649,27 @@ footer p {
   header {
     flex-direction: column;
     gap: 20px;
+    padding: 15px;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .Hero {
+    padding: 60px 20px;
+    text-align: center;
   }
 
   .Hero h1 {
     font-size: 2.7rem;
+    line-height: 1.2;
+  }
+
+  .Hero p {
+    font-size: 1rem;
   }
 
   .Profile {
@@ -605,19 +677,76 @@ footer p {
     gap: 20px;
     text-align: center;
   }
+
+  .ideas {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .link_tab {
+    width: 140px;
+  }
 }
 
 @media (max-width: 600px) {
+  header {
+    padding: 12px;
+  }
+
   nav ul {
     flex-direction: column;
     text-align: center;
+    gap: 12px;
+  }
+
+  .Hero {
+    padding: 50px 15px;
   }
 
   .Hero h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .Hero p {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .ideas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .link_tab {
+    width: 100%;
+    padding: 18px 10px;
+  }
+
+  .link_tab span {
+    font-size: 40px;
+  }
+
+  .link_tab p {
+    font-size: 14px;
+  }
+
+  .Profile {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .Hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .ideas {
+    grid-template-columns: 1fr;
+  }
+
+  .link_tab {
+    max-width: 220px;
+    margin: auto;
   }
 }
