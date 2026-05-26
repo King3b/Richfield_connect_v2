@@ -295,9 +295,14 @@ button:hover {
   font-size: 1rem;
 }
 
-.cTopic {
-  color: #60a5fa;
-  font-size: 0.95rem;
+
+.follow{
+    color: #60a5fa;
+    cursor: pointer;
+}
+.follow:hover{
+  
+  color: #130081;
 }
 
 .cTime {

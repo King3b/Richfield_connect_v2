@@ -1,266 +1,463 @@
+// This code handles the Edit Profile page - users can update their info
 $(document).ready(function () {
-  console.log("✅ Edit Profile loaded");
+  // ========================================
+  // 1. VARIABLES TO STORE USER DATA
+  // ========================================
+  let currentUser = null; // The logged in user
+  let userInterests = []; // List of interests
+  let userHobbies = []; // List of hobbies
+  let userSkills = []; // List of skills
+  let userGoals = []; // List of goals
+  let userAchievements = []; // List of achievements
 
-  // ======================================
-  // 1. CURRENT USER
-  // ======================================
+  // ========================================
+  // 2. GET THE LOGGED IN USER
+  // ========================================
+  function getLoggedInUser() {
+    // Get user from browser storage
+    currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  let currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-  if (!currentUser) {
-    window.location.href = "logIn.html";
-    return;
+    // If no one is logged in, go to login page
+    if (!currentUser) {
+      window.location.href = "logIn.html";
+      return false;
+    }
+    return true;
   }
 
-  // ======================================
-  // 2. PROFILE DATA (LOCAL STATE)
-  // ======================================
+  // ========================================
+  // 3. LOAD USER'S SAVED PROFILE DATA
+  // ========================================
+  function getSavedProfileData() {
+    let userEmail = currentUser.email;
 
-  let hobbies = [];
-  let skills = [];
-  let goals = [];
-  let achievements = [];
-  let interests = [];
+    // Get all saved profile pictures
+    let allProfilePics =
+      JSON.parse(localStorage.getItem("profile_images")) || {};
 
-  // ======================================
-  // 3. LOAD USER DATA FROM STORAGE
-  // ======================================
-
-  function loadUserData() {
-    const email = currentUser.email;
-
-    const images = JSON.parse(localStorage.getItem("profile_images")) || {};
-
-    const interestData =
+    // Get all saved interests (hobbies, skills, etc.)
+    let allInterestsData =
       JSON.parse(localStorage.getItem("user_interests")) || {};
 
-    const bioData = JSON.parse(localStorage.getItem("user_bio")) || {};
+    // Get all saved bio information
+    let allBioData = JSON.parse(localStorage.getItem("user_bio")) || {};
 
+    // Return only THIS user's data
     return {
-      images: images[email] || {},
-      interests: interestData[email] || {},
-      bio: bioData[email] || {},
+      pictures: allProfilePics[userEmail] || {},
+      interests: allInterestsData[userEmail] || {},
+      bioInfo: allBioData[userEmail] || {},
     };
   }
 
-  // ======================================
-  // 4. FILL FORM
-  // ======================================
+  // ========================================
+  // 4. SAVE USER'S PROFILE DATA
+  // ========================================
+  function saveUserProfileData(pictures, interests, bioInfo) {
+    let userEmail = currentUser.email;
 
-  function fillForm() {
-    const data = loadUserData();
+    // ----- Save pictures -----
+    let allProfilePics =
+      JSON.parse(localStorage.getItem("profile_images")) || {};
+    allProfilePics[userEmail] = pictures;
+    localStorage.setItem("profile_images", JSON.stringify(allProfilePics));
 
+    // ----- Save interests (hobbies, skills, etc.) -----
+    let allInterestsData =
+      JSON.parse(localStorage.getItem("user_interests")) || {};
+    allInterestsData[userEmail] = interests;
+    localStorage.setItem("user_interests", JSON.stringify(allInterestsData));
+
+    // ----- Save bio information -----
+    let allBioData = JSON.parse(localStorage.getItem("user_bio")) || {};
+    allBioData[userEmail] = bioInfo;
+    localStorage.setItem("user_bio", JSON.stringify(allBioData));
+
+    // ----- Also update the main user object -----
+    currentUser.profileImage = pictures.profileImage;
+    currentUser.bannerImage = pictures.bannerImage;
+    currentUser.hobbies = interests.hobbies;
+    currentUser.skills = interests.skills;
+    currentUser.achievements = interests.achievements;
+    currentUser.interests = interests.interests;
+    currentUser.bio = bioInfo.bio;
+    currentUser.location = bioInfo.location;
+    currentUser.github = bioInfo.github;
+    currentUser.linkedin = bioInfo.linkedin;
+    currentUser.phone = bioInfo.phone;
+
+    // Save the updated user
+    localStorage.setItem("loggedInUser", JSON.stringify(currentUser));
+    localStorage.setItem("richfieldUser", JSON.stringify(currentUser));
+  }
+
+  // ========================================
+  // 5. FILL THE FORM WITH USER'S SAVED DATA
+  // ========================================
+  function fillFormWithUserData() {
+    let savedData = getSavedProfileData();
+    let userPictures = savedData.pictures;
+    let userInterestsData = savedData.interests;
+    let userBioInfo = savedData.bioInfo;
+
+    // ----- Basic Information -----
     $("#name").val(currentUser.name || "");
     $("#Surname").val(currentUser.surname || "");
+    $("#bio").val(userBioInfo.bio || currentUser.bio || "No bio added yet ✨");
+    $("#course").val(currentUser.course || "");
+    $("#year").val(currentUser.yearOfStudy || "");
+    $("#Location").val(userBioInfo.location || currentUser.location || "");
+    $("#campus").val(currentUser.campus || "");
+    $("#gender").val(currentUser.gender || "");
+
+    // ----- Contact Information -----
     $("#email").val(currentUser.email || "");
+    $("#phone").val(userBioInfo.phone || "");
+    $("#github").val(userBioInfo.github || "");
+    $("#linkedin").val(userBioInfo.linkedin || "");
 
-    $("#bio").val(data.bio.bio || "");
-    $("#Location").val(data.bio.location || "");
+    // ----- Load all the lists -----
+    userHobbies = userInterestsData.hobbies || [];
+    userSkills = userInterestsData.skills || [];
+    userGoals = userInterestsData.goals || [];
+    userAchievements = userInterestsData.achievements || [];
+    userInterests = userInterestsData.interests || [];
 
-    hobbies = data.interests.hobbies || [];
-    skills = data.interests.skills || [];
-    goals = data.interests.goals || [];
-    achievements = data.interests.achievements || [];
-    interests = data.interests.interests || [];
+    // ----- Show them on the page -----
+    showHobbiesOnPage();
+    showSkillsOnPage();
+    showGoalsOnPage();
+    showAchievementsOnPage();
+    showInterestsOnPage();
 
-    renderAllLists();
-
-    // images
-    if (data.images.profileImage) {
-      $(".profile_preview img").attr("src", data.images.profileImage);
+    // ----- Load pictures if they exist -----
+    if (userPictures.profileImage) {
+      $(".profile_preview img").attr("src", userPictures.profileImage);
     }
-
-    if (data.images.bannerImage) {
-      $(".banner_preview img").attr("src", data.images.bannerImage);
-    }
-  }
-
-  // ======================================
-  // 5. RENDER LISTS
-  // ======================================
-
-  function renderList(container, list, type) {
-    const $box = $(container);
-    $box.empty();
-
-    if (list.length === 0) {
-      $box.html(`<span>No ${type}s yet</span>`);
-      return;
-    }
-
-    list.forEach((item) => {
-      $box.append(`
-        <button class="tag" data-type="${type}">
-          ${escapeText(item)}
-        </button>
-      `);
-    });
-  }
-
-  function renderAllLists() {
-    renderList("#hobbiesContainer", hobbies, "hobby");
-    renderList("#skillsContainer", skills, "skill");
-    renderList("#goalsContainer", goals, "goal");
-    renderList("#achievementsContainer", achievements, "achievement");
-    renderList("#interestsContainer", interests, "interest");
-  }
-
-  // ======================================
-  // 6. ADD ITEM
-  // ======================================
-
-  function addItem(type, value) {
-    if (!value.trim()) return;
-
-    const map = {
-      hobby: hobbies,
-      skill: skills,
-      goal: goals,
-      achievement: achievements,
-      interest: interests,
-    };
-
-    if (!map[type].includes(value)) {
-      map[type].push(value);
-      renderAllLists();
+    if (userPictures.bannerImage) {
+      $(".banner_preview img").attr("src", userPictures.bannerImage);
     }
   }
 
-  // ======================================
-  // 7. REMOVE ITEM
-  // ======================================
-
-  function removeItem(type, value) {
-    const map = {
-      hobby: hobbies,
-      skill: skills,
-      goal: goals,
-      achievement: achievements,
-      interest: interests,
-    };
-
-    map[type] = map[type].filter((i) => i !== value);
-    renderAllLists();
+  // ========================================
+  // 6. SHOW LISTS ON THE PAGE (HOBBIES, SKILLS, ETC.)
+  // ========================================
+  function showHobbiesOnPage() {
+    showTagList("#hobbiesContainer", userHobbies, "hobby");
   }
 
-  // ======================================
-  // 8. CLICK TAGS
-  // ======================================
+  function showSkillsOnPage() {
+    showTagList("#skillsContainer", userSkills, "skill");
+  }
 
-  $(document).on("click", ".tag", function () {
-    const type = $(this).data("type");
-    const value = $(this).text();
+  function showGoalsOnPage() {
+    showTagList("#goalsContainer", userGoals, "goal");
+  }
 
-    $(this).toggleClass("selected");
+  function showAchievementsOnPage() {
+    showTagList("#achievementsContainer", userAchievements, "achievement");
+  }
 
-    if ($(this).hasClass("selected")) {
-      addItem(type, value);
+  function showInterestsOnPage() {
+    showTagList("#interestsContainer", userInterests, "interest", true);
+  }
+
+  // Helper function to show any list of tags
+  function showTagList(containerId, itemsList, tagType, isPreSelected = false) {
+    let $container = $(containerId);
+    $container.empty(); // Clear old list
+
+    // If list is empty, show a message
+    if (itemsList.length === 0) {
+      $container.append(
+        `<span class="empty-tag">No ${tagType}s added yet</span>`,
+      );
     } else {
-      removeItem(type, value);
+      // Show each item as a button
+      for (let i = 0; i < itemsList.length; i++) {
+        let item = itemsList[i];
+        let selectedClass = isPreSelected ? "selected" : "";
+        let buttonHtml = `<button type="button" class="tag ${selectedClass}" data-type="${tagType}">${makeSafe(item)}</button>`;
+        $container.append(buttonHtml);
+      }
+    }
+  }
+
+  // ========================================
+  // 7. ADD A NEW ITEM TO A LIST
+  // ========================================
+  function addNewItem(listType, newValue) {
+    if (!newValue.trim()) return; // Don't add empty items
+
+    // Figure out which list to add to
+    if (listType === "hobby") {
+      if (!userHobbies.includes(newValue)) {
+        userHobbies.push(newValue);
+        showHobbiesOnPage();
+      }
+    } else if (listType === "skill") {
+      if (!userSkills.includes(newValue)) {
+        userSkills.push(newValue);
+        showSkillsOnPage();
+      }
+    } else if (listType === "goal") {
+      if (!userGoals.includes(newValue)) {
+        userGoals.push(newValue);
+        showGoalsOnPage();
+      }
+    } else if (listType === "achievement") {
+      if (!userAchievements.includes(newValue)) {
+        userAchievements.push(newValue);
+        showAchievementsOnPage();
+      }
+    } else if (listType === "interest") {
+      if (!userInterests.includes(newValue)) {
+        userInterests.push(newValue);
+        showInterestsOnPage();
+      }
+    }
+
+    showPopupMessage(listType + " added!");
+  }
+
+  // ========================================
+  // 8. REMOVE AN ITEM FROM A LIST
+  // ========================================
+  function removeItemFromList(listType, valueToRemove) {
+    if (listType === "hobby") {
+      // Keep only items that are NOT the one to remove
+      userHobbies = userHobbies.filter(function (item) {
+        return item !== valueToRemove;
+      });
+      showHobbiesOnPage();
+    } else if (listType === "skill") {
+      userSkills = userSkills.filter(function (item) {
+        return item !== valueToRemove;
+      });
+      showSkillsOnPage();
+    } else if (listType === "goal") {
+      userGoals = userGoals.filter(function (item) {
+        return item !== valueToRemove;
+      });
+      showGoalsOnPage();
+    } else if (listType === "achievement") {
+      userAchievements = userAchievements.filter(function (item) {
+        return item !== valueToRemove;
+      });
+      showAchievementsOnPage();
+    } else if (listType === "interest") {
+      userInterests = userInterests.filter(function (item) {
+        return item !== valueToRemove;
+      });
+      showInterestsOnPage();
+    }
+
+    showPopupMessage(listType + " removed");
+  }
+
+  // ========================================
+  // 9. HANDLE CLICKING ON TAGS (ADD/REMOVE)
+  // ========================================
+  $(document).on("click", ".tag", function () {
+    let $clickedButton = $(this);
+    let tagType = $clickedButton.data("type");
+    let tagValue = $clickedButton.text();
+
+    // If it's already selected, remove it
+    if ($clickedButton.hasClass("selected")) {
+      $clickedButton.removeClass("selected");
+      removeItemFromList(tagType, tagValue);
+    }
+    // Otherwise, add it
+    else {
+      $clickedButton.addClass("selected");
+      addNewItem(tagType, tagValue);
     }
   });
 
-  // ======================================
-  // 9. IMAGE UPLOAD
-  // ======================================
+  // ========================================
+  // 10. HANDLE IMAGE UPLOADS
+  // ========================================
+  function setupImageUploads() {
+    // Profile picture upload
+    $("#profileUpload").on("change", function (event) {
+      let file = event.target.files[0];
 
-  function setupImages() {
-    $("#profileUpload").on("change", function (e) {
-      const file = e.target.files[0];
-      if (!file) return;
+      if (file && file.type.startsWith("image/")) {
+        let fileReader = new FileReader();
 
-      const reader = new FileReader();
-      reader.onload = function (ev) {
-        $(".profile_preview img").attr("src", ev.target.result);
-      };
-      reader.readAsDataURL(file);
+        fileReader.onload = function (loadEvent) {
+          let imageUrl = loadEvent.target.result;
+          $(".profile_preview img").attr("src", imageUrl);
+          showPopupMessage("Profile image updated!");
+        };
+
+        fileReader.readAsDataURL(file);
+      }
     });
 
-    $("#bannerUpload").on("change", function (e) {
-      const file = e.target.files[0];
-      if (!file) return;
+    // Banner image upload
+    $("#bannerUpload").on("change", function (event) {
+      let file = event.target.files[0];
 
-      const reader = new FileReader();
-      reader.onload = function (ev) {
-        $(".banner_preview img").attr("src", ev.target.result);
-      };
-      reader.readAsDataURL(file);
+      if (file && file.type.startsWith("image/")) {
+        let fileReader = new FileReader();
+
+        fileReader.onload = function (loadEvent) {
+          let imageUrl = loadEvent.target.result;
+          $(".banner_preview img").attr("src", imageUrl);
+          showPopupMessage("Banner image updated!");
+        };
+
+        fileReader.readAsDataURL(file);
+      }
     });
   }
 
-  // ======================================
-  // 10. SAVE PROFILE
-  // ======================================
+  // ========================================
+  // 11. SETUP THE "ADD" BUTTONS
+  // ========================================
+  function setupAddButtons() {
+    // Hobby Add Button
+    $("#addHobbyBtn").click(function () {
+      let newHobby = $("#hobbyInput").val();
+      addNewItem("hobby", newHobby);
+      $("#hobbyInput").val(""); // Clear the input
+    });
 
-  function saveProfile() {
-    const email = currentUser.email;
+    // Skill Add Button
+    $("#addSkillBtn").click(function () {
+      let newSkill = $("#skillInput").val();
+      addNewItem("skill", newSkill);
+      $("#skillInput").val("");
+    });
 
-    const images = {
+    // Goal Add Button
+    $("#addGoalBtn").click(function () {
+      let newGoal = $("#goalInput").val();
+      addNewItem("goal", newGoal);
+      $("#goalInput").val("");
+    });
+
+    // Achievement Add Button
+    $("#addAchievementBtn").click(function () {
+      let newAchievement = $("#achievementInput").val();
+      addNewItem("achievement", newAchievement);
+      $("#achievementInput").val("");
+    });
+
+    // Interest Add Button
+    $("#addInterestBtn").click(function () {
+      let newInterest = $("#interestInput").val();
+      addNewItem("interest", newInterest);
+      $("#interestInput").val("");
+    });
+
+    // Pressing Enter key also adds the item
+    $(".card input[type='text']").on("keypress", function (event) {
+      if (event.which === 13) {
+        // Enter key
+        event.preventDefault();
+        $(this).siblings("button").click(); // Click the add button
+      }
+    });
+  }
+
+  // ========================================
+  // 12. SHOW A TEMPORARY POPUP MESSAGE
+  // ========================================
+  function showPopupMessage(message) {
+    let popup = $("#popup");
+    popup.text("✅ " + message);
+    popup.addClass("show");
+
+    // Hide after 2 seconds
+    setTimeout(function () {
+      popup.removeClass("show");
+    }, 2000);
+  }
+
+  // ========================================
+  // 13. SAVE ALL CHANGES AND GO TO PROFILE
+  // ========================================
+  function saveAllChangesAndRedirect() {
+    // Get the picture URLs
+    let userPictures = {
       profileImage: $(".profile_preview img").attr("src"),
       bannerImage: $(".banner_preview img").attr("src"),
     };
 
-    const interests = {
-      hobbies,
-      skills,
-      goals,
-      achievements,
-      interests,
+    // Get all the lists
+    let userInterestsData = {
+      hobbies: userHobbies,
+      skills: userSkills,
+      goals: userGoals,
+      achievements: userAchievements,
+      interests: userInterests,
     };
 
-    const bio = {
-      bio: $("#bio").val(),
+    // Get bio information
+    let userBioInfo = {
+      bio: $("#bio").val().trim() || "No bio added yet ✨",
       location: $("#Location").val(),
-      github: $("#github").val(),
-      linkedin: $("#linkedin").val(),
-      phone: $("#phone").val(),
+      github: $("#github").val().trim(),
+      linkedin: $("#linkedin").val().trim(),
+      phone: $("#phone").val().trim(),
     };
 
-    // save grouped data
-    let allImages = JSON.parse(localStorage.getItem("profile_images")) || {};
-    let allInterests = JSON.parse(localStorage.getItem("user_interests")) || {};
-    let allBio = JSON.parse(localStorage.getItem("user_bio")) || {};
+    // Update basic user info
+    currentUser.name = $("#name").val().trim();
+    currentUser.surname = $("#Surname").val().trim();
+    currentUser.course = $("#course").val().trim();
+    currentUser.yearOfStudy = $("#year").val();
+    currentUser.campus = $("#campus").val();
+    currentUser.gender = $("#gender").val();
+    currentUser.email = $("#email").val().trim();
 
-    allImages[email] = images;
-    allInterests[email] = interests;
-    allBio[email] = bio;
+    // Save everything
+    saveUserProfileData(userPictures, userInterestsData, userBioInfo);
 
-    localStorage.setItem("profile_images", JSON.stringify(allImages));
-    localStorage.setItem("user_interests", JSON.stringify(allInterests));
-    localStorage.setItem("user_bio", JSON.stringify(allBio));
+    // Tell user it worked
+    alert("✅ Profile updated successfully!");
 
-    // update main user
-    currentUser.profileImage = images.profileImage;
-    currentUser.bannerImage = images.bannerImage;
-    currentUser.bio = bio.bio;
-
-    localStorage.setItem("loggedInUser", JSON.stringify(currentUser));
-
-    alert("✅ Profile saved!");
+    // Go to profile page
     window.location.href = "Profile.html";
   }
 
-  // ======================================
-  // 11. INIT
-  // ======================================
+  // ========================================
+  // 14. MAKE TEXT SAFE (PREVENT HACKING)
+  // ========================================
+  function makeSafe(text) {
+    if (!text) return "";
+    let tempDiv = document.createElement("div");
+    tempDiv.textContent = text;
+    return tempDiv.innerHTML;
+  }
 
-  function init() {
-    fillForm();
-    setupImages();
+  // ========================================
+  // 15. START EVERYTHING
+  // ========================================
+  function initializePage() {
+    // Step 1: Make sure user is logged in
+    let userLoaded = getLoggedInUser();
+    if (!userLoaded) return;
 
-    $("#profileForm").on("submit", function (e) {
-      e.preventDefault();
-      saveProfile();
+    // Step 2: Fill the form with their data
+    fillFormWithUserData();
+
+    // Step 3: Setup image uploads
+    setupImageUploads();
+
+    // Step 4: Setup add buttons
+    setupAddButtons();
+
+    // Step 5: Handle form submission (save button)
+    $("#profileForm").on("submit", function (event) {
+      event.preventDefault(); // Stop normal form submit
+      saveAllChangesAndRedirect();
     });
   }
 
-  init();
-
-  // ======================================
-  // SAFE TEXT
-  // ======================================
-
-  function escapeText(text) {
-    return $("<div>").text(text).html();
-  }
+  // Run everything
+  initializePage();
 });

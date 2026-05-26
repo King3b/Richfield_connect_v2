@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile | Richfield Connect</title>
+
+    <link rel="stylesheet" href="CSS/user_profile.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <img src="assets/images/rcLogo.png" alt="school_logo" />
+      <h1>Richfield connect</h1>
+
+      <nav>
+        <ul>
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="Signup.html">Sign up</a></li>
+          <li><a href="Feed.html">Feed</a></li>
+          <li><button id="themeToggle" class="theme_btn">🌙</button></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="suggestions-card">
+            <ul>
+              <li><a href="Home.html">🏠 Home</a></li>
+              <li><a href="Feed.html">📰 Feed</a></li>
+              <li><a href="Chat.html">💬 Chat</a></li>
+              <li><a href="Profile.html">👤 Profile</a></li>
+              <li><a href="SchoolResources.html">📚 Resources</a></li>
+              <li><a href="Edit_profile.html">⚙ Edit Profile</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Profile -->
+        <div class="profile-content">
+          <div class="profile-header">
+            <div class="banner">
+              <img id="bannerImg" src="https://picsum.photos/id/26/1200/300" />
+            </div>
+
+            <div class="profile-avatar">
+              <img id="avatarImg" src="https://ui-avatars.com/api/?name=User" />
+            </div>
+
+            <div class="profile-info">
+              <h1 id="displayName">User Name</h1>
+              <p id="displayUsername">@username</p>
+              <p id="displayBio">No bio added yet</p>
+
+              <div class="details">
+                <span id="displayLocation">📍 Location not set</span>
+                <span id="displayCourse">🎓 Course not set</span>
+                <span id="displayYear">📚 Year not set</span>
+              </div>
+          
+
+              <!-- FOLLOW SYSTEM READY -->
+              <div class="stats">
+                <div class="stat">
+                  <span id="followersCount">0</span>
+                  <label>Followers</label>
+                </div>
+                <div class="stat">
+                  <span id="followingCount">0</span>
+                  <label>Following</label>
+                </div>
+                <div class="stat">
+                  <span id="friendsCount">0</span>
+                  <label>Friends</label>
+                </div>
+                <div class="stat">
+                  <span id="postsCount">0</span>
+                  <label>Posts</label>
+                </div>
+              </div>
+
+              <button id="followBtn" class="follow-btn">Follow</button>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="overview">Overview</button>
+            <button class="tab-btn" data-tab="skills">Skills</button>
+            <button class="tab-btn" data-tab="connections">Connections</button>
+          </div>
+
+          <!-- Overview -->
+          <div id="overviewTab" class="tab-content active">
+            <div class="info-card">
+              <h3>Personal Info</h3>
+              <div><strong>Name:</strong> <span id="fullName"></span></div>
+              <div><strong>Email:</strong> <span id="email"></span></div>
+              <div><strong>ID:</strong> <span id="studentId"></span></div>
+              <div><strong>Gender:</strong> <span id="gender"></span></div>
+              <div><strong>Location:</strong> <span id="location"></span></div>
+            </div>
+
+            <div class="info-card">
+              <h3>Education</h3>
+              <div><strong>Campus:</strong> <span id="campus"></span></div>
+              <div><strong>Course:</strong> <span id="course"></span></div>
+              <div><strong>Year:</strong> <span id="year"></span></div>
+            </div>
+
+            <div class="info-card">
+              <h3>Social</h3>
+              <a id="github" target="_blank">GitHub</a>
+              <a id="linkedin" target="_blank">LinkedIn</a>
+              <a id="portfolio" target="_blank">Portfolio</a>
+            </div>
+
+            <div class="info-card">
+              <h3>Achievements</h3>
+              <ul id="achievementsList"></ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Hobbies</h3>
+              <ul id="hobbiesList"></ul>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div id="skillsTab" class="tab-content">
+            <div class="info-card">
+              <h3>Skills</h3>
+              <div id="skillsList"></div>
+            </div>
+
+            <div class="info-card">
+              <h3>Interests</h3>
+              <div id="interestsList"></div>
+            </div>
+          </div>
+
+          <!-- Connections -->
+          <div id="connectionsTab" class="tab-content">
+            <div class="info-card">
+              <h3>Followers</h3>
+              <div id="followersList"></div>
+            </div>
+
+            <div class="info-card">
+              <h3>Following</h3>
+              <div id="followingList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Richfield Connect</p>
+    </footer>
+
+    <!-- FIXED SCRIPT -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="feed.js"></script>
+    <script src="JavaScript/user_profile.js"></script>
+  </body>
+</html>
