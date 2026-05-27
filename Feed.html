@@ -46,11 +46,11 @@
             <div class="post_title">
               <p class="cUser">WilliamsHowdy</p>
               <a class="follow">follow</a>
-              <p class="cTime">20 ago</p>
+              <p class="cTime">2h ago</p>
             </div>
           </div>
           <p class="cMsg">
-            my very first Game going to release soon whebn i get the resources
+            my very first Game going to release soon when i get the resources
           </p>
           <img src="assets/images/pixelGame.jpg" alt="subject picture" />
           <div class="react_buttons">
@@ -63,7 +63,7 @@
           </div>
           <!-- comment hidden until user press comment-->
 
-          <div id="comments_users">
+          <div class="comments_users">
             <div class="comment">
               <p class="cUser">@MousaTheGoat</p>
               <p class="cTime">40 min ago</p>
@@ -79,7 +79,7 @@
               id="user_comment"
               placeholder="Write a comment..."
             ></textarea>
-            <button type="submit">post</button>
+            <button type="submit-comment-btn">post</button>
           </div>
         </div>
         <div class="post">
@@ -101,7 +101,7 @@
               Comments (<span class="comment-count">0</span>)
             </button>
           </div>
-          <div id="comments_users">
+          <div class="comments_users">
             <div class="comment">
               <p class="cUser">@VeronicaTheGoat</p>
               <p class="cTime">40 min ago</p>
@@ -129,7 +129,7 @@
               <p class="cTime">20 ago</p>
             </div>
           </div>
-          <p class="cMsg">This is the content of the post.</p>
+          <p class="cMsg">welcome to the best campus location and site</p>
           <img src="assets/images/richfield.jpeg" alt="subject picture" />
           <div class="react_buttons">
             <span class="like-count">10 likes</span>
@@ -139,7 +139,7 @@
               Comments (<span class="comment-count">0</span>)
             </button>
           </div>
-          <div id="comments_users">
+          <div class="comments_users">
             <div class="comment">
               <p class="cUser">@MessiGlazer</p>
               <p class="cTime">40 min ago</p>
@@ -180,18 +180,11 @@
           <input type="text" placeholder="Search groups" />
           <button type="submit">Search</button>
         </div>
-        <div class="group_categories">
-          <button type="button">Academic</button>
-          <button type="button">Clubs</button>
-          <button type="button">Sports</button>
-          <button type="button">Arts</button>
-          <button type="button">Social</button>
-        </div>
         <div class="group">
           <h4>
             <a href="Chat.html?group=Math511"> Math 511 Study Group </a>
           </h4>
-
+          <button class="join-group-btn">Join</button>
           <p>
             Maths study group for students in Math 511. We discuss homework,
             share resources, and prepare for exams together.
@@ -204,7 +197,7 @@
               Computer Science Club
             </a>
           </h4>
-
+          <button class="join-group-btn">Join</button>
           <p>
             programming and other computer related tasks, we share resources and
             help each other with projects and homework
@@ -212,12 +205,10 @@
         </div>
 
         <div class="group">
-          />
-
           <h4>
             <a href="Chat.html?group=Literature"> Literature Enthusiasts </a>
           </h4>
-
+          <button class=".join-group-btn">join</button>
           <p>
             A group for students who love literature. We discuss books, share
             recommendations, and organize reading sessions.
@@ -248,7 +239,7 @@
       </div>
       <p>&copy; 2024 Richfield Connect. All rights reserved.</p>
     </footer>
-  
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JavaScript/signup.js"></script>
     <script src="JavaScript/feed.js"></script>

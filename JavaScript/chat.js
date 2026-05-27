@@ -406,23 +406,6 @@ if (chatForm) {
 }
 
 // ========================================
-// 7. TYPING INDICATOR
-// ========================================
-if (chatInput) {
-  chatInput.addEventListener("input", function () {
-    if (!typingIndicator) return;
-
-    typingIndicator.textContent = "Someone is typing...";
-
-    clearTimeout(window.typingTimeout);
-
-    window.typingTimeout = setTimeout(function () {
-      typingIndicator.textContent = "";
-    }, 1000);
-  });
-}
-
-// ========================================
 // 8. EMOJI BUTTON
 // ========================================
 if (emojiButton) {
@@ -487,159 +470,23 @@ if (imageUploadInput) {
   });
 }
 
-// ========================================
-// 10. CREATE A NEW GROUP (from input field)
-// ========================================
-if (createGroupButton && newGroupNameInput) {
-  createGroupButton.addEventListener("click", function () {
-    let newGroupName = newGroupNameInput.value.trim();
-    if (!newGroupName) {
-      alert("Please enter a group name!");
-      return;
-    }
+// ===================================
+// SEARCH GROUPS
+// ===================================
 
-    createNewGroup(newGroupName);
-    newGroupNameInput.value = "";
-  });
-}
+$(".group_search button").on("click", function () {
+  const search = $(".group_search input").val().toLowerCase();
 
-// ========================================
-// 11. SEARCH GROUP - CREATE IF NOT EXISTS
-// ========================================
-let searchButton = document.querySelector(".group_search button");
-let searchInput = document.querySelector(".group_search input");
+  $(".groups .group").each(function () {
+    const groupName = $(this).find("h4 a").text().toLowerCase();
 
-if (searchButton && searchInput) {
-  searchButton.addEventListener("click", function () {
-    let searchTerm = searchInput.value.trim();
-    if (!searchTerm) {
-      alert("Please enter a group name to search!");
-      return;
-    }
-
-    // Check if group exists in the list
-    let groupExists = false;
-    let existingGroups = document.querySelectorAll(".groups .group h4 a");
-
-    for (let i = 0; i < existingGroups.length; i++) {
-      let groupLink = existingGroups[i];
-      let existingGroupName = groupLink.textContent;
-
-      if (existingGroupName.toLowerCase() === searchTerm.toLowerCase()) {
-        groupExists = true;
-        // Redirect to existing group
-        window.location.href =
-          "Chat.html?group=" + encodeURIComponent(existingGroupName);
-        return;
-      }
-    }
-
-    // If group doesn't exist, ask if user wants to create it
-    let wantToCreate = confirm(
-      "Group '" + searchTerm + "' does not exist. Would you like to create it?",
-    );
-
-    if (wantToCreate) {
-      createNewGroup(searchTerm);
-      searchInput.value = "";
-      // Redirect to the new group
-      setTimeout(function () {
-        window.location.href =
-          "Chat.html?group=" + encodeURIComponent(searchTerm);
-      }, 500);
-    }
-  });
-
-  // Also allow pressing Enter to search
-  searchInput.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-      searchButton.click();
-    }
-  });
-}
-
-// ========================================
-// 12. FUNCTION TO CREATE A NEW GROUP
-// ========================================
-function createNewGroup(groupNameToCreate) {
-  // Check if group already exists
-  let existingGroups = document.querySelectorAll(".groups .group h4 a");
-  for (let i = 0; i < existingGroups.length; i++) {
-    if (
-      existingGroups[i].textContent.toLowerCase() ===
-      groupNameToCreate.toLowerCase()
-    ) {
-      alert("A group with this name already exists!");
-      return false;
-    }
-  }
-
-  // Create the new group card
-  let newGroupCard = document.createElement("div");
-  newGroupCard.classList.add("group");
-  newGroupCard.innerHTML = `
-    <div style="font-size: 30px;">💬</div>
-    <h4>
-      <a href="Chat.html?group=${encodeURIComponent(groupNameToCreate)}">
-        ${makeSafe(groupNameToCreate)}
-      </a>
-    </h4>
-    <p>A new group for discussions about ${makeSafe(groupNameToCreate)}</p>
-    <button class="join-group-btn">Join Group</button>
-  `;
-
-  document.querySelector(".groups").appendChild(newGroupCard);
-
-  // Create empty message storage for the new group
-  if (!localStorage.getItem(groupNameToCreate)) {
-    localStorage.setItem(groupNameToCreate, JSON.stringify([]));
-  }
-
-  alert('Group "' + groupNameToCreate + '" created successfully! 🎉');
-  return true;
-}
-
-// ========================================
-// 13. JOIN GROUP BUTTONS
-// ========================================
-function setupJoinGroupButtons() {
-  let joinButtons = document.querySelectorAll(".join-group-btn");
-  for (let i = 0; i < joinButtons.length; i++) {
-    let button = joinButtons[i];
-    button.removeEventListener("click", handleJoinGroup);
-    button.addEventListener("click", handleJoinGroup);
-  }
-}
-
-function handleJoinGroup(event) {
-  let groupCard = event.target.closest(".group");
-  let groupLink = groupCard.querySelector("h4 a");
-  let groupNameText = groupLink.textContent;
-
-  if (currentUser) {
-    let joinedGroupsKey = currentUser.email + "_joined_groups";
-    let joinedGroups = JSON.parse(localStorage.getItem(joinedGroupsKey)) || [];
-
-    if (!joinedGroups.includes(groupNameText)) {
-      joinedGroups.push(groupNameText);
-      localStorage.setItem(joinedGroupsKey, JSON.stringify(joinedGroups));
-      alert("You joined " + groupNameText + "! 🎉");
+    if (groupName.includes(search)) {
+      $(this).show();
     } else {
-      alert("You're already a member of " + groupNameText + "!");
+      $(this).hide();
     }
-  } else {
-    alert("Please login to join groups!");
-  }
-}
-
-// ========================================
-// 14. HELPER FUNCTION - Make text safe
-// ========================================
-function makeSafe(text) {
-  let tempDiv = document.createElement("div");
-  tempDiv.textContent = text;
-  return tempDiv.innerHTML;
-}
+  });
+});
 
 // ========================================
 // 15. ADD CSS STYLES FOR THE CHAT

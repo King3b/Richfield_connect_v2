@@ -41,94 +41,95 @@
         </ul>
       </aside>
       <div class="main-content">
-      <section class="chat">
-        <div class="chat_header">
-          <div class="online-users">
-            <span class="online-dot"></span>
-            12 users online
-          </div>
-          <span class="user_icon"></span>
-          <h2 id="group-name">Group Chat</h2>
-        </div>
-        <div class="chat_window">
-          <div class="messages" id="messages">
-            <div class="received">
-              <p>Hello! How can I help you today?</p>
+        <section class="chat">
+          <div class="chat_header">
+            <div class="online-users">
+              <span class="online-dot"></span>
+              12 users online
             </div>
-            <div class="sent">
-              <p id="typing"></p>
-            </div>
+            <span class="user_icon"></span>
+            <h2 id="group-name">Group Chat</h2>
           </div>
-          <form class="chat_input" id="chat-form">
+          <div class="chat_window">
+            <div class="messages" id="messages">
+              <div class="received">
+                <p>Hello! How can I help you today?</p>
+              </div>
+              <div class="sent">
+                <p id="typing"></p>
+              </div>
+            </div>
+            <form class="chat_input" id="chat-form">
+              <input
+                type="text"
+                id="chat-message"
+                id="typing"
+                placeholder="Type your message here..."
+                required
+              />
+              <button type="submit">Send</button>
+              <label for="image-upload" class="image-upload-label">
+                Image</label
+              >
+              <input
+                type="file"
+                id="image-upload"
+                accept="image/*"
+                style="display: none"
+              />
+              <button id="emoji-btn">😀</button>
+            </form>
+          </div>
+        </section>
+        <article class="groups">
+          <h2 id="Groups">Groups</h2>
+          <div class="group_search">
             <input
               type="text"
-              id="chat-message"
-              id="typing"
-              placeholder="Type your message here..."
-              required
+              id="group-search"
+              placeholder="Search or create a group..."
             />
-            <button type="submit">Send</button>
-            <label for="image-upload" class="image-upload-label"> Image</label>
-            <input
-              type="file"
-              id="image-upload"
-              accept="image/*"
-              style="display: none"
-            />
-            <button id="emoji-btn">😀</button>
-          </form>
-        </div>
-      </section>
-      <article class="groups">
-        <h2>Groups</h2>
-        <div class="group_search">
-          <input
-            type="text"
-            id="group-search"
-            placeholder="Search or create a group..."
-          />
 
-          <button id="group-action-btn">Search</button>
-        </div>
-        <div class="group_categories">
-          <button type="button">Academic</button>
-          <button type="button">Clubs</button>
-          <button type="button">Sports</button>
-          <button type="button">Arts</button>
-          <button type="button">Social</button>
-        </div>
-        <div class="group">
-          <h4>
-            <a href="Chat.html?group=Math511"> Math 511 Study Group </a>
-          </h4>
+            <button id="group-action-btn">Search</button>
+          </div>
+          <div class="group">
+            <h4>
+              <a href="Chat.html?group=Math511"> Math 511 Study Group </a>
+            </h4>
 
-          <p>
-            Group description goes here. This is a brief overview of the group.
-          </p>
-        </div>
+            <p>
+              Group description goes here. This is a brief overview of the
+              group.
+            </p>
+            
+          </div>
 
-        <div class="group">
-          <h4>
-            <a href="Chat.html?group=ComputerScience">
-              Computer Science Club
-            </a>
-          </h4>
+          <div class="group">
+            <h4>
+              <a href="Chat.html?group=ComputerScience">
+                Computer Science Club
+              </a>
+            </h4>
 
-          <p>
-            Group description goes here. This is a brief overview of the group.
-          </p>
-        </div>
+            <p>
+              Group description goes here. This is a brief overview of the
+              group.
+            </p>
+            
+          </div>
 
-        <div class="group">
-          <h4>
-            <a href="Chat.html?group=Literature"> Literature Enthusiasts </a>
-          </h4>
+          <div class="group">
+            <h4>
+              <a href="Chat.html?group=Literature"> Literature Enthusiasts </a>
+            </h4>
 
-          <p>
-            Group description goes here. This is a brief overview of the group.
-          </p>
-        </div>
-      </article>
+            <p>
+              Group description goes here. This is a brief overview of the
+              group.
+            </p>
+            
+          </div>
+        </article>
       </div>
     </main>
     <footer>
